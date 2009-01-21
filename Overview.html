@@ -168,9 +168,9 @@ interface <dfn id=websocket>WebSocket</dfn> {
   readonly attribute long <a href=#dom-websocket-readystate title=dom-WebSocket-readyState>readyState</a>;
 
   // networking
-           attribute EventListener <a href=#handler-websocket-onopen title=handler-WebSocket-onopen>onopen</a>;
-           attribute EventListener <a href=#handler-websocket-onmessage title=handler-WebSocket-onmessage>onmessage</a>;
-           attribute EventListener <a href=#handler-websocket-onclosed title=handler-WebSocket-onclosed>onclosed</a>;
+           attribute <span>Function</span> <a href=#handler-websocket-onopen title=handler-WebSocket-onopen>onopen</a>;
+           attribute <span>Function</span> <a href=#handler-websocket-onmessage title=handler-WebSocket-onmessage>onmessage</a>;
+           attribute <span>Function</span> <a href=#handler-websocket-onclosed title=handler-WebSocket-onclosed>onclosed</a>;
   void <a href=#dom-websocket-postmessage title=dom-WebSocket-postMessage>postMessage</a>(in DOMString data);
   void <a href=#dom-websocket-disconnect title=dom-WebSocket-disconnect>disconnect</a>();
 };</pre><p><code><a href=#websocket>WebSocket</a></code> objects must also implement the
