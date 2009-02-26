@@ -6,7 +6,7 @@
   </style><div class=head>
    <p><a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a></p>
    <h1>The Web Sockets API</h1>
-   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->25 February 2009</h2>
+   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->26 February 2009</h2>
    <dl><!-- ZZZ: update the month/day
     <dt>This Version:</dt>
     <dd><a href="http://www.w3.org/TR/2009/WD-websockets-20090101/">http://www.w3.org/TR/2009/WD-websockets-20090101/</a></dd>
@@ -79,7 +79,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
-  This specification is the 25 February 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
+  This specification is the 26 February 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
   <!--:ZZZ-->
   </p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- context and rationale (required) --><p>This specification is intended to specify a part of the Web
   platform closely related to HTML5. It is defined in a separate
@@ -100,8 +100,9 @@
      <li><a href=#dependencies><span class=secno>1.1.1 </span>Dependencies</a></ol></li>
    <li><a href=#terminology><span class=secno>1.2 </span>Terminology</a></ol></li>
  <li><a href=#the-websocket-interface><span class=secno>2 </span>The <code>WebSocket</code> interface</a></li>
- <li><a href=#websocket-events><span class=secno>3 </span>WebSocket Events</a></li>
- <li><a href=#feedback-from-the-protocol><span class=secno>4 </span>Feedback from the protocol</a></li>
+ <li><a href=#feedback-from-the-protocol><span class=secno>3 </span>Feedback from the protocol</a>
+  <ol>
+   <li><a href=#garbage-collection><span class=secno>3.1 </span>Garbage collection</a></ol></li>
  <li><a class=no-num href=#references>References</a></ol>
 <!--end-toc--><hr><h2 id=network-intro><span class=secno>1 </span>Introduction</h2><p><em>This section is non-normative.</em><p>To enable Web applications to maintain bidirectional
   communications with server-side processes, this specification
@@ -170,7 +171,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
   // networking
            attribute <span>Function</span> <a href=#handler-websocket-onopen title=handler-WebSocket-onopen>onopen</a>;
            attribute <span>Function</span> <a href=#handler-websocket-onmessage title=handler-WebSocket-onmessage>onmessage</a>;
-           attribute <span>Function</span> <a href=#handler-websocket-onclosed title=handler-WebSocket-onclosed>onclosed</a>;
+           attribute <span>Function</span> <a href=#handler-websocket-onclose title=handler-WebSocket-onclose>onclose</a>;
   void <a href=#dom-websocket-postmessage title=dom-WebSocket-postMessage>postMessage</a>(in DOMString data);
   void <a href=#dom-websocket-disconnect title=dom-WebSocket-disconnect>disconnect</a>();
 };</pre><p><code><a href=#websocket>WebSocket</a></code> objects must also implement the
@@ -247,22 +248,14 @@ interface <dfn id=websocket>WebSocket</dfn> {
   <em>is</em> established, then the user agent must <span>send <var title="">data</var> using the Web Socket</span>.<p>The <dfn id=dom-websocket-disconnect title=dom-WebSocket-disconnect><code>disconnect()</code></dfn>
   method must <span>close the Web Socket connection</span> or
   connection attempt, if any. If the connection is already closed, it
-  must do nothing. Closing the connection causes a <code title=event-WebSocket-close><a href=#event-websocket-close>close</a></code> event to be fired and
+  must do nothing. Closing the connection causes a <code title=event-close>close</code> event to be fired and
   the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code>
   attribute's value to change, as <a href=#closeWebSocket>described
-  below</a>.<h2 id=websocket-events><span class=secno>3 </span>WebSocket Events</h2><p>The <dfn id=event-websocket-open title=event-WebSocket-open><code>open</code></dfn>
-  event is fired when the <span>Web Socket connection is
-  established</span>.<p>The <dfn id=event-websocket-close title=event-WebSocket-close><code>close</code></dfn>
-  event is fired when the connection is closed (whether by the author,
-  calling the <code title=dom-WebSocket-disconnect><a href=#dom-websocket-disconnect>disconnect()</a></code> method, or by
-  the server, or by a network error).<p class=note>No information regarding why the connection was
-  closed is passed to the application in this version of this
-  specification.<p>The <code title=event-message>message</code> event is fired
-  when when data is received for a connection.</p><hr><p>The following are the <span>event handler attributes</span> that
+  below</a>.</p><hr><p>The following are the <span>event handler attributes</span> that
   must be supported, as DOM attributes, by all objects implementing
   the <code><a href=#websocket>WebSocket</a></code> interface:<dl><dt><dfn id=handler-websocket-onopen title=handler-WebSocket-onopen><code>onopen</code></dfn></dt>
 
-   <dd><p>Must be invoked whenever an <code title=event-WebSocket-open><a href=#event-websocket-open>open</a></code> event is targeted at or
+   <dd><p>Must be invoked whenever an <code title=event-open>open</code> event is targeted at or
    bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
 
    <dt><dfn id=handler-websocket-onmessage title=handler-WebSocket-onmessage><code>onmessage</code></dfn></dt>
@@ -270,12 +263,12 @@ interface <dfn id=websocket>WebSocket</dfn> {
    <dd><p>Must be invoked whenever a <code title=event-message>message</code> event is targeted at or
    bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
 
-   <dt><dfn id=handler-websocket-onclosed title=handler-WebSocket-onclosed><code>onclosed</code></dfn></dt>
+   <dt><dfn id=handler-websocket-onclose title=handler-WebSocket-onclose><code>onclose</code></dfn></dt>
 
-   <dd><p>Must be invoked whenever an <code title=event-WebSocket-closed>closed</code> event is targeted at or
+   <dd><p>Must be invoked whenever an <code title=event-close>close</code> event is targeted at or
    bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
 
-  </dl><h2 id=feedback-from-the-protocol><span class=secno>4 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
+  </dl><h2 id=feedback-from-the-protocol><span class=secno>3 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
   agent must run the following steps:<ol><li>
 
     <p>Change the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code> attribute's value
@@ -286,7 +279,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
    <li>
 
     <p><span>Queue a task</span> to <span>fire a simple event</span>
-    named <code title=event-WebSocket-open><a href=#event-websocket-open>open</a></code> at the
+    named <code title=event-open>open</code> at the
     <code><a href=#websocket>WebSocket</a></code> object.</p>
 
    </li>
@@ -298,8 +291,12 @@ interface <dfn id=websocket>WebSocket</dfn> {
   closed</i>, the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code> attribute's value
   must be changed to <code title=dom-WebSocket-CLOSED><a href=#dom-websocket-closed>CLOSED</a></code>
   (2), and the user agent must <span>queue a task</span> to <span>fire
-  a simple event</span> named <code title=event-WebSocket-close><a href=#event-websocket-close>close</a></code> at the
+  a simple event</span> named <code title=event-close>close</code> at the
   <code><a href=#websocket>WebSocket</a></code> object.</p><hr><p>The <span>task source</span> for all <span title=concept-task>tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id=web-socket-task-source>Web Socket task
-  source</dfn>.<h2 class=no-num id=references>References</h2><p class=big-issue>This section will be written in a future
+  source</dfn>.<h3 id=garbage-collection><span class=secno>3.1 </span>Garbage collection</h3><p>A <code><a href=#websocket>WebSocket</a></code> object with an open connection must not
+  be garbage collected if there are any event listeners registered for
+  <code title=event-message>message</code> events.<p>If a <code><a href=#websocket>WebSocket</a></code> object is garbage collected while its
+  connection is still open, the user agent must <span>close the Web
+  Socket connection</span>.<h2 class=no-num id=references>References</h2><p class=big-issue>This section will be written in a future
   draft.<!--XXX-->
