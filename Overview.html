@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><head><meta charset=ascii><title>The Web Sockets API</title><link href=http://www.w3.org/StyleSheets/TR/%57%33%43-ED rel=stylesheet type=text/css><!-- ZZZ ED vs WD --><style>
+<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><meta charset=ascii><title>The Web Sockets API</title><link href=http://www.w3.org/StyleSheets/TR/%57%33%43-ED rel=stylesheet type=text/css><!-- ZZZ ED vs WD --><style>
    .toc ~ hr { display: block; background: none; border: none; padding: 0; margin: 2em 0; }
    .XXX { border: solid thick red; }
    pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em; }
@@ -6,7 +6,7 @@
   </style><div class=head>
    <p><a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a></p>
    <h1>The Web Sockets API</h1>
-   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->26 February 2009</h2>
+   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->18 March 2009</h2>
    <dl><!-- ZZZ: update the month/day
     <dt>This Version:</dt>
     <dd><a href="http://www.w3.org/TR/2009/WD-websockets-20090101/">http://www.w3.org/TR/2009/WD-websockets-20090101/</a></dd>
@@ -79,7 +79,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
-  This specification is the 26 February 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
+  This specification is the 18 March 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
   <!--:ZZZ-->
   </p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- context and rationale (required) --><p>This specification is intended to specify a part of the Web
   platform closely related to HTML5. It is defined in a separate
@@ -251,7 +251,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
   must do nothing. Closing the connection causes a <code title=event-close>close</code> event to be fired and
   the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code>
   attribute's value to change, as <a href=#closeWebSocket>described
-  below</a>.</p><hr><p>The following are the <span>event handler attributes</span> that
+  below</a>.<hr><p>The following are the <span>event handler attributes</span> that
   must be supported, as DOM attributes, by all objects implementing
   the <code><a href=#websocket>WebSocket</a></code> interface:<dl><dt><dfn id=handler-websocket-onopen title=handler-WebSocket-onopen><code>onopen</code></dfn></dt>
 
@@ -287,12 +287,12 @@ interface <dfn id=websocket>WebSocket</dfn> {
   </ol><hr><p>When <i>a Web Socket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title=event-message>message</code>, which does not bubble, is
   cancelable, has no default action, and whose <code title=dom-MessageEvent-data>data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to dispatch it at
-  the <code><a href=#websocket>WebSocket</a></code> object.</p><hr><p id=closeWebSocket>When the <i>Web Socket connection is
+  the <code><a href=#websocket>WebSocket</a></code> object.<hr><p id=closeWebSocket>When the <i>Web Socket connection is
   closed</i>, the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code> attribute's value
   must be changed to <code title=dom-WebSocket-CLOSED><a href=#dom-websocket-closed>CLOSED</a></code>
   (2), and the user agent must <span>queue a task</span> to <span>fire
   a simple event</span> named <code title=event-close>close</code> at the
-  <code><a href=#websocket>WebSocket</a></code> object.</p><hr><p>The <span>task source</span> for all <span title=concept-task>tasks</span> <span title="queue a
+  <code><a href=#websocket>WebSocket</a></code> object.<hr><p>The <span>task source</span> for all <span title=concept-task>tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id=web-socket-task-source>Web Socket task
   source</dfn>.<h3 id=garbage-collection><span class=secno>3.1 </span>Garbage collection</h3><p>A <code><a href=#websocket>WebSocket</a></code> object with an open connection must not
   be garbage collected if there are any event listeners registered for
