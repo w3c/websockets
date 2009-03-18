@@ -1,9 +1,146 @@
-<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><meta charset=ascii><title>The Web Sockets API</title><link href=http://www.w3.org/StyleSheets/TR/%57%33%43-ED rel=stylesheet type=text/css><!-- ZZZ ED vs WD --><style>
-   .toc ~ hr { display: block; background: none; border: none; padding: 0; margin: 2em 0; }
-   .XXX { border: solid thick red; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em; }
+<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><meta charset=ascii><title>The Web Sockets API</title><style type=text/css>
+   pre { margin-left: 2em; white-space: pre-wrap; }
+   h2 { margin: 3em 0 1em 0; }
+   h3 { margin: 2.5em 0 1em 0; }
+   h4 { margin: 2.5em 0 0.75em 0; }
+   h5, h6 { margin: 2.5em 0 1em; }
+   h1 + h2, h1 + h2 + h2 { margin: 0.75em 0 0.75em; }
+   h2 + h3, h3 + h4, h4 + h5, h5 + h6 { margin-top: 0.5em; }
+   p { margin: 1em 0; }
+   hr:not(.top) { display: block; background: none; border: none; padding: 0; margin: 2em 0; height: auto; }
+   dl, dd { margin-top: 0; margin-bottom: 0; }
+   dt { margin-top: 0.75em; margin-bottom: 0.25em; clear: left; }
+   dt + dt { margin-top: 0; }
+   dd dt { margin-top: 0.25em; margin-bottom: 0; }
+   dd p { margin-top: 0; }
+   dd dl + p { margin-top: 1em; }
+   dd table + p { margin-top: 1em; }
+   p + * > li, dd li { margin: 1em 0; }
+   dt, dfn { font-weight: bold; font-style: normal; }
+   dt dfn { font-style: italic; }
+   pre, code { font-size: inherit; font-family: monospace; font-variant: normal; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   @media screen { code { color: orangered; } }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   blockquote { margin: 0 0 0 2em; border: 0; padding: 0; font-style: italic; }
+
+   .bad, .bad *:not(.XXX) { color: gray; border-color: gray; background: transparent; }
+   .matrix, .matrix td { border: none; text-align: right; }
+   .matrix { margin-left: 2em; }
+   .dice-example { border-collapse: collapse; border-style: hidden solid solid hidden; border-width: thin; margin-left: 3em; }
+   .dice-example caption { width: 30em; font-size: smaller; font-style: italic; padding: 0.75em 0; text-align: left; }
+   .dice-example td, .dice-example th { border: solid thin; width: 1.35em; height: 1.05em; text-align: center; padding: 0; }
+   .applies th > * { display: block; white-space: nowrap; }
+   .applies thead code { display: block; }
+   .applies td { text-align: center; }
+   .applies .yes { background: yellow; }
+
+   .toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   img.extra { float: right; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em 1em; }
    pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
-  </style><div class=head>
+   pre.css { border: solid thin; background: #FFFFEE; color: black; padding: 0.5em 1em; }
+   pre.css:first-line { color: #AAAA50; }
+   dl.domintro { color: green; margin: 2em 0 2em 2em; padding: 0.5em 1em; border: none; background: #EEFFEE; }
+   hr + dl.domintro, div.impl + dl.domintro { margin-top: 2.5em; margin-bottom: 1.5em; }
+   dl.domintro dt, dl.domintro dt * { color: black; text-decoration: none; }
+   dl.domintro dd { margin: 0.5em 0 1em 2em; padding: 0; }
+   dl.domintro dd p { margin: 0.5em 0; }
+   dl.switch { padding-left: 2em; }
+   dl.switch > dt { text-indent: -1.5em; }
+   dl.switch > dt:before { content: '\21AA'; padding: 0 0.5em 0 0; display: inline-block; width: 1em; text-align: right; line-height: 0.5em; }
+   .diff-old { text-decoration: line-through; color: silver; background: transparent; }
+   .diff-chg, .diff-new { text-decoration: underline; color: green; background: transparent; }
+   a .diff-new { border-bottom: 1px blue solid; }
+
+   h2 { page-break-before: always; }
+   h1 + h2, hr + h2.no-toc { page-break-before: auto; }
+
+   div.head { margin: 0 0 1em; padding: 1em 0 0 0; }
+   div.head p { margin: 0; }
+   div.head h1 { margin: 0; }
+   div.head .logo { float: right; margin: 0 1em; }
+   div.head .logo img { border: none } /* remove border from top image */
+   div.head dl { margin: 1em 0; }
+   p.copyright { font-size: x-small; font-style: oblique; margin: 0; }
+
+   body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
+   body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
+   body > .toc > li > * { margin-bottom: 0.5em; }
+   body > .toc > li > * > li > * { margin-bottom: 0.25em; }
+   .toc, .toc li { list-style: none; }
+
+   .brief { margin-top: 1em; margin-bottom: 1em; line-height: 1.1; }
+   .brief li { margin: 0; padding: 0; }
+   .brief li p { margin: 0; padding: 0; }
+
+   .XXX { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .XXX > :first-child { margin-top: 0; }
+   p .XXX { line-height: 3em; }
+   .note { color: green; background: transparent; font-family: sans-serif; }
+   .warning { color: red; background: transparent; }
+   .note, .warning { font-weight: bolder; font-style: italic; }
+   p.note, div.note { padding: 0.5em 2em; }
+   span.note { padding: 0 2em; }
+   .note p:first-child, .warning p:first-child { margin-top: 0; }
+   .note p:last-child, .warning p:last-child { margin-bottom: 0; }
+   .warning:before { font-style: normal; }
+   p.note:before { content: 'Note: '; }
+   p.warning:before { content: '\26A0 Warning! '; }
+
+   .bookkeeping:before { display: block; content: 'Bookkeeping details'; font-weight: bolder; font-style: italic; }
+   .bookkeeping { font-size: 0.8em; margin: 2em 0; }
+   .bookkeeping p { margin: 0.5em 2em; display: list-item; list-style: square; }
+
+   h4 { position: relative; z-index: 3; }
+   h4 + .element, h4 + div + .element { margin-top: -2.5em; padding-top: 2em; }
+   .element {
+     background: #EEFFEE;
+     color: black;
+     margin: 0 0 1em 0.15em;
+     padding: 0 1em 0.25em 0.75em;
+     border-left: solid #99FF99 0.25em;
+     position: relative;
+     z-index: 1;
+   }
+   .element:before {
+     position: absolute;
+     z-index: 2;
+     top: 0;
+     left: -1.15em;
+     height: 2em;
+     width: 0.9em;
+     background: #EEFFEE;
+     content: ' ';
+     border-style: none none solid solid;
+     border-color: #99FF99;
+     border-width: 0.25em;
+   }
+
+   .example {
+     display: block;
+     color: #222222;
+     background: #FCFCFC;
+     border-left: double;
+     margin-left: 2em;
+     padding-left: 1em;
+   }
+
+   .tall-and-narrow {
+     font-size: 0.6em;
+     column-width: 25em;
+     column-gap: 1em;
+     -moz-column-width: 25em;
+     -moz-column-gap: 1em;
+     -webkit-column-width: 25em;
+     -webkit-column-gap: 1em;
+   }
+  </style><link href=http://www.w3.org/StyleSheets/TR/%57%33%43-ED rel=stylesheet type=text/css><!-- ZZZ ED vs WD --><div class=head>
    <p><a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a></p>
    <h1>The Web Sockets API</h1>
    <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->18 March 2009</h2>
@@ -30,13 +167,7 @@
    and <a href=http://www.w3.org/Consortium/Legal/copyright-documents>document
    use</a> rules apply.</p>
 
-   <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-   <p class="alt copyright">The <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/#network>WHATWG
-   version</a> of this specification is available under a more
-   permissive license.</p>
-   <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
-  </div><hr><h2 class="no-num no-toc" id=abstract>Abstract</h2><p>This specification defines an API that enables Web pages to use
+  </div><hr class=top><h2 class="no-num no-toc" id=abstract>Abstract</h2><p>This specification defines an API that enables Web pages to use
   the Web Sockets protocol for two-way communication with a remote
   host.<h2 class="no-num no-toc" id=status-of-this-document>Status of this document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
@@ -46,13 +177,7 @@
   at http://www.w3.org/TR/.</em></p><!-- where to send feedback (required) --><p>If you wish to make comments regarding this document, please send
   them to <a href=mailto:public-webapps-comments@w3.org>public-webapps-comments@w3.org</a>
   (<a href="mailto:public-webapps-comments-request@w3.org?subject=subscribe">subscribe</a>,
-  <a href=http://lists.w3.org/Archives/Public/public-webapps-comments/>archives</a>)
-
-  <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING SENTENCE TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->  
-  or <a href=mailto:whatwg@whatwg.org>whatwg@whatwg.org</a> (<a href=http://lists.whatwg.org/listinfo.cgi/whatwg-whatwg.org>subscribe</a>,
-  <a href=http://lists.whatwg.org/pipermail/whatwg-whatwg.org/>archives</a>).
-   <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING SENTENCE TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
+  <a href=http://lists.w3.org/Archives/Public/public-webapps-comments/>archives</a>).
   All feedback is welcome.</p><!-- stability (required) --><p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
@@ -62,16 +187,13 @@
   mailing lists and take part in the discussions.</p><!-- version history or list of changes (required) --><p>The latest stable version of the editor's draft of this
   specification is always available on <a href=http://dev.w3.org/html5/websockets/Overview.html>the W3C CVS
   server</a>. Change tracking for this document is available at the
-  following location:<ul><li>CVS log: <a href=http://dev.w3.org/cvsweb/html5/apps/Overview.html>http://dev.w3.org/cvsweb/html5/apps/Overview.html</a></li>
+  following location:<ul><li>CVS log: <a href=http://dev.w3.org/cvsweb/html5/websockets/Overview.html>http://dev.w3.org/cvsweb/html5/websockets/Overview.html</a></li>
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- relationship to other work (required) --><p>This specification is automatically generated from the
-  corresponding section in the HTML5 specification, as hosted in the
-  <a href=http://svn.whatwg.org/webapps/>WHATWG Subversion
-  repository</a>. The latest editor's working copy of HTML5 (which may
-  contain unfinished text in the process of being prepared) is
-  available <a href=http://www.whatwg.org/specs/web-apps/current-work/>on the
-  WHATWG site</a>. Detailed change history for all of HTML5, including
-  the parts that form this specification, can be found at the
-  following locations:</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><ul><li>Twitter messages (non-editorial changes only): <a href=http://twitter.com/WHATWG>http://twitter.com/WHATWG</a></li>
+  corresponding section in the HTML5 specification's source document,
+  as hosted in the <a href=http://svn.whatwg.org/webapps/>WHATWG
+  Subversion repository</a>. Detailed change history for all of HTML5,
+  including the parts that form this specification, can be found at
+  the following locations:</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><ul><li>Twitter messages (non-editorial changes only): <a href=http://twitter.com/WHATWG>http://twitter.com/WHATWG</a></li>
    <li>Interactive Web interface: <a href=http://html5.org/tools/web-apps-tracker>http://html5.org/tools/web-apps-tracker</a></li>
    <li>Commit-Watchers mailing list: <a href=http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org>http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></li>
    <li>Subversion interface: <a href=http://svn.whatwg.org/webapps/>http://svn.whatwg.org/webapps/</a></li>
@@ -81,9 +203,7 @@
   <!--ZZZ:-->
   This specification is the 18 March 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
   <!--:ZZZ-->
-  </p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- context and rationale (required) --><p>This specification is intended to specify a part of the Web
-  platform closely related to HTML5. It is defined in a separate
-  document primarily to ease the cognitive load on reviewers.</p><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href=http://www.w3.org/Consortium/Patent-Policy-20040205/>5
+  </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href=http://www.w3.org/Consortium/Patent-Policy-20040205/>5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href=http://www.w3.org/2004/01/pp-impl/42538/status rel=disclosure>public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
@@ -93,16 +213,15 @@
   6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id=contents>Table of contents</h2>
 <!--begin-toc-->
 <ol class=toc>
- <li><a href=#network-intro><span class=secno>1 </span>Introduction</a>
+ <li><a href=#network-intro><span class=secno>1 </span>Introduction</a></li>
+ <li><a href=#conformance-requirements><span class=secno>2 </span>Conformance requirements</a>
   <ol>
-   <li><a href=#conformance-requirements><span class=secno>1.1 </span>Conformance requirements</a>
-    <ol>
-     <li><a href=#dependencies><span class=secno>1.1.1 </span>Dependencies</a></ol></li>
-   <li><a href=#terminology><span class=secno>1.2 </span>Terminology</a></ol></li>
- <li><a href=#the-websocket-interface><span class=secno>2 </span>The <code>WebSocket</code> interface</a></li>
- <li><a href=#feedback-from-the-protocol><span class=secno>3 </span>Feedback from the protocol</a>
+   <li><a href=#dependencies><span class=secno>2.1 </span>Dependencies</a></ol></li>
+ <li><a href=#terminology><span class=secno>3 </span>Terminology</a></li>
+ <li><a href=#the-websocket-interface><span class=secno>4 </span>The <code>WebSocket</code> interface</a></li>
+ <li><a href=#feedback-from-the-protocol><span class=secno>5 </span>Feedback from the protocol</a>
   <ol>
-   <li><a href=#garbage-collection><span class=secno>3.1 </span>Garbage collection</a></ol></li>
+   <li><a href=#garbage-collection><span class=secno>5.1 </span>Garbage collection</a></ol></li>
  <li><a class=no-num href=#references>References</a></ol>
 <!--end-toc--><hr><h2 id=network-intro><span class=secno>1 </span>Introduction</h2><p><em>This section is non-normative.</em><p>To enable Web applications to maintain bidirectional
   communications with server-side processes, this specification
@@ -110,7 +229,7 @@
   underlying network. For example, this interface could not be used to
   implement an IRC client without proxying messages through a custom
   server.<p class=XXX>An introduction to the client-side and
-  server-side of using the direct connection APIs.<h3 id=conformance-requirements><span class=secno>1.1 </span>Conformance requirements</h3><p>All diagrams, examples, and notes in this specification are
+  server-side of using the direct connection APIs.<h2 id=conformance-requirements><span class=secno>2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
   Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
@@ -130,7 +249,7 @@
   agents.<p>User agents may impose implementation-specific limits on
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
-  platform-specific limitations.<h4 id=dependencies><span class=secno>1.1.1 </span>Dependencies</h4><p>This specification relies on several other underlying
+  platform-specific limitations.<h3 id=dependencies><span class=secno>2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
   specifications.<dl><dt>HTML5</dt>
 
    <dd>
@@ -149,7 +268,7 @@
 
    </dd>
 
-  </dl><h3 id=terminology><span class=secno>1.2 </span>Terminology</h3><p>The construction "a <code title="">Foo</code> object", where
+  </dl><h2 id=terminology><span class=secno>3 </span>Terminology</h2><p>The construction "a <code title="">Foo</code> object", where
   <code title="">Foo</code> is actually an interface, is sometimes
   used instead of the more accurate "an object implementing the
   interface <code title="">Foo</code>".<p>The term DOM is used to refer to the API set made available to
@@ -158,7 +277,7 @@
   <code>Node</code> objects as defined in the DOM Core
   specifications. <a href=#refsDOM3CORE>[DOM3CORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.<h2 id=the-websocket-interface><span class=secno>2 </span>The <code><a href=#websocket>WebSocket</a></code> interface</h2><pre class=idl>[<a href=#dom-websocket title=dom-WebSocket>Constructor</a>(in DOMString url)]
+  <em>setting</em> when a new value is assigned to it.<h2 id=the-websocket-interface><span class=secno>4 </span>The <code><a href=#websocket>WebSocket</a></code> interface</h2><pre class=idl>[<a href=#dom-websocket title=dom-WebSocket>Constructor</a>(in DOMString url)]
 interface <dfn id=websocket>WebSocket</dfn> {
   readonly attribute DOMString <a href=#dom-websocket-url title=dom-WebSocket-URL>URL</a>;
 
@@ -268,7 +387,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
    <dd><p>Must be invoked whenever an <code title=event-close>close</code> event is targeted at or
    bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
 
-  </dl><h2 id=feedback-from-the-protocol><span class=secno>3 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
+  </dl><h2 id=feedback-from-the-protocol><span class=secno>5 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
   agent must run the following steps:<ol><li>
 
     <p>Change the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code> attribute's value
@@ -294,7 +413,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
   a simple event</span> named <code title=event-close>close</code> at the
   <code><a href=#websocket>WebSocket</a></code> object.<hr><p>The <span>task source</span> for all <span title=concept-task>tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id=web-socket-task-source>Web Socket task
-  source</dfn>.<h3 id=garbage-collection><span class=secno>3.1 </span>Garbage collection</h3><p>A <code><a href=#websocket>WebSocket</a></code> object with an open connection must not
+  source</dfn>.<h3 id=garbage-collection><span class=secno>5.1 </span>Garbage collection</h3><p>A <code><a href=#websocket>WebSocket</a></code> object with an open connection must not
   be garbage collected if there are any event listeners registered for
   <code title=event-message>message</code> events.<p>If a <code><a href=#websocket>WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>close the Web
