@@ -145,7 +145,7 @@
   </style><link href=http://www.w3.org/StyleSheets/TR/%57%33%43-ED rel=stylesheet type=text/css><!-- ZZZ ED vs WD --><div class=head>
    <p><a href=http://www.w3.org/><img alt=W3C height=48 src=http://www.w3.org/Icons/w3c_home width=72></a></p>
    <h1>The Web Sockets API</h1>
-   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->27 March 2009</h2>
+   <h2 class="no-num no-toc" id=editor-s-draft-date-zzz-9-june-2008><!-- "W3C Working Draft" --> Editor's Draft <!--ZZZ-->31 March 2009</h2>
    <dl><!-- ZZZ: update the month/day
     <dt>This Version:</dt>
     <dd><a href="http://www.w3.org/TR/2009/WD-websockets-20090101/">http://www.w3.org/TR/2009/WD-websockets-20090101/</a></dd>
@@ -203,7 +203,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
-  This specification is the 27 March 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
+  This specification is the 31 March 2009 <!--ZZZ "Working Draft"-->Editor's Draft.
   <!--:ZZZ-->
   </p><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href=http://www.w3.org/Consortium/Patent-Policy-20040205/>5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href=http://www.w3.org/2004/01/pp-impl/42538/status rel=disclosure>public list of
@@ -374,22 +374,11 @@ interface <dfn id=websocket>WebSocket</dfn> {
   attribute's value to change, as <a href=#closeWebSocket>described
   below</a>.<hr><p>The following are the <span>event handler attributes</span> that
   must be supported, as DOM attributes, by all objects implementing
-  the <code><a href=#websocket>WebSocket</a></code> interface:<dl><dt><dfn id=handler-websocket-onopen title=handler-WebSocket-onopen><code>onopen</code></dfn></dt>
-
-   <dd><p>Must be invoked whenever an <code title=event-open>open</code> event is targeted at or
-   bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
-
-   <dt><dfn id=handler-websocket-onmessage title=handler-WebSocket-onmessage><code>onmessage</code></dfn></dt>
-
-   <dd><p>Must be invoked whenever a <code title=event-message>message</code> event is targeted at or
-   bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
-
-   <dt><dfn id=handler-websocket-onclose title=handler-WebSocket-onclose><code>onclose</code></dfn></dt>
-
-   <dd><p>Must be invoked whenever an <code title=event-close>close</code> event is targeted at or
-   bubbles through the <code><a href=#websocket>WebSocket</a></code> object.</dd>
-
-  </dl><h2 id=feedback-from-the-protocol><span class=secno>5 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
+  the <code><a href=#websocket>WebSocket</a></code> interface:<table><thead><tr><th><span title="event handler attributes">event handler attribute</span> <th><span>Event handler event type</span>
+   <tbody><tr><td><dfn id=handler-websocket-onopen title=handler-WebSocket-onopen><code>onopen</code></dfn> <td> <code title=event-open>open</code>
+    <tr><td><dfn id=handler-websocket-onmessage title=handler-WebSocket-onmessage><code>onmessage</code></dfn> <td> <code title=event-message>message</code>
+    <tr><td><dfn id=handler-websocket-onclose title=handler-WebSocket-onclose><code>onclose</code></dfn> <td> <code title=event-close>close</code>
+  </table><h2 id=feedback-from-the-protocol><span class=secno>5 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
   agent must run the following steps:<ol><li>
 
     <p>Change the <code title=dom-WebSocket-readyState><a href=#dom-websocket-readystate>readyState</a></code> attribute's value
