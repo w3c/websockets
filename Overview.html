@@ -1,4 +1,4 @@
-<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><meta charset=ascii><title>The Web Sockets API</title><style type=text/css>
+<!DOCTYPE html><!-- when publishing, change bits marked ZZZ --><html lang=en-US-x-Hixie><title>The Web Sockets API</title><style type=text/css>
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -253,7 +253,7 @@
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href=#refsRFC2119>[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
+  not appear in all uppercase letters in this specification. <a href=#references>[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
@@ -273,7 +273,7 @@
    <dd>
 
     <p>Many fundamental concepts from HTML5 are used by this
-    specification. <a href=#refsHTML5>[HTML5]</a></p>
+    specification. <a href=#references>[HTML5]</a></p>
 
    </dd>
 
@@ -282,7 +282,7 @@
    <dd>
 
     <p>The IDL blocks in this specification use the semantics of the
-    WebIDL specification. <a href=#refsWebIDL>[WebIDL]</a></p>
+    WebIDL specification. <a href=#references>[WebIDL]</a></p>
 
    </dd>
 
@@ -293,7 +293,7 @@
   scripts in Web applications, and does not necessarily imply the
   existence of an actual <code>Document</code> object or of any other
   <code>Node</code> objects as defined in the DOM Core
-  specifications. <a href=#refsDOM3CORE>[DOM3CORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
+  specifications. <a href=#references>[DOM3CORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
   <em>setting</em> when a new value is assigned to it.<h2 id=the-websocket-interface><span class=secno>4 </span>The <code><a href=#websocket>WebSocket</a></code> interface</h2><pre class=idl>[<a href=#dom-websocket title=dom-WebSocket>Constructor</a>(in DOMString url)]
 interface <dfn id=websocket>WebSocket</dfn> {
@@ -312,7 +312,7 @@ interface <dfn id=websocket>WebSocket</dfn> {
   void <a href=#dom-websocket-postmessage title=dom-WebSocket-postMessage>postMessage</a>(in DOMString data);
   void <a href=#dom-websocket-disconnect title=dom-WebSocket-disconnect>disconnect</a>();
 };</pre><p><code><a href=#websocket>WebSocket</a></code> objects must also implement the
-  <code>EventTarget</code> interface. <a href=#refsDOM3EVENTS>[DOM3EVENTS]</a>
+  <code>EventTarget</code> interface. <a href=#references>[DOM3EVENTS]</a>
 
   <p>The <dfn id=dom-websocket title=dom-WebSocket><code>WebSocket(<var title="">url</var>)</code></dfn> constructor takes one argument,
   <var title="">url</var>, which specifies the <span>URL</span> to
