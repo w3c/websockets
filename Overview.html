@@ -419,7 +419,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
    </li>
 
   </ol><hr><p>When <i>a Web Socket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
-  the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is
+  the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to dispatch it at
   the <code><a href="#websocket">WebSocket</a></code> object.<hr><p id="closeWebSocket">When the <i>Web Socket connection is
   closed</i>, the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
