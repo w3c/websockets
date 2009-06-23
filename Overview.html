@@ -146,12 +146,27 @@
      -webkit-column-width: 25em;
      -webkit-column-gap: 1em;
    }
+
+   ul.domTree, ul.domTree ul { padding: 0 0 0 1em; margin: 0; }
+   ul.domTree li { padding: 0; margin: 0; list-style: none; position: relative; }
+   ul.domTree li li { list-style: none; }
+   ul.domTree li:first-child::before { position: absolute; top: 0; height: 0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree li:not(:last-child)::after { position: absolute; top: 0; bottom: -0.6em; left: -0.75em; width: 0.5em; border-style: none none solid solid; content: ''; border-width: 0.1em; }
+   ul.domTree span { font-style: italic; font-family: serif; }
+   ul.domTree .t1 code { color: purple; font-weight: bold; }
+   ul.domTree .t2 { font-style: normal; font-family: monospace; }
+   ul.domTree .t2 .name { color: black; font-weight: bold; }
+   ul.domTree .t2 .value { color: blue; font-weight: normal; }
+   ul.domTree .t3 code, .domTree .t4 code, .domTree .t5 code { color: gray; }
+   ul.domTree .t7 code, .domTree .t8 code { color: green; }
+   ul.domTree .t10 code { color: teal; }
+
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><!-- ZZZ ED vs WD --><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 12 June 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 23 June 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -220,7 +235,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 12 June 2009 Editor's Draft.
+  This specification is the 23 June 2009 Editor's Draft.
   <!--:ZZZ-->
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
