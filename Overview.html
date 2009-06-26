@@ -166,7 +166,7 @@
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 23 June 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 26 June 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -235,7 +235,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 23 June 2009 Editor's Draft.
+  This specification is the 26 June 2009 Editor's Draft.
   <!--:ZZZ-->
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
@@ -387,7 +387,9 @@ interface <dfn id="websocket">WebSocket</dfn> {
    the resource name, and with <var title="">protocol</var> as the
    protocol (if it is present).</li>
 
-  </ol><hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
+  </ol><p>This constructor must be visible when the <span>script's global
+  scope</span> is either a <code>Window</code> object or an object
+  implementing the <code>WorkerUtils interface.</code><hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
   attribute must return the value that was passed to the
   constructor.<p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
