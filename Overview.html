@@ -414,12 +414,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
   </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
-  connection. If the connection is not established (<code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> is not <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code>), it must raise an
-  <code>INVALID_STATE_ERR</code> exception. If the <var title="">data</var> argument has any unpaired surrogates, then it
-  must raise <code>SYNTAX_ERR</code>. If the connection <em>is</em>
-  established, and the string has no unpaired surrogates, then the
-  user agent must <span>send <var title="">data</var> using the Web
-  Socket</span>.<p>The <dfn id="dom-websocket-disconnect" title="dom-WebSocket-disconnect"><code>disconnect()</code></dfn>
+  connection. If the connection has not yet been established (<code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> is <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>), it must raise
+  an <code>INVALID_STATE_ERR</code> exception. (No exception is raised
+  if the connection was once established but has subsequently been
+  closed, however.) If the <var title="">data</var> argument has any
+  unpaired surrogates, then it must raise <code>SYNTAX_ERR</code>. If
+  the connection <em>is</em> established, and the string has no
+  unpaired surrogates, then the user agent must <span>send <var title="">data</var> using the Web Socket</span>.<p>The <dfn id="dom-websocket-disconnect" title="dom-WebSocket-disconnect"><code>disconnect()</code></dfn>
   method must <span>close the Web Socket connection</span> or
   connection attempt, if any. If the connection is already closed, it
   must do nothing. Closing the connection causes a <code title="event-close">close</code> event to be fired and
