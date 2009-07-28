@@ -360,9 +360,6 @@ interface <dfn id="websocket">WebSocket</dfn> {
    U+0021 .. U+007E, then throw a <code>SYNTAX_ERR</code>
    exception.</li>
 
-   <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue
-   these steps in the background (without blocking scripts).</li>
-
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
    serialization of an origin">ASCII serialization</span> of the
    <span>origin</span> of the script that invoked the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket()</a></code> constructor,
@@ -378,6 +375,14 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <li><p>If <var title="">url</var> has a <span title="url-port">&lt;port&gt;</span> component, then let <var title="">port</var> be that component's value; otherwise, there is
    no explicit <var title="">port</var>.</li>
 
+   <li><p>If there is an explicit <var title="">port</var> and the
+   user agent is configured to block access to that port, then throw a
+   <span>security exception</span>. (User agents typically block
+   access to well-known ports like SMTP.)</li>
+   <!--
+    e.g. http://www.mozilla.org/projects/netlib/PortBanning.html
+   -->
+
    <li><p>Let <var title="">resource name</var> be the value of the
    <span title="url-path">&lt;path&gt;</span> component (which might
    be empty) of <var title="">url</var>.</li>
@@ -388,6 +393,9 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <li><p>If <var title="">url</var> has a <span title="url-query">&lt;query&gt;</span> component, then append a
    single U+003F QUESTION MARK (?) character to <var title="">resource
    name</var>, followed by the value of the <span title="url-query">&lt;query&gt;</span> component.</li>
+
+   <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue
+   these steps in the background (without blocking scripts).</li>
 
    <li>
 
