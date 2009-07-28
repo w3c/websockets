@@ -174,7 +174,7 @@
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 16 July 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 28 July 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -243,7 +243,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 16 July 2009 Editor's Draft.
+  This specification is the 28 July 2009 Editor's Draft.
   <!--:ZZZ-->
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
@@ -330,7 +330,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   const unsigned short <a href="#dom-websocket-connecting" title="dom-WebSocket-CONNECTING">CONNECTING</a> = 0;
   const unsigned short <a href="#dom-websocket-open" title="dom-WebSocket-OPEN">OPEN</a> = 1;
   const unsigned short <a href="#dom-websocket-closed" title="dom-WebSocket-CLOSED">CLOSED</a> = 2;
-  readonly attribute long <a href="#dom-websocket-readystate" title="dom-WebSocket-readyState">readyState</a>;
+  readonly attribute unsigned short <a href="#dom-websocket-readystate" title="dom-WebSocket-readyState">readyState</a>;
 
   // networking
            attribute <span>Function</span> <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
