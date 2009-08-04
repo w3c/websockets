@@ -174,7 +174,7 @@
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 28 July 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 4 August 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -243,7 +243,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 28 July 2009 Editor's Draft.
+  This specification is the 4 August 2009 Editor's Draft.
   <!--:ZZZ-->
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
@@ -347,7 +347,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
   connect. The second, <var title="">protocol</var>, if present,
   specifies a sub-protocol that the server must support for the
   connection to be successful. When the <code>WebSocket()</code>
-  constructor is invoked, the UA must run these steps:<ol><li><p><span title="parse a url">Parse</span> the <var title="">url</var> argument.</li>
+  constructor is invoked, the UA must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
+   during a redirect, in the protocol section --><li><p><span title="parse a url">Parse</span> the <var title="">url</var> argument.</li>
 
    <li><p>If the previous step failed, or if <var title="">url</var>
    does not have a <span title="url-scheme">&lt;scheme&gt;</span>
