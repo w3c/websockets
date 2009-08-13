@@ -1,6 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie">
-  <title>The Web Sockets API</title>
-  <style type="text/css">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie"><title>The Web Sockets API</title><style type="text/css">
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -171,23 +169,17 @@
    ul.domTree .t7 code, .domTree .t8 code { color: green; }
    ul.domTree .t10 code { color: teal; }
 
-  </style>
-  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"> <!-- ZZZ ED vs WD -->
- </head>
- <body>
-  <div class="head">
+  </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><!-- ZZZ ED vs WD --><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 11 August 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 13 August 2009</h2>
    <!--:ZZZ-->
-   <dl>
-<!-- ZZZ: update the month/day (twice), (un)comment out
+   <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
     <dd><a href="http://www.w3.org/TR/2009/WD-websockets-20090423/">http://www.w3.org/TR/2009/WD-websockets-20090423/</a></dd>
- :ZZZ -->
-    <dt>Latest Published Version:</dt>
+ :ZZZ --><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
     <dd><a href="http://dev.w3.org/html5/websockets/">http://dev.w3.org/html5/websockets/</a></dd>
@@ -197,8 +189,7 @@
 <!-- :ZZZ -->
     <dt>Editors:</dt>
     <dd><a href="mailto:ian@hixie.ch">Ian Hickson</a>, Google, Inc.</dd>
-   </dl>
-   <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+   </dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
    © 2009 <a href="http://www.w3.org/"><abbr title="World Wide
    Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
    Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research
@@ -208,30 +199,14 @@
    and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document
    use</a> rules apply.</p>
 
-  </div>
-
-  <hr class="top">
-
-  <h2 class="no-num no-toc" id="abstract">Abstract</h2>
-
-  <p>This specification defines an API that enables Web pages to use
+  </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API that enables Web pages to use
   the Web Sockets protocol for two-way communication with a remote
-  host.</p>
-
-
-  <h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2>
-
-  <!-- intro boilerplate (required) -->
-  <p><em>This section describes the status of this document at the
+  host.<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
   formally published revision of this technical report can be found in
   the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
-  at http://www.w3.org/TR/.</em></p>
-
-
-  <!-- where to send feedback (required) -->
-  <p>If you wish to make comments regarding this document, please send
+  at http://www.w3.org/TR/.</em></p><!-- where to send feedback (required) --><p>If you wish to make comments regarding this document, please send
   them to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a>
   (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>),
@@ -244,82 +219,43 @@
   or <a href="mailto:hybi@ietf.org">hybi@ietf.org</a> (<a href="https://www.ietf.org/mailman/listinfo/hybi">subscribe</a>,
   <a href="http://www.ietf.org/mail-archive/web/hybi/current/maillist.html">archives</a>).
 
-  All feedback is welcome.</p>
-
-
-  <!-- stability (required) -->
-  <p>Implementors should be aware that this specification is not
+  All feedback is welcome.</p><!-- stability (required) --><p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
   under them in incompatible ways.</strong> Vendors interested in
   implementing this specification before it eventually reaches the
   Candidate Recommendation stage should join the aforementioned
-  mailing lists and take part in the discussions.</p>
-
-
-  <!-- version history or list of changes (required) -->
-
-  <p>The latest stable version of the editor's draft of this
+  mailing lists and take part in the discussions.</p><!-- version history or list of changes (required) --><p>The latest stable version of the editor's draft of this
   specification is always available on <a href="http://dev.w3.org/html5/websockets/Overview.html">the W3C CVS
   server</a>. Change tracking for this document is available at the
-  following location:</p>
-
-  <ul>
-   <li>CVS log: <a href="http://dev.w3.org/cvsweb/html5/websockets/Overview.html">http://dev.w3.org/cvsweb/html5/websockets/Overview.html</a></li>
-  </ul>
-
-  <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-  <!-- relationship to other work (required) -->
-  <p>This specification is automatically generated from the
+  following location:<ul><li>CVS log: <a href="http://dev.w3.org/cvsweb/html5/websockets/Overview.html">http://dev.w3.org/cvsweb/html5/websockets/Overview.html</a></li>
+  </ul><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- relationship to other work (required) --><p>This specification is automatically generated from the
   corresponding section in the HTML5 specification's source document,
   as hosted in the <a href="http://svn.whatwg.org/webapps/">WHATWG
   Subversion repository</a>. Detailed change history for all of HTML5,
   including the parts that form this specification, can be found at
-  the following locations:</p>
-  <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
-  <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-  <ul>
-   <li>Twitter messages (non-editorial changes only): <a href="http://twitter.com/WHATWG">http://twitter.com/WHATWG</a></li>
+  the following locations:</p><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><ul><li>Twitter messages (non-editorial changes only): <a href="http://twitter.com/WHATWG">http://twitter.com/WHATWG</a></li>
    <li>Interactive Web interface: <a href="http://html5.org/tools/web-apps-tracker">http://html5.org/tools/web-apps-tracker</a></li>
    <li>Commit-Watchers mailing list: <a href="http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org">http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></li>
    <li>Subversion interface: <a href="http://svn.whatwg.org/webapps/">http://svn.whatwg.org/webapps/</a></li>
-  </ul>
-  <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-
-
-  <!-- status of document, group responsible (required) -->
-  <p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
+  </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 11 August 2009 Editor's Draft.
+  This specification is the 13 August 2009 Editor's Draft.
   <!--:ZZZ-->
-  </p>
-
-
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
-  available from the IETF at the following location:</p>
-
-  <ul>
-   <li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
-  </ul>
-
-
-  <!-- required patent boilerplate -->
-  <p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
+  </ul><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p>
-
-  <h2 class="no-num no-toc" id="contents">Table of contents</h2>
-  
+  6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of contents</h2>
 <!--begin-toc-->
 <ol class="toc">
  <li><a href="#network-intro"><span class="secno">1 </span>Introduction</a></li>
@@ -332,71 +268,34 @@
   <ol>
    <li><a href="#garbage-collection"><span class="secno">5.1 </span>Garbage collection</a></ol></li>
  <li><a class="no-num" href="#references">References</a></ol>
-<!--end-toc-->
-  <hr>
-  <h2 id="network-intro"><span class="secno">1 </span>Introduction</h2>
-
-  <p><i>This section is non-normative.</i></p>
-
-  <p>To enable Web applications to maintain bidirectional
+<!--end-toc--><hr><h2 id="network-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable Web applications to maintain bidirectional
   communications with server-side processes, this specification
-  introduces the <code><a href="#websocket">WebSocket</a></code> interface.</p>
-
-  <p class="note">This interface does not allow for raw access to the
+  introduces the <code><a href="#websocket">WebSocket</a></code> interface.<p class="note">This interface does not allow for raw access to the
   underlying network. For example, this interface could not be used to
   implement an IRC client without proxying messages through a custom
-  server.</p>
-
-  <p class="XXX">An introduction to the client-side and
-  server-side of using the direct connection APIs.</p>
-
-
-
-  <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2>
-
-  <p>All diagrams, examples, and notes in this specification are
+  server.<p class="XXX">An introduction to the client-side and
+  server-side of using the direct connection APIs.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.</p>
-
-  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+  Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
   NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a></p>
-
-  <p>Requirements phrased in the imperative as part of algorithms
+  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
-  algorithm.</p>
-
-  <p>Some conformance requirements are phrased as requirements on
+  algorithm.<p>Some conformance requirements are phrased as requirements on
   attributes, methods or objects. Such requirements are to be
-  interpreted as requirements on user agents.</p>
-
-  <p>Conformance requirements phrased as algorithms or specific steps
+  interpreted as requirements on user agents.<p>Conformance requirements phrased as algorithms or specific steps
   may be implemented in any manner, so long as the end result is
   equivalent. (In particular, the algorithms defined in this
   specification are intended to be easy to follow, and not intended to
-  be performant.)</p>
-
-  <p>The only conformance class defined by this specification is user
-  agents.</p>
-
-  <p>User agents may impose implementation-specific limits on
+  be performant.)<p>The only conformance class defined by this specification is user
+  agents.<p>User agents may impose implementation-specific limits on
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
-  platform-specific limitations.</p>
-
-
-  <h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3>
-
-  <p>This specification relies on several other underlying
-  specifications.</p>
-
-  <dl>
-
-   <dt>HTML5</dt>
+  platform-specific limitations.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
+  specifications.<dl><dt>HTML5</dt>
 
    <dd>
 
@@ -414,29 +313,16 @@
 
    </dd>
 
-  </dl>
-
-
-  <h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
-
-  <p>The construction "a <code title="">Foo</code> object", where
+  </dl><h2 id="terminology"><span class="secno">3 </span>Terminology</h2><p>The construction "a <code title="">Foo</code> object", where
   <code title="">Foo</code> is actually an interface, is sometimes
   used instead of the more accurate "an object implementing the
-  interface <code title="">Foo</code>".</p>
-
-  <p>The term DOM is used to refer to the API set made available to
+  interface <code title="">Foo</code>".<p>The term DOM is used to refer to the API set made available to
   scripts in Web applications, and does not necessarily imply the
   existence of an actual <code>Document</code> object or of any other
   <code>Node</code> objects as defined in the DOM Core
-  specifications. <a href="#refsDOMCORE">[DOMCORE]</a></p>
-
-  <p>A DOM attribute is said to be <em>getting</em> when its value is
+  specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>A DOM attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.</p>
-
-  <h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2>
-
-  <pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, optional in DOMString protocol)]
+  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, optional in DOMString protocol)]
 interface <dfn id="websocket">WebSocket</dfn> {
   readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-URL">URL</a>;
 
@@ -453,9 +339,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   boolean <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
-};</pre>
-
-  <p><code><a href="#websocket">WebSocket</a></code> objects must also implement the
+};</pre><p><code><a href="#websocket">WebSocket</a></code> objects must also implement the
   <code>EventTarget</code> interface. <a href="#refsDOMEVENTS">[DOMEVENTS]</a>
 
   <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocol</var>)</code></dfn>
@@ -463,14 +347,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
   connect. The second, <var title="">protocol</var>, if present,
   specifies a sub-protocol that the server must support for the
   connection to be successful. When the <code>WebSocket()</code>
-  constructor is invoked, the UA must run these steps:</p>
-
-  <ol>
-
-   <!-- beware, this is very similar to the steps for what happens
-   during a redirect, in the protocol section -->
-
-   <li><p><span title="parse a url">Parse</span> the <var title="">url</var> argument.</li>
+  constructor is invoked, the UA must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
+   during a redirect, in the protocol section --><li><p><span title="parse a url">Parse</span> the <var title="">url</var> argument.</li>
 
    <li><p>If the previous step failed, or if <var title="">url</var>
    does not have a <span title="url-scheme">&lt;scheme&gt;</span>
@@ -537,25 +415,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    </li>
 
-  </ol>
-
-  <p>This constructor must be visible when the <span>script's global
+  </ol><p>This constructor must be visible when the <span>script's global
   scope</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.</p>
-
-  <hr>
-
-  <p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
+  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
   attribute must return the value that was passed to the
-  constructor.</p>
-
-  <p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
+  constructor.<p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
-  following values:</p>
-
-  <dl>
-
-   <dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
+  following values:<dl><dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
    <dd>The connection has not yet been established.</dd>
 
@@ -567,12 +433,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    <dd>The connection has been closed or could not be opened.</dd>
 
-  </dl>
-
-  <p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).</p>
-
-  <p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
+  </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
+  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
   connection. If the connection has not yet been established (<code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> is <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>), it must raise
   an <code>INVALID_STATE_ERR</code> exception. (No exception is raised
   if the connection was once established but has subsequently been
@@ -586,49 +448,22 @@ interface <dfn id="websocket">WebSocket</dfn> {
   connection is still established (and the data was queued or sent
   successfully), or false if the connection is closed (e.g. because
   the user agent just had a buffer overflow and failed to send the
-  data).</p>
-
-  <p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
+  data).<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
   method must <span>close the Web Socket connection</span> or
   connection attempt, if any. If the connection is already closed, it
-  must do nothing. Closing the connection causes a <code title="event-close">close</code> event to be fired and
-  the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-  attribute's value to change, as <a href="#closeWebSocket">described
-  below</a>.</p>
-
-  <hr>
-
-  <p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
+  must do nothing.<p class="note">Closing the connection eventually causes a <code title="event-close">close</code> event to be fired and the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  to change, as <a href="#closeWebSocket">described below</a>.<hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
   attribute must return the number of bytes that have been queued but
   not yet sent. If the connection is closed, this attribute's value
   will only increase with each call to the <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> method (the number does not
-  reset to zero once the connection closes).</p>
-
-  <hr>
-
-  <p>The following are the <span>event handler attributes</span> that
+  reset to zero once the connection closes).<hr><p>The following are the <span>event handler attributes</span> that
   must be supported, as DOM attributes, by all objects implementing
-  the <code><a href="#websocket">WebSocket</a></code> interface:</p>
-
-  <table>
-   <thead>
-    <tr><th><span title="event handler attributes">event handler attribute</span> <th><span>Event handler event type</span>
-   <tbody>
-    <tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
+  the <code><a href="#websocket">WebSocket</a></code> interface:<table><thead><tr><th><span title="event handler attributes">event handler attribute</span> <th><span>Event handler event type</span>
+   <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
-  </table>
-
-
-
-  <h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2>
-
-  <p>When the <i>Web Socket connection is established</i>, the user
-  agent must run the following steps:</p>
-
-  <ol>
-
-   <li>
+  </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
+  agent must run the following steps:<ol><li>
 
     <p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
     to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</p>
@@ -643,50 +478,21 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    </li>
 
-  </ol>
-
-  <hr>
-
-  <p>When <i>a Web Socket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
+  </ol><hr><p>When <i>a Web Socket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to dispatch it at
-  the <code><a href="#websocket">WebSocket</a></code> object.</p>
-
-  <hr>
-
-  <p id="closeWebSocket">When the <i>Web Socket connection is
+  the <code><a href="#websocket">WebSocket</a></code> object.<hr><p id="closeWebSocket">When the <i>Web Socket connection is
   closed</i>, the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   must be changed to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code>
   (2), and the user agent must <span>queue a task</span> to <span>fire
   a simple event</span> called <code title="event-close">close</code> at the
-  <code><a href="#websocket">WebSocket</a></code> object.</p>
-
-  <hr>
-
-  <p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
+  <code><a href="#websocket">WebSocket</a></code> object.<hr><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="web-socket-task-source">Web Socket task
-  source</dfn>.</p>
-
-
-  <h3 id="garbage-collection"><span class="secno">5.1 </span>Garbage collection</h3>
-
-  <p>A <code><a href="#websocket">WebSocket</a></code> object with an open connection must not
+  source</dfn>.<h3 id="garbage-collection"><span class="secno">5.1 </span>Garbage collection</h3><p>A <code><a href="#websocket">WebSocket</a></code> object with an open connection must not
   be garbage collected if there are any event listeners registered for
-  <code title="event-message">message</code> events.</p>
-
-  <p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
+  <code title="event-message">message</code> events.<p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>close the Web
-  Socket connection</span>.</p>
-
-
-
-  <h2 class="no-num" id="references">References</h2>
-
-  <p>All references are normative unless marked "Non-normative".</p>
-
-  <dl>
-
-   <dt id="refsDOMCORE">[DOMCORE]</dt>
+  Socket connection</span>.<h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".<dl><dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document
    Object Model (DOM) Level 3 Core Specification</a></cite>, A. Le
    Hors, P. Le Hegaret, L. Wood, G. Nicol, J. Robie, M. Champion,
@@ -732,7 +538,3 @@ interface <dfn id="websocket">WebSocket</dfn> {
    IDL</a></cite>, C. McCormack. W3C, July 2009.</dd>
 
   </dl>
-
-
- 
-
