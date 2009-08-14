@@ -174,7 +174,7 @@
    <h1>The Web Sockets API</h1>
    <!--ZZZ:-->
    <!--<h2 class="no-num no-toc">W3C Working Draft 23 April 2009</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 13 August 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-date-1-january-1970">Editor's Draft 14 August 2009</h2>
    <!--:ZZZ-->
    <dl><!-- ZZZ: update the month/day (twice), (un)comment out
     <dt>This Version:</dt>
@@ -190,8 +190,8 @@
     <dt>Editors:</dt>
     <dd><a href="mailto:ian@hixie.ch">Ian Hickson</a>, Google, Inc.</dd>
    </dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
-   © 2009 <a href="http://www.w3.org/"><abbr title="World Wide
-   Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
+   &copy; 2009 <a href="http://www.w3.org/"><abbr title="World Wide
+   Web Consortium">W3C</abbr></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts
    Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.org/"><abbr title="European Research
    Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C
    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
@@ -243,7 +243,7 @@
   specification's progress along the W3C Recommendation track.
   <!--ZZZ:-->
   <!--This specification is the 23 April 2009 Working Draft.-->
-  This specification is the 13 August 2009 Editor's Draft.
+  This specification is the 14 August 2009 Editor's Draft.
   <!--:ZZZ-->
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
@@ -348,53 +348,23 @@ interface <dfn id="websocket">WebSocket</dfn> {
   specifies a sub-protocol that the server must support for the
   connection to be successful. When the <code>WebSocket()</code>
   constructor is invoked, the UA must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
-   during a redirect, in the protocol section --><li><p><span title="parse a url">Parse</span> the <var title="">url</var> argument.</li>
+   during a redirect, in the protocol section --><li><p><span>Parse a Web Socket URL's components</span> from the
+   <var title="">url</var> argument, to obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and <var title="">secure</var>. If
+   this fails, throw a <code>SYNTAX_ERR</code> exception and abort
+   these steps.</li>
 
-   <li><p>If the previous step failed, or if <var title="">url</var>
-   does not have a <span title="url-scheme">&lt;scheme&gt;</span>
-   component whose value is either "<code title="">ws</code>" or
-   "<code title="">wss</code>", when compared in an <span>ASCII
-   case-insensitive</span> manner, then throw a
-   <code>SYNTAX_ERR</code> exception.</li>
-
-   <li><p>If <var title="">protocol</var> is specified but is either
-   the empty string or contains characters that are not in the range
-   U+0021 .. U+007E, then throw a <code>SYNTAX_ERR</code>
-   exception.</li>
+   <li><p>If <var title="">port</var> is a port to which the user
+   agent is configured to block access, then throw a <span>security
+   exception</span>. (User agents typically block access to well-known
+   ports like SMTP.)</li>
+   <!--
+    e.g. http://www.mozilla.org/projects/netlib/PortBanning.html
+   -->
 
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
    serialization of an origin">ASCII serialization</span> of the
    <span>origin</span> of the script that invoked the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket()</a></code> constructor,
    <span>converted to ASCII lowercase</span>.</li>
-
-   <li><p>If the <span title="url-scheme">&lt;scheme&gt;</span>
-   component of <var title="">url</var> is "<code title="">ws</code>",
-   set <var title="">secure</var> to false; otherwise, the <span title="url-scheme">&lt;scheme&gt;</span> component is "<code title="">wss</code>", set <var title="">secure</var> to
-   true.</li>
-
-   <li><p>Let <var title="">host</var> be the value of the <span title="url-host">&lt;host&gt;</span> component of <var title="">url</var>, <span>converted to ASCII lowercase</span>.</li>
-
-   <li><p>If <var title="">url</var> has a <span title="url-port">&lt;port&gt;</span> component, then let <var title="">port</var> be that component's value; otherwise, there is
-   no explicit <var title="">port</var>.</li>
-
-   <li><p>If there is an explicit <var title="">port</var> and the
-   user agent is configured to block access to that port, then throw a
-   <span>security exception</span>. (User agents typically block
-   access to well-known ports like SMTP.)</li>
-   <!--
-    e.g. http://www.mozilla.org/projects/netlib/PortBanning.html
-   -->
-
-   <li><p>Let <var title="">resource name</var> be the value of the
-   <span title="url-path">&lt;path&gt;</span> component (which might
-   be empty) of <var title="">url</var>.</li>
-
-   <li><p>If <var title="">resource name</var> is the empty string,
-   set it to a single character U+002F SOLIDUS (/).</li>
-
-   <li><p>If <var title="">url</var> has a <span title="url-query">&lt;query&gt;</span> component, then append a
-   single U+003F QUESTION MARK (?) character to <var title="">resource
-   name</var>, followed by the value of the <span title="url-query">&lt;query&gt;</span> component.</li>
 
    <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue
    these steps in the background (without blocking scripts).</li>
