@@ -169,7 +169,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-1-december-2009">Editor's Draft 1 December 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-4-december-2009">Editor's Draft 4 December 2009</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -241,7 +241,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 1 December 2009 Editor's Draft.
+  This specification is the 4 December 2009 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
@@ -340,8 +340,10 @@ interface <dfn id="websocket">WebSocket</dfn> {
   constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
   connect. The second, <var title="">protocol</var>, if present,
   specifies a sub-protocol that the server must support for the
-  connection to be successful. When the <code>WebSocket()</code>
-  constructor is invoked, the UA must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
+  connection to be successful. The sub-protocol name must be an ASCII
+  string with no U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)
+  characters in it.<p>When the <code>WebSocket()</code> constructor is invoked, the UA
+  must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
    during a redirect, in the protocol section --><li><p><span>Parse a Web Socket URL's components</span> from the
    <var title="">url</var> argument, to obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and <var title="">secure</var>. If
    this fails, throw a <code>SYNTAX_ERR</code> exception and abort
@@ -354,6 +356,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <!--
     e.g. http://www.mozilla.org/projects/netlib/PortBanning.html
    -->
+
+   <li><p>If <var title="">protocol</var> is present but contains
+   characters with Unicode code points greater than U+007F (i.e. any
+   characters that are not ASCII characters), or if it contains either
+   a U+000A LINE FEED (LF) character or a U+000D CARRIAGE RETURN (CR)
+   character, then throw a <code>SYNTAX_ERR</code> exception and abort
+   these steps.</li>
 
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
    serialization of an origin">ASCII serialization</span> of the
