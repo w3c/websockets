@@ -391,8 +391,10 @@ interface <dfn id="websocket">WebSocket</dfn> {
   </ol><p>This constructor must be visible when the <span>script's global
   object</span> is either a <code>Window</code> object or an object
   implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
-  attribute must return the value that was passed to the
-  constructor.<p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
+  attribute must return the result of <span title="resolve a
+  url">resolving</span> the <span>URL</span> that was passed to the
+  constructor. (It doesn't matter what it is resolved relative to,
+  since we already know it is an <span>absolute URL</span>.)<p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
   following values:<dl><dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
