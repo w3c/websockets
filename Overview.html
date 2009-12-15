@@ -71,7 +71,7 @@
    div.head .logo { float: right; margin: 0 1em; }
    div.head .logo img { border: none } /* remove border from top image */
    div.head dl { margin: 1em 0; }
-   div.head p.copyright { font-size: x-small; font-style: oblique; margin: 0; }
+   div.head p.copyright, div.head p.alt { font-size: x-small; font-style: oblique; margin: 0; }
 
    body > .toc > li { margin-top: 1em; margin-bottom: 1em; }
    body > .toc.brief > li { margin-top: 0.35em; margin-bottom: 0.35em; }
@@ -174,7 +174,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-11-december-2009">Editor's Draft 11 December 2009</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-15-december-2009">Editor's Draft 15 December 2009</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -197,7 +197,7 @@
    use</a> rules apply.</p>
 
    <!-- UNDER NO CIRCUMSTANCES IS THE FOLLOWING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
-   <p class="alt copyright">The text of this specification is also
+   <p class="alt">The text of this specification is also
    available in the WHATWG <a href="http://www.whatwg.org/specs/web-apps/current-work/complete.html#network">Web
    Applications 1.0</a> specification, under a license that permits
    reuse of the specification text.</p>
@@ -205,7 +205,7 @@
 
   </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API that enables Web pages to use
   the Web Sockets protocol for two-way communication with a remote
-  host.<h2 class="no-num no-toc" id="status-of-this-document">Status of this document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
+  host.<h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
   formally published revision of this technical report can be found in
@@ -246,7 +246,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 11 December 2009 Editor's Draft.
+  This specification is the 15 December 2009 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
@@ -257,7 +257,7 @@
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of contents</h2>
+  6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of Contents</h2>
 <!--begin-toc-->
 <ol class="toc">
  <li><a href="#network-intro"><span class="secno">1 </span>Introduction</a></li>
