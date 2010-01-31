@@ -174,7 +174,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-10-january-2010">Editor's Draft 10 January 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-31-january-2010">Editor's Draft 31 January 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -238,7 +238,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 10 January 2010 Editor's Draft.
+  This specification is the 31 January 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
@@ -431,7 +431,29 @@ interface <dfn id="websocket">WebSocket</dfn> {
   attribute must return the number of bytes that have been queued but
   not yet sent. If the connection is closed, this attribute's value
   will only increase with each call to the <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> method (the number does not
-  reset to zero once the connection closes).<hr><p>The following are the <span>event handlers</span> that must be
+  reset to zero once the connection closes).<div class="example">
+
+   <p>In this simple example, the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+   attribute is used to ensure that updates are sent either at the
+   rate of one update every 50ms, if the network can handle that rate,
+   or at whatever rate the network <em>can</em> handle, if that is too
+   fast.</p>
+
+   <pre>var socket = new WebSocket('ws://game.example.com:12010/updates');
+socket.onopen = function () {
+  setInterval(function() {
+    if (socket.bufferedAmount == 0)
+      socket.send(getUpdateData());
+  }, 50);
+};</pre>
+
+   <p>The <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+   attribute can also be used to saturate the network without sending
+   the data at a higher rate than the network can handle, though this
+   requires more careful monitoring of the value of the attribute over
+   time.</p>
+
+  </div><hr><p>The following are the <span>event handlers</span> that must be
   supported, as IDL attributes, by all objects implementing the
   <code><a href="#websocket">WebSocket</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
