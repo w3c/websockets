@@ -165,6 +165,25 @@
    ul.domTree .t7 code, .domTree .t8 code { color: green; }
    ul.domTree .t10 code { color: teal; }
 
+   body.dfnEnabled dfn { cursor: pointer; }
+   .dfnPanel {
+     display: inline;
+     position: absolute;
+     z-index: 10;
+     height: auto;
+     width: auto;
+     padding: 0.5em 0.75em;
+     font: small sans-serif, Droid Sans Fallback;
+     background: #DDDDDD;
+     color: black;
+     border: outset 0.2em;
+   }
+   .dfnPanel * { margin: 0; padding: 0; font: inherit; text-indent: 0; }
+   .dfnPanel :link, .dfnPanel :visited { color: black; }
+   .dfnPanel p { font-weight: bolder; }
+   .dfnPanel * + p { margin-top: 0.25em; }
+   .dfnPanel li { list-style-position: inside; }
+
    #configUI { position: absolute; z-index: 20; top: 10em; right: 1em; width: 11em; font-size: small; }
    #configUI p { margin: 0.5em 0; padding: 0.3em; background: #EEEEEE; color: black; border: inset thin; }
    #configUI p label { display: block; }
@@ -174,7 +193,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-31-january-2010">Editor's Draft 31 January 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-1-february-2010">Editor's Draft 1 February 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -238,7 +257,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 31 January 2010 Editor's Draft.
+  This specification is the 1 February 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
