@@ -193,7 +193,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The Web Sockets API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-1-february-2010">Editor's Draft 1 February 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-4-february-2010">Editor's Draft 4 February 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -257,7 +257,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 1 February 2010 Editor's Draft.
+  This specification is the 4 February 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the Web Socket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
@@ -310,12 +310,12 @@
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
   platform-specific limitations.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
-  specifications.<dl><dt>HTML5</dt>
+  specifications.<dl><dt>HTML</dt>
 
    <dd>
 
-    <p>Many fundamental concepts from HTML5 are used by this
-    specification. <a href="#refsHTML5">[HTML5]</a></p>
+    <p>Many fundamental concepts from HTML are used by this
+    specification. <a href="#refsHTML">[HTML]</a></p>
 
    </dd>
 
@@ -502,31 +502,31 @@ socket.onopen = function () {
   be garbage collected if there are any event listeners registered for
   <code title="event-message">message</code> events.<p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>close the Web
-  Socket connection</span>.<h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- XXX really should remove dates and version numbers from these references once and for all --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
+  Socket connection</span>.<h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web,
+  because the newer ones keep changing. --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document
    Object Model (DOM) Level 3 Core Specification</a></cite>, A. Le
    Hors, P. Le Hegaret, L. Wood, G. Nicol, J. Robie, M. Champion,
-   S. Byrnes. W3C, April 2004.</dd>
+   S. Byrnes. W3C.</dd>
    <!--
    <dd><cite><a href="http://simon.html5.org/specs/web-dom-core">Web
-   DOM Core</a></cite>, S. Pieters. W3C, June 2009.</dd>
+   DOM Core</a></cite>, S. Pieters. W3C.</dd>
    -->
 
-   <dt id="refsHTML5">[HTML5]</dt>
-   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML5</a></cite>,
-   I. Hickson. WHATWG, August 2009.</dd>
+   <dt id="refsHTML">[HTML]</dt>
+   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/">HTML</a></cite>,
+   I. Hickson. WHATWG.</dd>
 
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use in
-   RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF, March
-   1997.</dd>
+   RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
    <!--
    <dd><cite><a href="http://www.w3.org/TR/WebIDL/">Web
-   IDL</a></cite>, C. McCormack. W3C, December 2008.</dd>
+   IDL</a></cite>, C. McCormack. W3C.</dd>
    -->
    <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
-   IDL</a></cite>, C. McCormack. W3C, July 2009.</dd>
+   IDL</a></cite>, C. McCormack. W3C.</dd>
 
   </dl>
