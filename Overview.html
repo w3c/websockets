@@ -359,6 +359,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   // networking
            attribute <span>Function</span> <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
+           attribute <span>Function</span> <a href="#handler-websocket-onmessageerror" title="handler-WebSocket-onmessageerror">onmessageerror</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   boolean <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
@@ -486,6 +487,7 @@ socket.onopen = function () {
   <code><a href="#websocket">WebSocket</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
+    <tr><td><dfn id="handler-websocket-onmessageerror" title="handler-WebSocket-onmessageerror"><code>onmessageerror</code></dfn> <td> <code title="event-messageerror">messageerror</code>
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
@@ -497,6 +499,11 @@ socket.onopen = function () {
   if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code>
   (1), and if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code>
+  object.<p>When <i>a WebSocket error has been detected</i>, the user agent
+  must <span>queue a task</span> to set to <var title="">data</var>,
+  and <span>queue a task</span> to check to see if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), and if so,
+  <span>fire a simple event</span> named <code title="event-messageerror">messageerror</code> at the <code><a href="#websocket">WebSocket</a></code>
   object.<p id="closeWebSocket">When the <i>WebSocket connection is
   closed</i>, the user agent must <span>queue a task</span> to first
   change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
