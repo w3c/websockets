@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie"><title>The Web Sockets API</title><style type="text/css">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- when publishing, change bits marked ZZZ --><html lang="en-US-x-Hixie"><title>The WebSocket API</title><style type="text/css">
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -191,9 +191,9 @@
    #configUI input[type=button] { display: block; margin: auto; }
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
-   <h1>The Web Sockets API</h1>
+   <h1>The WebSocket API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-25-february-2010">Editor's Draft 25 February 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-2-march-2010">Editor's Draft 2 March 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -215,7 +215,7 @@
    and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document
    use</a> rules apply.</p>
   </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API that enables Web pages to use
-  the Web Sockets protocol for two-way communication with a remote
+  the WebSocket protocol for two-way communication with a remote
   host.<h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><!-- intro boilerplate (required) --><p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the most recently
@@ -257,9 +257,9 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 25 February 2010 Editor's Draft.
+  This specification is the 2 March 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
-  Internet Draft for a wire protocol, the Web Socket Protocol,
+  Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
   </ul><!-- required patent boilerplate --><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
@@ -371,7 +371,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   non-empty ASCII string with no control characters in it (i.e. only
   characters in the range U+0020 to U+007E).<p>When the <code>WebSocket()</code> constructor is invoked, the UA
   must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
-   during a redirect, in the protocol section --><li><p><span>Parse a Web Socket URL's components</span> from the
+   during a redirect, in the protocol section --><li><p><span>Parse a WebSocket URL's components</span> from the
    <var title="">url</var> argument, to obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and <var title="">secure</var>. If
    this fails, throw a <code>SYNTAX_ERR</code> exception and abort
    these steps.</li>
@@ -400,16 +400,16 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    <li>
 
-    <p><span>Establish a Web Socket connection</span> to a host <var title="">host</var>, on port <var title="">port</var> (if one was
+    <p><span>Establish a WebSocket connection</span> to a host <var title="">host</var>, on port <var title="">port</var> (if one was
     specified), from <var title="">origin</var>, with the flag <var title="">secure</var>, with <var title="">resource name</var> as
     the resource name, and with <var title="">protocol</var> as the
     protocol (if it is present).</p>
 
-    <p class="note">If the "<span>establish a Web Socket
+    <p class="note">If the "<span>establish a WebSocket
     connection</span>" algorithm fails, it triggers the "<span>fail
-    the Web Socket connection</span>" algorithm, which then invokes
-    the "<span>close the Web Socket connection</span>" algorithm,
-    which then establishes that the "<span>Web Socket connection is
+    the WebSocket connection</span>" algorithm, which then invokes
+    the "<span>close the WebSocket connection</span>" algorithm,
+    which then establishes that the "<span>WebSocket connection is
     closed</span>", which fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
 
    </li>
@@ -428,7 +428,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    <dt><dfn id="dom-websocket-open" title="dom-WebSocket-OPEN"><code>OPEN</code></dfn> (numeric value 1)</dt>
 
-   <dd>The <span>Web Socket connection is established</span> and communication is possible.</dd>
+   <dd>The <span>WebSocket connection is established</span> and communication is possible.</dd>
 
    <dt><dfn id="dom-websocket-closed" title="dom-WebSocket-CLOSED"><code>CLOSED</code></dfn> (numeric value 2)</dt>
 
@@ -441,15 +441,15 @@ interface <dfn id="websocket">WebSocket</dfn> {
   raise an <code>INVALID_STATE_ERR</code> exception. If the <var title="">data</var> argument has any unpaired surrogates, then it
   must raise <code>SYNTAX_ERR</code>. If the connection is
   established, and the string has no unpaired surrogates, then the
-  user agent must <span>send <var title="">data</var> using the Web
-  Socket</span>. If the data cannot be sent, e.g. because it would
+  user agent must <span>send <var title="">data</var> using the
+  WebSocket</span>. If the data cannot be sent, e.g. because it would
   need to be buffered but the buffer is full, the user agent must
-  <span>close the Web Socket connection</span>. The method must then
+  <span>close the WebSocket connection</span>. The method must then
   return true if the connection is still established (and the data was
   queued or sent successfully), or false if the connection is closed
   (e.g. because the user agent just had a buffer overflow and failed
   to send the data).<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
-  method must <span>close the Web Socket connection</span> or
+  method must <span>close the WebSocket connection</span> or
   connection attempt, if any, and change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2). If the
   connection is already closed, it must do nothing.<p class="note">Closing the connection immediately causes a task to
@@ -487,17 +487,17 @@ socket.onopen = function () {
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
-  </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>Web Socket connection is established</i>, the user
+  </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), and then
   <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p>When <i>a Web Socket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
+  object.<p>When <i>a WebSocket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to check to see
   if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code>
   (1), and if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p id="closeWebSocket">When the <i>Web Socket connection is
+  object.<p id="closeWebSocket">When the <i>WebSocket connection is
   closed</i>, the user agent must <span>queue a task</span> to first
   change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2), and then <span>fire
@@ -506,12 +506,11 @@ socket.onopen = function () {
   <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
   value will already be set to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2) when this task
   runs.)<p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
-  task">queued</span> in this section is the <dfn id="web-socket-task-source">Web Socket task
+  task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.<h3 id="garbage-collection"><span class="secno">5.1 </span>Garbage collection</h3><p>A <code><a href="#websocket">WebSocket</a></code> object with an open connection must not
   be garbage collected if there are any event listeners registered for
   <code title="event-message">message</code> events.<p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
-  connection is still open, the user agent must <span>close the Web
-  Socket connection</span>.<h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web,
+  connection is still open, the user agent must <span>close the WebSocket connection</span>.<h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web,
   because the newer ones keep changing. --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document
    Object Model (DOM) Level 3 Core Specification</a></cite>, A. Le
