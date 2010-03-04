@@ -193,7 +193,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The WebSocket API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-3-march-2010">Editor's Draft 3 March 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-4-march-2010">Editor's Draft 4 March 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -257,7 +257,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 3 March 2010 Editor's Draft.
+  This specification is the 4 March 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the IETF at the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol">http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol</a></li>
@@ -353,14 +353,15 @@ interface <dfn id="websocket">WebSocket</dfn> {
   // ready state
   const unsigned short <a href="#dom-websocket-connecting" title="dom-WebSocket-CONNECTING">CONNECTING</a> = 0;
   const unsigned short <a href="#dom-websocket-open" title="dom-WebSocket-OPEN">OPEN</a> = 1;
-  const unsigned short <a href="#dom-websocket-closed" title="dom-WebSocket-CLOSED">CLOSED</a> = 2;
+  const unsigned short <a href="#dom-websocket-closing" title="dom-WebSocket-CLOSING">CLOSING</a> = 2;
+  const unsigned short <a href="#dom-websocket-closed" title="dom-WebSocket-CLOSED">CLOSED</a> = 3;
   readonly attribute unsigned short <a href="#dom-websocket-readystate" title="dom-WebSocket-readyState">readyState</a>;
   readonly attribute unsigned long <a href="#dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount">bufferedAmount</a>;
 
   // networking
            attribute <span>Function</span> <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
-           attribute <span>Function</span> <a href="#handler-websocket-onmessageerror" title="handler-WebSocket-onmessageerror">onmessageerror</a>;
+           attribute <span>Function</span> <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   boolean <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
@@ -432,7 +433,11 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    <dd>The <span>WebSocket connection is established</span> and communication is possible.</dd>
 
-   <dt><dfn id="dom-websocket-closed" title="dom-WebSocket-CLOSED"><code>CLOSED</code></dfn> (numeric value 2)</dt>
+   <dt><dfn id="dom-websocket-closing" title="dom-WebSocket-CLOSING"><code>CLOSING</code></dfn> (numeric value 2)</dt>
+
+   <dd>The connection is going through the closing handshake.</dd>
+
+   <dt><dfn id="dom-websocket-closed" title="dom-WebSocket-CLOSED"><code>CLOSED</code></dfn> (numeric value 3)</dt>
 
    <dd>The connection has been closed or could not be opened.</dd>
 
@@ -442,21 +447,83 @@ interface <dfn id="websocket">WebSocket</dfn> {
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
   raise an <code>INVALID_STATE_ERR</code> exception. If the <var title="">data</var> argument has any unpaired surrogates, then it
   must raise <code>SYNTAX_ERR</code>. If the connection is
-  established, and the string has no unpaired surrogates, then the
-  user agent must <span>send <var title="">data</var> using the
+  established, and the string has no unpaired surrogates, and <span title="the WebSocket closing handshake has started">the WebSocket
+  closing handshake has not yet started</span>, then the user agent
+  must <span>send <var title="">data</var> using the
   WebSocket</span>. If the data cannot be sent, e.g. because it would
   need to be buffered but the buffer is full, the user agent must
   <span>close the WebSocket connection</span>. The method must then
   return true if the connection is still established (and the data was
-  queued or sent successfully), or false if the connection is closed
-  (e.g. because the user agent just had a buffer overflow and failed
-  to send the data).<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
-  method must <span>close the WebSocket connection</span> or
-  connection attempt, if any, and change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2). If the
-  connection is already closed, it must do nothing.<p class="note">Closing the connection immediately causes a task to
-  be queued to fire a <code title="event-close">close</code> event, as
-  <a href="#closeWebSocket">described below</a>.<hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
+  queued or sent successfully), or false if the connection is closing
+  or closed (e.g. because the user agent just had a buffer overflow
+  and failed to send the data, or because <span>the WebSocket closing
+  handshake has started</span>).<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
+  method must run the first matching steps from the following list:<dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+   attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
+
+   <dd>
+
+    <p>Do nothing.</p>
+
+    <p class="note">The connection is already closing or is already
+    closed. If it has not already, a <code title="event-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
+
+   </dd>
+
+
+   <dt>If the WebSocket connection is not yet <span title="WebSocket
+   connection is established">established</span></dt>
+
+   <dd>
+
+    <p><span>Fail the WebSocket connection</span> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
+    (2).</p>
+
+    <p class="note">The "<span>fail the WebSocket connection</span>"
+    algorithm invokes the "<span>close the WebSocket
+    connection</span>" algorithm, which then establishes that the
+    "<span>WebSocket connection is closed</span>", which fires the
+    <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+
+   </dd>
+
+
+   <dt>If the WebSocket closing handshake has not yet been <span title="the WebSocket closing handshake has
+   started">started</span></dt>
+
+   <dd>
+
+    <p><span>Start the WebSocket closing handshake</span> and set the
+    <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+    attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).</p>
+
+    <p class="note">The "<span>start the WebSocket closing
+    handshake</span>" algorithm eventually invokes the "<span>close
+    the WebSocket connection</span>" algorithm, which then establishes
+    that the "<span>WebSocket connection is closed</span>", which
+    fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+
+   </dd>
+
+
+   <dt>Otherwise</dt>
+
+   <dd>
+
+    <p>Set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
+    (2).</p>
+
+    <p class="note"><span>The WebSocket closing handshake has
+    started</span>, and will eventually invokethe "<span>close the
+    WebSocket connection</span>" algorithm, which will establish that
+    the "<span>WebSocket connection is closed</span>", and thus the
+    <code title="event-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
+
+   </dd>
+
+  </dl><hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
   attribute must return the number of bytes that have been queued but
   not yet sent. This does not include framing overhead incurred by the
   protocol. If the connection is closed, this attribute's value will
@@ -488,7 +555,7 @@ socket.onopen = function () {
   <code><a href="#websocket">WebSocket</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
-    <tr><td><dfn id="handler-websocket-onmessageerror" title="handler-WebSocket-onmessageerror"><code>onmessageerror</code></dfn> <td> <code title="event-messageerror">messageerror</code>
+    <tr><td><dfn id="handler-websocket-onerror" title="handler-WebSocket-onerror"><code>onerror</code></dfn> <td> <code title="event-error">error</code>
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
@@ -499,23 +566,28 @@ socket.onopen = function () {
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to check to see
   if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code>
-  (1), and if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p>When <i>a WebSocket error has been detected</i>, the user agent
-  must <span>queue a task</span> to set to <var title="">data</var>,
-  and <span>queue a task</span> to check to see if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), and if so,
-  <span>fire a simple event</span> named <code title="event-messageerror">messageerror</code> at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p id="closeWebSocket">When the <i>WebSocket connection is
-  closed</i>, the user agent must create an event that uses the
-  <code><a href="#closeevent">CloseEvent</a></code> interface, with the event name <code title="event-close">close</code>, which does not bubble, is not
-  cancelable, has no default action, and whose <code title="dom-CloseEvent-wasClean"><a href="#dom-closeevent-wasclean">wasClean</a></code> attribute is set to
-  false, and <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2), and then
-  dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. (If the
+  (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2), and
+  if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object.<p>When <i>a WebSocket error has been detected</i>, the user agent
+  must <span>queue a task</span> to check to see if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2), and if so,
+  <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#websocket">WebSocket</a></code>
+  object.<p>When <i>the WebSocket closing handshake has started</i>, the user
+  agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
   <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method was called,
   the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-  attribute's value will already be set to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (2) when this task
-  runs.)<p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
+  attribute's value will already be set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) when this task
+  runs.)<p id="closeWebSocket">When the <i>WebSocket connection is
+  closed</i>, possibly <i title="">cleanly</i>, the user agent must
+  create an event that uses the <code><a href="#closeevent">CloseEvent</a></code> interface,
+  with the event name <code title="event-close">close</code>, which
+  does not bubble, is not cancelable, has no default action, and whose
+  <code title="dom-CloseEvent-wasClean"><a href="#dom-closeevent-wasclean">wasClean</a></code> attribute is
+  set to true if the connection closed <i title="">cleanly</i> and
+  false otherwise; and <span>queue a task</span> to first change the
+  <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+  value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3), and
+  then dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object.<p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.<h3 id="event-definitions"><span class="secno">5.1 </span>Event definitions</h3><pre class="idl">interface <dfn id="closeevent">CloseEvent</dfn> : <span>Event</span> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
