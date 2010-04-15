@@ -443,8 +443,9 @@ interface <dfn id="websocket">WebSocket</dfn> {
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
   connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
-  raise an <code>INVALID_STATE_ERR</code> exception. If the <var title="">data</var> argument has any unpaired surrogates, then it
-  must raise <code>SYNTAX_ERR</code>. If the connection is
+  raise an <code>INVALID_STATE_ERR</code> exception. Otherwise, if the
+  <var title="">data</var> argument has any unpaired surrogates, then
+  it must raise <code>SYNTAX_ERR</code>. If the connection is
   established, and the string has no unpaired surrogates, and <span title="the WebSocket closing handshake has started">the WebSocket
   closing handshake has not yet started</span>, then the user agent
   must <span>send <var title="">data</var> using the
