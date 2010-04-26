@@ -183,7 +183,7 @@
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The WebSocket API</h1>
 
-   <h2 class="no-num no-toc" id="editor-s-draft-15-april-2010">Editor's Draft 15 April 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-26-april-2010">Editor's Draft 26 April 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -247,7 +247,7 @@
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
 
-  This specification is the 15 April 2010 Editor's Draft.
+  This specification is the 26 April 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -338,7 +338,7 @@
   being retrieved (e.g. by author script), and is said to be
   <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString protocol)]
 interface <dfn id="websocket">WebSocket</dfn> {
-  readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-URL">URL</a>;
+  readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-url">url</a>;
 
   // ready state
   const unsigned short <a href="#dom-websocket-connecting" title="dom-WebSocket-CONNECTING">CONNECTING</a> = 0;
@@ -417,7 +417,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
   </ol><p>This constructor must be visible when the <span>script's global
   object</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-URL"><code>URL</code></dfn>
+  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn>
   attribute must return the result of <span title="resolve a
   url">resolving</span> the <span>URL</span> that was passed to the
   constructor. (It doesn't matter what it is resolved relative to,
