@@ -182,7 +182,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The WebSocket API</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-15-june-2010">Editor's Draft 15 June 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-21-july-2010">Editor's Draft 21 July 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -254,7 +254,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Apps
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 15 June 2010 Editor's Draft.
+  This specification is the 21 July 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -340,7 +340,8 @@
   <code>Node</code> objects as defined in the DOM Core
   specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>An IDL attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString protocol)]
+  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString protocols)]
+[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString[] protocols)]
 interface <dfn id="websocket">WebSocket</dfn> {
   readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-url">url</a>;
 
@@ -357,16 +358,21 @@ interface <dfn id="websocket">WebSocket</dfn> {
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
+  readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
   boolean <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
 };
-<a href="#websocket">WebSocket</a> implements <span>EventTarget</span>;</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocol</var>)</code></dfn>
+<a href="#websocket">WebSocket</a> implements <span>EventTarget</span>;</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
   constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
-  connect. The second, <var title="">protocol</var>, if present,
-  specifies a sub-protocol that the server must support for the
-  connection to be successful. The sub-protocol name must be a
-  non-empty ASCII string with no control characters in it (i.e. only
-  characters in the range U+0020 to U+007E).<p>When the <code>WebSocket()</code> constructor is invoked, the UA
+  connect. The second, <var title="">protocols</var>, if present, is
+  either a string or an array of strings. If it is a string, it is
+  equivalent to an array consisting of just that string; if it is
+  omitted, it is equivalent to the empty array. Each string in the
+  array is a subprotocol name. The connection will only be established
+  if the server reports that it has selected one of these
+  subprotocols. The subprotocol names must all be non-empty ASCII
+  strings with no control characters and not spaces in them (i.e. only
+  characters in the range U+0021 to U+007E).<p>When the <code>WebSocket()</code> constructor is invoked, the UA
   must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
    during a redirect, in the protocol section --><li><p><span>Parse a WebSocket URL's components</span> from the
    <var title="">url</var> argument, to obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and <var title="">secure</var>. If
@@ -389,10 +395,20 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
    </li>
 
-   <li><p>If <var title="">protocol</var> is present but is either the
-   empty string or contains characters with Unicode code points less
-   than U+0020 or greater than U+007E (i.e. any characters that are
-   not printable ASCII characters), then throw a
+   <li>
+
+    <p>If <var title="">protocols</var> is absent, let <var title="">protocols</var> be an empty array.</p>
+
+    <p>Otherwise, if <var title="">protocols</var> is present and a
+    string, let <var title="">protocols</var> instead be an array
+    consisting of just that string.</p>
+
+   </li>
+
+   <li><p>If any of the values in <var title="">protocols</var> occur
+   more than once or contain characters with Unicode code points less
+   than U+0021 or greater than U+007E (i.e. the space character or any
+   characters that are not printable ASCII characters), then throw a
    <code>SYNTAX_ERR</code> exception and abort these steps.</li>
 
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
@@ -407,8 +423,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
     <p><span>Establish a WebSocket connection</span> to a host <var title="">host</var>, on port <var title="">port</var> (if one was
     specified), from <var title="">origin</var>, with the flag <var title="">secure</var>, with <var title="">resource name</var> as
-    the resource name, and with <var title="">protocol</var> as the
-    protocol (if it is present).</p>
+    the resource name, and with <var title="">protocols</var> as the
+    (possibly empty) list of protocols.</p>
 
     <p class="note">If the "<span>establish a WebSocket
     connection</span>" algorithm fails, it triggers the "<span>fail
@@ -444,7 +460,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <dd>The connection has been closed or could not be opened.</dd>
 
   </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
+  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
+  must initially return the empty string. After the <span>WebSocket
+  connection is established</span>, its value might change, as defined
+  below.<p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
+  subprotocol selected by the server, if any. It can be used in
+  conjunction with the array form of the constructor's second argument
+  to perform subprotocol negotiation.<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
   connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
   raise an <code>INVALID_STATE_ERR</code> exception. Otherwise, if the
@@ -569,8 +591,10 @@ socket.onopen = function () {
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), and then
-  <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
+  to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1); then change the
+  <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's
+  value to the <span>selected WebSocket subprotocol</span>, if there
+  is one; and then <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
   object.<p>When <i>a WebSocket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to check to see
