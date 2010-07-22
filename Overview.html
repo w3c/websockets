@@ -423,8 +423,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
     <p><span>Establish a WebSocket connection</span> to a host <var title="">host</var>, on port <var title="">port</var> (if one was
     specified), from <var title="">origin</var>, with the flag <var title="">secure</var>, with <var title="">resource name</var> as
-    the resource name, and with <var title="">protocols</var> as the
-    (possibly empty) list of protocols.</p>
+    the resource name, with <var title="">protocols</var> as the
+    (possibly empty) list of protocols, and with the <var title="">defer cookies</var> flag set.</p>
 
     <p class="note">If the "<span>establish a WebSocket
     connection</span>" algorithm fails, it triggers the "<span>fail
@@ -591,10 +591,12 @@ socket.onopen = function () {
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1); then change the
-  <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's
-  value to the <span>selected WebSocket subprotocol</span>, if there
-  is one; and then <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
+  to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1); <span>apply the
+  cookies</span> that were collected in the <var title="">list of
+  cookies</var> when the <span title="WebSocket connection is
+  established">connection was established</span>; change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to
+  the <span>selected WebSocket subprotocol</span>, if there is one;
+  and then <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
   object.<p>When <i>a WebSocket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to check to see
