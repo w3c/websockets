@@ -182,7 +182,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The WebSocket API</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-27-july-2010">Editor's Draft 27 July 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-august-2010">Editor's Draft 6 August 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -254,7 +254,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 July 2010 Editor's Draft.
+  This specification is the 6 August 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -359,7 +359,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
            attribute <span>Function</span> <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
-  boolean <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
 };
 <a href="#websocket">WebSocket</a> implements <span>EventTarget</span>;</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
@@ -474,15 +474,12 @@ interface <dfn id="websocket">WebSocket</dfn> {
   it must raise <code>SYNTAX_ERR</code>. If the connection is
   established, and the string has no unpaired surrogates, and <span title="the WebSocket closing handshake has started">the WebSocket
   closing handshake has not yet started</span>, then the user agent
-  must <span>send <var title="">data</var> using the
-  WebSocket</span>. If the data cannot be sent, e.g. because it would
-  need to be buffered but the buffer is full, the user agent must
-  <span>close the WebSocket connection</span>. The method must then
-  return true if the connection is still established (and the data was
-  queued or sent successfully), or false if the connection is closing
-  or closed (e.g. because the user agent just had a buffer overflow
-  and failed to send the data, or because <span>the WebSocket closing
-  handshake has started</span>).<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
+  must <span>send <var title="">data</var> using the WebSocket</span>;
+  if the data cannot be sent, e.g. because it would need to be
+  buffered but the buffer is full, the user agent must <span>close the
+  WebSocket connection</span>. Any invokation of this method that does
+  not raise an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute
+  by the number of bytes needed to express the argument as UTF-8.<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
   method must run the first matching steps from the following list:<dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
    attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
 
