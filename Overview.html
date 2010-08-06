@@ -635,13 +635,9 @@ socket.onopen = function () {
   executing a <span title="concept-task">task</span> must not be
   garbage collected if there are any event listeners registered for
   <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of
-  the last time the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
-  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as
-  of the last time the <span>event loop</span> started executing a
-  <span title="concept-task">task</span> must not be garbage collected
-  if there are any event listeners registered for <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <span title="WebSocket
+  was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as of the last time
+  the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
+  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <span title="WebSocket
   connection is established">an established connection</span> that has
   data queued to be transmitted to the network must not be garbage
   collected.<p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
