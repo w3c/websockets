@@ -185,7 +185,7 @@
   </style><link href="http://www.w3.org/StyleSheets/TR/W3C-ED" rel="stylesheet" type="text/css"><div class="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
    <h1>The WebSocket API</h1>
-   <h2 class="no-num no-toc" id="editor-s-draft-10-august-2010">Editor's Draft 10 August 2010</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-2-september-2010">Editor's Draft 2 September 2010</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -257,7 +257,7 @@
   </ul><!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING LIST TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST --><!-- status of document, group responsible (required) --><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 10 August 2010 Editor's Draft.
+  This specification is the 2 September 2010 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -376,11 +376,10 @@ interface <dfn id="websocket">WebSocket</dfn> {
   subprotocols. The subprotocol names must all be non-empty ASCII
   strings with no control characters and not spaces in them (i.e. only
   characters in the range U+0021 to U+007E).<p>When the <code>WebSocket()</code> constructor is invoked, the UA
-  must run these steps:<ol><!-- beware, this is very similar to the steps for what happens
-   during a redirect, in the protocol section --><li><p><span>Parse a WebSocket URL's components</span> from the
+  must run these steps:<ol><li><p><span>Parse a WebSocket URL's components</span> from the
    <var title="">url</var> argument, to obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and <var title="">secure</var>. If
    this fails, throw a <code>SYNTAX_ERR</code> exception and abort
-   these steps.</li>
+   these steps. <a href="#refsWSP">[WSP]</a></li>
 
    <li>
 
@@ -427,7 +426,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
     <p><span>Establish a WebSocket connection</span> to a host <var title="">host</var>, on port <var title="">port</var> (if one was
     specified), from <var title="">origin</var>, with the flag <var title="">secure</var>, with <var title="">resource name</var> as
     the resource name, with <var title="">protocols</var> as the
-    (possibly empty) list of protocols, and with the <var title="">defer cookies</var> flag set.</p>
+    (possibly empty) list of protocols, and with the <var title="">defer cookies</var> flag set. <a href="#refsWSP">[WSP]</a></p>
 
     <p class="note">If the "<span>establish a WebSocket
     connection</span>" algorithm fails, it triggers the "<span>fail
@@ -482,7 +481,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   buffered but the buffer is full, the user agent must <span>close the
   WebSocket connection</span>. Any invokation of this method that does
   not raise an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute
-  by the number of bytes needed to express the argument as UTF-8.<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
+  by the number of bytes needed to express the argument as UTF-8. <a href="#refsWSP">[WSP]</a><p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
   method must run the first matching steps from the following list:<dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
    attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
 
@@ -497,13 +496,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
 
    <dt>If the WebSocket connection is not yet <span title="WebSocket
-   connection is established">established</span></dt>
+   connection is established">established</span> <a href="#refsWSP">[WSP]</a></dt>
 
    <dd>
 
     <p><span>Fail the WebSocket connection</span> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
-    (2).</p>
+    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).
+    <a href="#refsWSP">[WSP]</a></p>
 
     <p class="note">The "<span>fail the WebSocket connection</span>"
     algorithm invokes the "<span>close the WebSocket
@@ -515,13 +514,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
 
    <dt>If the WebSocket closing handshake has not yet been <span title="the WebSocket closing handshake has
-   started">started</span></dt>
+   started">started</span> <a href="#refsWSP">[WSP]</a></dt>
 
    <dd>
 
     <p><span>Start the WebSocket closing handshake</span> and set the
     <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-    attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).</p>
+    attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
 
     <p class="note">The "<span>start the WebSocket closing
     handshake</span>" algorithm eventually invokes the "<span>close
@@ -596,24 +595,24 @@ socket.onopen = function () {
   cookies</var> when the <span title="WebSocket connection is
   established">connection was established</span>; change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to
   the <span>selected WebSocket subprotocol</span>, if there is one;
-  and then <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p>When <i>a WebSocket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
+  and then <span>fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code> object.
+  <a href="#refsWSP">[WSP]</a><p>When <i>a WebSocket message has been received</i> with text <var title="">data</var>, the user agent must create an event that uses
   the <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is not
   cancelable, has no default action, and whose <code title="dom-MessageEvent-data">data</code> attribute is set to <var title="">data</var>, and <span>queue a task</span> to check to see
   if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code>
   (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2), and
-  if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object.<p>When <i>a WebSocket error has been detected</i>, the user agent
+  if so, dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a><p>When <i>a WebSocket error has been detected</i>, the user agent
   must <span>queue a task</span> to check to see if the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   is <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2), and if so,
   <span>fire a simple event</span> named <code title="event-error">error</code> at the <code><a href="#websocket">WebSocket</a></code>
-  object.<p>When <i>the WebSocket closing handshake has started</i>, the user
+  object. <a href="#refsWSP">[WSP]</a><p>When <i>the WebSocket closing handshake has started</i>, the user
   agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
   <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method was called,
   the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value will already be set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) when this task
-  runs.)<p id="closeWebSocket">When the <i>WebSocket connection is
+  runs.) <a href="#refsWSP">[WSP]</a><p id="closeWebSocket">When the <i>WebSocket connection is
   closed</i>, possibly <i title="">cleanly</i>, the user agent must
   create an event that uses the <code><a href="#closeevent">CloseEvent</a></code> interface,
   with the event name <code title="event-close">close</code>, which
@@ -623,7 +622,7 @@ socket.onopen = function () {
   false otherwise; and <span>queue a task</span> to first change the
   <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
   value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3), and
-  then dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object.<p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
+  then dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.<h3 id="event-definitions"><span class="secno">5.1 </span>Event definitions</h3><pre class="idl">interface <dfn id="closeevent">CloseEvent</dfn> : <span>Event</span> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
@@ -643,9 +642,9 @@ socket.onopen = function () {
   there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <span title="WebSocket
   connection is established">an established connection</span> that has
   data queued to be transmitted to the network must not be garbage
-  collected.<p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
+  collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>close the
-  WebSocket connection</span>.<h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web, because the newer ones keep changing. --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
+  WebSocket connection</span>. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web, because the newer ones keep changing. --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/">Document
    Object Model (DOM) Level 3 Core Specification</a></cite>, A. Le
    Hors, P. Le Hegaret, L. Wood, G. Nicol, J. Robie, M. Champion,
@@ -681,5 +680,9 @@ socket.onopen = function () {
    -->
    <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web
    IDL</a></cite>, C. McCormack. W3C.</dd>
+
+   <dt id="refsWSP">[WSP]</dt>
+   <dd><cite><a href="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol">The
+   WebSocket protocol</a></cite>, I. Fette. IETF.</dd>
 
   </dl>
