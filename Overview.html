@@ -230,7 +230,7 @@
 
    <h1>The WebSocket API</h1>
    <!--<h2 class="no-num no-toc">(subtitle)</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-8-february-2011">Editor's Draft 8 February 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-28-february-2011">Editor's Draft 28 February 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -283,7 +283,14 @@
     change rapidly and make your feedback harder to understand.</p>
     <script type="text/javascript">
      function checkFeedbackForm(form) {
-       if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+       if (form.elements.text.value.match(/^ *</)) {
+         alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
+         return true;
+       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+       if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
+         alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
+         return true;
+       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
          form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
          return true;
        } else {
@@ -292,7 +299,7 @@
        }
      }
     </script><p>
-     <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"><small>(Note: Your IP address will be publicly recorded for spam prevention purposes.)</small>
+     <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
     </p>
    </fieldset></form><p>You can also e-mail feedback to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>),
@@ -324,7 +331,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 8 February 2011 Editor's Draft.
+  This specification is the 28 February 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
