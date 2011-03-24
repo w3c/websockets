@@ -230,7 +230,7 @@
 
    <h1>The WebSocket API</h1>
    <!--<h2 class="no-num no-toc">(subtitle)</h2>-->
-   <h2 class="no-num no-toc" id="editor-s-draft-28-february-2011">Editor's Draft 28 February 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-24-march-2011">Editor's Draft 24 March 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -331,7 +331,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 28 February 2011 Editor's Draft.
+  This specification is the 24 March 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -673,7 +673,20 @@ socket.onopen = function () {
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When the <i>WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1); <span>apply the
-  cookies</span> that were collected in the <var title="">list of
+  cookies</span>
+<!--
+Once we have the cookies back:
+
+     <li><p>Act as if <span title="receives a
+     set-cookie-string">receiving a set-cookie-string</span> for
+     <span>the document's address</span>,
+     consisting of the value of the element's <code
+     title="attr-meta-content">content</code> attribute encoded as
+     UTF-8. <a href="#refsCOOKIES">[COOKIES]</a> <a
+     href="#refsRFC3629">[RFC3629]</a></p></li>
+
+-->
+  that were collected in the <var title="">list of
   cookies</var> when the <span title="WebSocket connection is
   established">connection was established</span>; change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to
   the <span>selected WebSocket subprotocol</span>, if there is one;
@@ -698,22 +711,31 @@ socket.onopen = function () {
   closed</i>, possibly <i title="">cleanly</i>, the user agent must
   create an event that uses the <code><a href="#closeevent">CloseEvent</a></code> interface,
   with the event name <code title="event-close">close</code>, which
-  does not bubble, is not cancelable, has no default action, and whose
+  does not bubble, is not cancelable, has no default action, whose
   <code title="dom-CloseEvent-wasClean"><a href="#dom-closeevent-wasclean">wasClean</a></code> attribute is
   set to true if the connection closed <i title="">cleanly</i> and
-  false otherwise; and <span>queue a task</span> to first change the
-  <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-  value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3), and
-  then dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
+  false otherwise, whose <code title="dom-CloseEvent-code"><a href="#dom-closeevent-code">code</a></code>
+  attribute is set to the <i>WebSocket connection close code</i>, and
+  whose <code title="dom-CloseEvent-reason"><a href="#dom-closeevent-reason">reason</a></code> attribute is
+  set to the <i>WebSocket connection close reason</i>; and <span>queue
+  a task</span> to first change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3), and then
+  dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.<h3 id="event-definitions"><span class="secno">5.1 </span>Event definitions</h3><pre class="idl">interface <dfn id="closeevent">CloseEvent</dfn> : <span>Event</span> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
-  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean wasCleanArg);
+  readonly attribute unsigned long <span title="dom-WebSocket-code">code</span>;
+  readonly attribute DOMString <span title="dom-WebSocket-reason">reason</span>;
+  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean wasCleanArg, in unsigned long codeArg, in unsigned long reasonArg);
 };</pre><p>The <dfn id="dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent"><code>initCloseEvent()</code></dfn>
   method must initialize the event in a manner analogous to the
   similarly-named method in the DOM Events interfaces. <a href="#refsDOMEVENTS">[DOMEVENTS]</a><p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
   attribute represents whether the connection closed cleanly or
-  not.<h3 id="garbage-collection"><span class="secno">5.2 </span>Garbage collection</h3><p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  not.<p>The <dfn id="dom-closeevent-code" title="dom-CloseEvent-code"><code>code</code></dfn>
+  attribute represents the WebSocket connection close code provided by
+  the server.<p>The <dfn id="dom-closeevent-reason" title="dom-CloseEvent-reason"><code>reason</code></dfn>
+  attribute represents the WebSocket connection close reason provided
+  by the server.<h3 id="garbage-collection"><span class="secno">5.2 </span>Garbage collection</h3><p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>
   (0) as of the last time the <span>event loop</span> started
   executing a <span title="concept-task">task</span> must not be
@@ -726,7 +748,17 @@ socket.onopen = function () {
   data queued to be transmitted to the network must not be garbage
   collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>close the
-  WebSocket connection</span>. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web, because the newer ones keep changing. --><dl><dt id="refsDOMCORE">[DOMCORE]</dt>
+  WebSocket connection</span>. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><!--REFS--><p>All references are normative unless marked "Non-normative".</p><!-- Dates are only included for standards older than the Web, because the newer ones keep changing. --><dl><dt id="refsCOOKIES">[COOKIES]</dt>
+   <!--
+   <dd><cite><a href="http://tools.ietf.org/html/rfc2109">HTTP State
+   Management Mechanism</a></cite>, D. Kristol, L. Montulli. IETF.</dd>
+   <dd><cite><a href="http://tools.ietf.org/html/rfc2965">HTTP State Management
+   Mechanism</a></cite>, D. Kristol, L. Montulli. IETF.</dd>
+   -->
+   <dd><cite><a href="http://tools.ietf.org/html/draft-ietf-httpstate-cookie">HTTP State
+   Management Mechanism</a></cite>, A. Barth. IETF.</dd>
+
+   <dt id="refsDOMCORE">[DOMCORE]</dt>
    <dd><cite><a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html">Web DOM Core</a></cite>, A. van Kesteren. W3C.</dd>
 
    <dt id="refsDOMEVENTS">[DOMEVENTS]</dt>
@@ -747,6 +779,10 @@ socket.onopen = function () {
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in
    RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
+
+   <dt id="refsRFC3629">[RFC3629]</dt>
+   <dd><cite><a href="http://tools.ietf.org/html/rfc3629">UTF-8, a
+   transformation format of ISO 10646</a></cite>, F. Yergeau. IETF.</dd>
 
    <dt id="refsWEBIDL">[WEBIDL]</dt>
    <!--
