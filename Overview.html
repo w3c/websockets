@@ -206,28 +206,12 @@
      }
      return null;
    }
-   function load(script) {
-     var e = document.createElement('script');
-     e.setAttribute('src', 'http://www.whatwg.org/specs/web-apps/current-work/' + script + '?' + encodeURIComponent(location) + '&' + encodeURIComponent(document.referrer));
-     document.body.appendChild(e);
-   }
-   function init() {
-     if (location.search == '?slow-browser')
-       return;
-     var configUI = document.createElement('div');
-     configUI.id = 'configUI';
-     document.body.appendChild(configUI);
-     load('dfn.js'); // doesn't support split-out specs, but, oh well.
-     if (getCookie('profile') == '1')
-       document.getElementsByTagName('h2')[0].textContent += '; load: ' + (new Date() - loadTimer) + 'ms';
-     fixBrokenLink();
-   }
-  </script><body onload="init()"><div class="head" id="head">
+  </script><div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-april-2011">Editor's Draft 27 April 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-10-may-2011">Editor's Draft 10 May 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -327,7 +311,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 April 2011 Editor's Draft.
+  This specification is the 10 May 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
