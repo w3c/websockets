@@ -211,7 +211,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-12-may-2011">Editor's Draft 12 May 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-24-may-2011">Editor's Draft 24 May 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -312,7 +312,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 12 May 2011 Editor's Draft.
+  This specification is the 24 May 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -488,6 +488,21 @@ interface <dfn id="websocket">WebSocket</dfn> {
     specified), from <var title="">origin</var>, with the flag <var title="">secure</var>, with <var title="">resource name</var> as
     the resource name, with <var title="">protocols</var> as the
     (possibly empty) list of protocols, and with the <var title="">defer cookies</var> flag set. <a href="#refsWSP">[WSP]</a></p>
+
+    <p>When the user agent <i>validates the server's response</i> during
+    the "<span>establish a WebSocket connection</span>" algorithm, if
+    the status code received from the server is not 101 (e.g. it is a
+    redirect), the user agent must <span>fail the websocket
+    connection</span>.</p>
+
+    <p class="warning">Following HTTP procedures here could introduce
+    serious security problems in a Web browser context. For example,
+    consider a host with a WebSocket server at one path and an open
+    HTTP redirector at another. Suddenly, any script that can be given
+    a particular WebSocket URL can be tricked into communicating to
+    (and potentially sharing secrets with) any host on the Internet,
+    even if the script checks that the URL has the right hostname.</p>
+    
 
     <p class="note">If the "<span>establish a WebSocket
     connection</span>" algorithm fails, it triggers the "<span>fail
