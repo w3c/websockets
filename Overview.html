@@ -875,7 +875,40 @@ socket.onopen = function () {
   data queued to be transmitted to the network must not be garbage
   collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <span>start the
-  WebSocket closing handshake</span>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsCOOKIES">[COOKIES]</dt>
+  WebSocket closing handshake</span>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a><hr><p>If a user agent is to <dfn id="make-disappear">make disappear</dfn> a
+  <code><a href="#websocket">WebSocket</a></code> object (this happens when a
+  <code>Document</code> object goes away), the user agent must follow
+  the first appropriate set of steps from the following list:<dl class="switch"><dt>If the WebSocket connection is not yet <span title="WebSocket
+   connection is established">established</span> <a href="#refsWSP">[WSP]</a></dt>
+
+   <dd>
+
+    <p><span>Fail the WebSocket connection</span>. <a href="#refsWSP">[WSP]</a></p>
+
+   </dd>
+
+
+   <dt>If the WebSocket closing handshake has not yet been <span title="the WebSocket closing handshake has started">started</span>
+   <a href="#refsWSP">[WSP]</a></dt>
+
+   <dd>
+
+    <p><span>Start the WebSocket closing handshake</span>, with the
+    status code<!--CLOSE CODE--> to use in the WebSocket Close message
+    being 1001. <a href="#refsWSP">[WSP]</a></p>
+
+   </dd>
+
+
+   <dt>Otherwise</dt>
+
+   <dd>
+
+    <p>Do nothing.</p>
+
+   </dd>
+
+  </dl><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsCOOKIES">[COOKIES]</dt>
       <dd><cite><a href="http://tools.ietf.org/html/draft-ietf-httpstate-cookie">HTTP State
    Management Mechanism</a></cite>, A. Barth. IETF.</dd>
 
