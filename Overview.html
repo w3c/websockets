@@ -422,7 +422,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
            attribute <span>Function</span> <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
-  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>();
+  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>(in optional unsigned short code, in optional DOMString reason);
 
   // messaging
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
@@ -550,72 +550,89 @@ interface <dfn id="websocket">WebSocket</dfn> {
   subprotocol selected by the server, if any. It can be used in
   conjunction with the array form of the constructor's second argument
   to perform subprotocol negotiation.<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
-  method must run the first matching steps from the following list:<dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-   attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
+  method must run the following steps:<ol><li><p>If the method's first argument is present but is not an
+   integer equal to 1000 or in the range 3000 to 4999, throw an
+   <code>INVALID_ACCESS_ERR</code> exception and abort these
+   steps.</li>
 
-   <dd>
+   <li><p>Run the first matching steps from the following list:</p>
 
-    <p>Do nothing.</p>
+    <dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+     attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
 
-    <p class="note">The connection is already closing or is already
-    closed. If it has not already, a <code title="event-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
+     <dd>
 
-   </dd>
+      <p>Do nothing.</p>
 
+      <p class="note">The connection is already closing or is already
+      closed. If it has not already, a <code title="event-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
 
-   <dt>If the WebSocket connection is not yet <span title="WebSocket
-   connection is established">established</span> <a href="#refsWSP">[WSP]</a></dt>
-
-   <dd>
-
-    <p><span>Fail the WebSocket connection</span> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).
-    <a href="#refsWSP">[WSP]</a></p>
-
-    <p class="note">The "<span>fail the WebSocket connection</span>"
-    algorithm invokes the "<span>close the WebSocket
-    connection</span>" algorithm, which then establishes that the
-    "<span>WebSocket connection is closed</span>", which fires the
-    <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
-
-   </dd>
+     </dd>
 
 
-   <dt>If the WebSocket closing handshake has not yet been <span title="the WebSocket closing handshake has
-   started">started</span> <a href="#refsWSP">[WSP]</a></dt>
+     <dt>If the WebSocket connection is not yet <span title="WebSocket
+     connection is established">established</span> <a href="#refsWSP">[WSP]</a></dt>
 
-   <dd>
+     <dd>
 
-    <p><span>Start the WebSocket closing handshake</span> and set the
-    <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-    attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
+      <p><span>Fail the WebSocket connection</span> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+      value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).
+      <a href="#refsWSP">[WSP]</a></p>
 
-    <p class="note">The "<span>start the WebSocket closing
-    handshake</span>" algorithm eventually invokes the "<span>close
-    the WebSocket connection</span>" algorithm, which then establishes
-    that the "<span>WebSocket connection is closed</span>", which
-    fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+      <p class="note">The "<span>fail the WebSocket connection</span>"
+      algorithm invokes the "<span>close the WebSocket
+      connection</span>" algorithm, which then establishes that the
+      "<span>WebSocket connection is closed</span>", which fires the
+      <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
 
-   </dd>
+     </dd>
 
 
-   <dt>Otherwise</dt>
+     <dt>If the WebSocket closing handshake has not yet been <span title="the WebSocket closing handshake has
+     started">started</span> <a href="#refsWSP">[WSP]</a></dt>
 
-   <dd>
+     <dd>
 
-    <p>Set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-    value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
-    (2).</p>
+      <p><span>Start the WebSocket closing handshake</span> and set the
+      <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+      attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
 
-    <p class="note"><span>The WebSocket closing handshake has
-    started</span>, and will eventually invokethe "<span>close the
-    WebSocket connection</span>" algorithm, which will establish that
-    the "<span>WebSocket connection is closed</span>", and thus the
-    <code title="event-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
+      <p>If the first argument is present, then the status
+      code<!--CLOSE CODE--> to use in the WebSocket Close message must
+      be the integer given by the first argument. <a href="#refsWSP">[WSP]</a></p>
 
-   </dd>
+      <p>If the second argument is also present, then it must be
+      encoded as UTF-8 and provided in the Close message after the
+      status code<!--CLOSE CODE-->. <a href="#refsWSP">[WSP]</a></p>
 
-  </dl><hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
+      <p class="note">The "<span>start the WebSocket closing
+      handshake</span>" algorithm eventually invokes the "<span>close
+      the WebSocket connection</span>" algorithm, which then establishes
+      that the "<span>WebSocket connection is closed</span>", which
+      fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+
+     </dd>
+
+
+     <dt>Otherwise</dt>
+
+     <dd>
+
+      <p>Set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+      value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
+      (2).</p>
+
+      <p class="note"><span>The WebSocket closing handshake has
+      started</span>, and will eventually invokethe "<span>close the
+      WebSocket connection</span>" algorithm, which will establish that
+      the "<span>WebSocket connection is closed</span>", and thus the
+      <code title="event-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
+
+     </dd>
+
+    </dl></li>
+
+  </ol><hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
   attribute must return the number of bytes of UTF-8 text that have
   been queued using <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> but
   that, as of the last time the <span>event loop</span> started
@@ -857,8 +874,8 @@ socket.onopen = function () {
   connection is established">an established connection</span> that has
   data queued to be transmitted to the network must not be garbage
   collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
-  connection is still open, the user agent must <span>close the
-  WebSocket connection</span>. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsCOOKIES">[COOKIES]</dt>
+  connection is still open, the user agent must <span>start the
+  WebSocket closing handshake</span>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsCOOKIES">[COOKIES]</dt>
       <dd><cite><a href="http://tools.ietf.org/html/draft-ietf-httpstate-cookie">HTTP State
    Management Mechanism</a></cite>, A. Barth. IETF.</dd>
 
