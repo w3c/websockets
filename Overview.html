@@ -421,7 +421,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
            attribute <span>Function</span> <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
-  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>(in optional unsigned short code, in optional DOMString reason);
+  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>(in optional unsigned long code, in optional DOMString reason);
 
   // messaging
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
@@ -841,7 +841,7 @@ socket.onopen = function () {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
   readonly attribute unsigned long <span title="dom-WebSocket-code">code</span>;
   readonly attribute DOMString <span title="dom-WebSocket-reason">reason</span>;
-  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean wasCleanArg, in unsigned long codeArg, in unsigned long reasonArg);
+  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean wasCleanArg, in unsigned long codeArg, in DOMString reasonArg);
 };</pre><p>The <dfn id="dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent"><code>initCloseEvent()</code></dfn>
   method must initialize the event in a manner analogous to the
   similarly-named method in the DOM Events interfaces. <a href="#refsDOMEVENTS">[DOMEVENTS]</a><p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
