@@ -211,7 +211,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-may-2011">Editor's Draft 27 May 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-31-may-2011">Editor's Draft 31 May 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -312,7 +312,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 May 2011 Editor's Draft.
+  This specification is the 31 May 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -425,7 +425,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
 
   // messaging
            attribute <span>Function</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
-           attribute object <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
+           attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>ArrayBuffer</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>Blob</span> data);
@@ -661,29 +661,26 @@ socket.onopen = function () {
    time.</p>
 
   </div><hr><p>When a <code><a href="#websocket">WebSocket</a></code> object is created, its <dfn id="dom-websocket-binarytype" title="dom-WebSocket-binaryType"><code>binaryType</code></dfn> IDL
-  attribute must be set to the <code>Blob</code> interface object
-  associated with the same global object as the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket</a></code> constructor used to create
-  the <code><a href="#websocket">WebSocket</a></code> object. On getting, it must return the
-  last value it was set to. On setting, if the new value is either the
-  <code>Blob</code> or <code>ArrayBuffer</code> interface object
-  associated with the same global object as the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket</a></code> constructor used to create
-  the <code><a href="#websocket">WebSocket</a></code> object, then set the IDL attribute to
-  this new value. Otherwise, throw a <code>NOT_SUPPORTED_ERR</code>
-  exception.<p class="note">This attribute allows authors to control how binary
-  data is exposed to scripts. By setting the attribute to
-  <code>Blob</code>, binary data is returned in <code>Blob</code>
-  form; by setting it to <code>ArrayBuffer</code>, it is returned in
-  <code>ArrayBuffer</code> form. User agents can use this as a hint
-  for how to handle incoming binary data: if the attribute is set to
-  <code>Blob</code>, it is safe to spool it to disk, and if it is set
-  to <code>ArrayBuffer</code>, it is likely more efficient to keep the
-  data in memory. Naturally, user agents are encouraged to use more
-  subtle heuristics to decide whether to keep incoming data in memory
-  or not, e.g. based on how big the data is or how common it is for a
-  script to change the attribute at the last minute. This latter
-  aspect is important in particular because it is quite possible for
-  the attribute to be changed after the user agent has received the
-  data but before the user agent as fired the event for it.<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
+  attribute must be set to the string "<code title="">blob</code>". On
+  getting, it must return the last value it was set to. On setting, if
+  the new value is either the string "<code title="">blob</code>" or
+  the string "<code title="">arraybuffer</code>", then set the IDL
+  attribute to this new value. Otherwise, throw a
+  <code>SYNTAX_ERR</code> exception.<p class="note">This attribute allows authors to control how binary
+  data is exposed to scripts. By setting the attribute to "<code title="">blob</code>", binary data is returned in <code>Blob</code>
+  form; by setting it to "<code title="">arraybuffer</code>", it is
+  returned in <code>ArrayBuffer</code> form. User agents can use this
+  as a hint for how to handle incoming binary data: if the attribute
+  is set to "<code title="">blob</code>", it is safe to spool it to
+  disk, and if it is set to "<code title="">arraybuffer</code>", it is
+  likely more efficient to keep the data in memory. Naturally, user
+  agents are encouraged to use more subtle heuristics to decide
+  whether to keep incoming data in memory or not, e.g. based on how
+  big the data is or how common it is for a script to change the
+  attribute at the last minute. This latter aspect is important in
+  particular because it is quite possible for the attribute to be
+  changed after the user agent has received the data but before the
+  user agent as fired the event for it.<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
   connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
   raise an <code>INVALID_STATE_ERR</code> exception. Otherwise, the
@@ -792,14 +789,13 @@ socket.onopen = function () {
 
     <p>If <var title="">type</var> indicates that the data is Binary,
     and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is
-    set to <code>Blob</code>, then set <var title="">event</var>'s
-    <code title="dom-MessageEvent-data">data</code> attribute to a new
+    set to "<code title="">blob</code>", then set <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new
     <code>Blob</code> object that represents <var title="">data</var>
     as its raw data. <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
     <p>If <var title="">type</var> indicates that the data is Binary,
     and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is
-    set to <code>ArrayBuffer</code>, then set <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new
+    set to "<code title="">arraybuffer</code>", then set <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new
     read-only <code>ArrayBuffer</code> object whose contents are <var title="">data</var>. <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </li>
@@ -815,12 +811,11 @@ socket.onopen = function () {
   perform the above steps efficiently before they run the task,
   picking tasks from other <span title="task queue">task queues</span>
   while they prepare the buffers if not. For example, if the <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> attribute was set
-  to <code>Blob</code> when the data arrived, and the user agent
-  spooled all the data to disk, but just before running the above
-  <span title="concept-task">task</span> for this particular message
-  the script switched <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> to
-  <code>ArrayBuffer</code>, the user agent would want to page the data
-  back to RAM before running this <span title="concept-task">task</span> so as to avoid stalling the main
+  to "<code title="">blob</code>" when the data arrived, and the user
+  agent spooled all the data to disk, but just before running the
+  above <span title="concept-task">task</span> for this particular
+  message the script switched <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> to "<code title="">arraybuffer</code>", the user agent would want to page the
+  data back to RAM before running this <span title="concept-task">task</span> so as to avoid stalling the main
   thread while it created the <code>ArrayBuffer</code> object.<hr><p>When <i>the WebSocket closing handshake is started</i>, the user
   agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
