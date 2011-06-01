@@ -211,7 +211,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-31-may-2011">Editor's Draft 31 May 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-1-june-2011">Editor's Draft 1 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -263,22 +263,23 @@
     <p class="note">Please don't use section numbers as these tend to
     change rapidly and make your feedback harder to understand.</p>
     <script type="text/javascript">
-     function checkFeedbackForm(form) {
-       if (form.elements.text.value.match(/^ *</)) {
-         alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
-         return true;
-       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-       if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
-         alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
-         return true;
-       } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
-         form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
-         return true;
-       } else {
-         alert('Please include significantly more detail about exactly what problem you are trying to solve.');
-         return false;
-       }
-     }
+    function checkFeedbackForm(form) {
+      if (form.elements.text.value.match(/^ *</)) {
+        alert('Please don\'t start your feedback with an angle bracket, instead explain what topic your feedback is about first.');
+        return true;
+      } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+        if (form.elements.text.value.match(/^Please enter your feedback, carefully/)) {
+          alert('Please enter your feedback, explaining what is wrong, and without repeating the instructions. Thanks!');
+          return true;
+        } else if (form.elements.text.value.match(/ [^ ]+ [^ ]+ [^ ]+ [^ ]+ /)) {
+          form.action = "http://www.whatwg.org/specs/web-apps/current-work/file-bug.cgi";
+          return true;
+        } else {
+          alert('Please include significantly more detail about exactly what problem you are trying to solve.');
+          return false;
+        }
+      }
+    }
     </script><p>
      <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
     </p>
@@ -312,7 +313,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 31 May 2011 Editor's Draft.
+  This specification is the 1 June 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
