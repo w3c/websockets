@@ -211,7 +211,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-1-june-2011">Editor's Draft 1 June 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-6-june-2011">Editor's Draft 6 June 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -313,7 +313,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 1 June 2011 Editor's Draft.
+  This specification is the 6 June 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -490,8 +490,12 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <li>
 
     <p><i>Establish a WebSocket connection</i> given the set (<var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, <var title="">secure</var>), along
-    with the <var title="">protocols</var> list and an empty list for
-    the extensions, and <var title="">origin</var>. <a href="#refsWSP">[WSP]</a></p>
+    with the <var title="">protocols</var> list, an empty list for the
+    extensions, and <var title="">origin</var>. The <i>headers to send
+    appropriate cookies</i> must be a <code title="http-Cookie">Cookie</code> header whose value is the
+    <i>cookie-string</i> computed from the user's cookie store and the
+    URL <var title="">url</var>; for these purposes this is
+    <em>not</em> a "non-HTTP" API. <a href="#refsWSP">[WSP]</a> <a href="#refsCOOKIES">[COOKIES]</a></p>
 
     <p>When the user agent <i title="validate the server's
     response">validates the server's response</i> during the
@@ -759,9 +763,9 @@ socket.onopen = function () {
    the <i>subprotocol in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Act as if the user agent had <span title="receives a
-   set-cookie-string">received a set-cookie-string</span> for
-   <span>the document's address</span>, consisting of the <i>cookies
-   set during the server's opening handshake</i>. <a href="#refsCOOKIES">[COOKIES]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></li>
+   set-cookie-string">received a set-cookie-string</span> consisting
+   of the <i>cookies set during the server's opening handshake</i>,
+   for the URL <var title="">url</var> given to the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket()</a></code> constructor. <a href="#refsCOOKIES">[COOKIES]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></li>
 
    <li><p><span>Fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
    object.</p>
