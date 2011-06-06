@@ -552,7 +552,9 @@ interface <dfn id="websocket">WebSocket</dfn> {
   attribute must initially return the empty string. After <i>the
   WebSocket connection is established</i>, its value might change, as
   defined below.<p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns
-  the extensions selected by the server, if any.<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
+  the extensions selected by the server, if any. (Currently this will
+  only ever be either the empty string or "deflate-stream", the latter
+  indicating that the data is being compressed.)<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
   must initially return the empty string. After <i>the WebSocket
   connection is established</i>, its value might change, as defined
   below.<p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
