@@ -421,6 +421,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   // networking
            attribute <span>Function</span> <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
            attribute <span>Function</span> <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
+  readonly attribute DOMString <a href="#dom-websocket-extensions" title="dom-WebSocket-extensions">extensions</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>(in optional unsigned long code, in optional DOMString reason);
 
@@ -490,12 +491,13 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <li>
 
     <p><i>Establish a WebSocket connection</i> given the set (<var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, <var title="">secure</var>), along
-    with the <var title="">protocols</var> list, an empty list for the
-    extensions, and <var title="">origin</var>. The <i>headers to send
-    appropriate cookies</i> must be a <code title="http-Cookie">Cookie</code> header whose value is the
-    <i>cookie-string</i> computed from the user's cookie store and the
-    URL <var title="">url</var>; for these purposes this is
-    <em>not</em> a "non-HTTP" API. <a href="#refsWSP">[WSP]</a> <a href="#refsCOOKIES">[COOKIES]</a></p>
+    with the <var title="">protocols</var> list, a list containing
+    just "<code title="">deflate-stream</code>" for the extensions,
+    and <var title="">origin</var>. The <i>headers to send appropriate
+    cookies</i> must be a <code title="http-Cookie">Cookie</code>
+    header whose value is the <i>cookie-string</i> computed from the
+    user's cookie store and the URL <var title="">url</var>; for these
+    purposes this is <em>not</em> a "non-HTTP" API. <a href="#refsWSP">[WSP]</a> <a href="#refsCOOKIES">[COOKIES]</a></p>
 
     <p>When the user agent <i title="validate the server's
     response">validates the server's response</i> during the
@@ -545,7 +547,11 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <dd>The connection has been closed or could not be opened.</dd>
 
   </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
+  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-extensions" title="dom-WebSocket-extensions"><code>extensions</code></dfn>
+  attribute must initially return the empty string. After <i>the
+  WebSocket connection is established</i>, its value might change, as
+  defined below.<p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns
+  the extensions selected by the server, if any.<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
   must initially return the empty string. After <i>the WebSocket
   connection is established</i>, its value might change, as defined
   below.<p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
@@ -758,6 +764,9 @@ socket.onopen = function () {
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When <i>the WebSocket connection is established</i>, the user
   agent must <span>queue a task</span> to run these steps:<ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
    value to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</li>
+
+   <li><p>Change the <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute's
+   value to the <i>extensions in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to
    the <i>subprotocol in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
