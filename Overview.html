@@ -566,6 +566,10 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <code>INVALID_ACCESS_ERR</code> exception and abort these
    steps.</li>
 
+   <li><p>If the method's second argument has any unpaired surrogates,
+   then throw an <code>SYNTAX_ERR</code> exception and abort these
+   steps.</li>
+
    <li><p>If the method's second argument is present, then let <var title="">reason</var> be the result of encoding that argument as
    UTF-8. If <var title="">reason</var> is longer than 123 bytes, then
    throw an <code>SYNTAX_ERR</code> exception and abort these steps.
