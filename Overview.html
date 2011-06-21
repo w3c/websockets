@@ -566,6 +566,11 @@ interface <dfn id="websocket">WebSocket</dfn> {
    <code>INVALID_ACCESS_ERR</code> exception and abort these
    steps.</li>
 
+   <li><p>If the method's second argument is present, then let <var title="">reason</var> be the result of encoding that argument as
+   UTF-8. If <var title="">reason</var> is longer than 123 bytes, then
+   throw an <code>SYNTAX_ERR</code> exception and abort these steps.
+   <a href="#refsRFC3629">[RFC3629]</a></li>
+
    <li><p>Run the first matching steps from the following list:</p>
 
     <dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
@@ -612,9 +617,8 @@ interface <dfn id="websocket">WebSocket</dfn> {
       code<!--CLOSE CODE--> to use in the WebSocket Close message must
       be the integer given by the first argument. <a href="#refsWSP">[WSP]</a></p>
 
-      <p>If the second argument is also present, then it must be
-      encoded as UTF-8 and provided in the Close message after the
-      status code<!--CLOSE CODE-->. <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></p>
+      <p>If the second argument is also present, then <var title="">reason</var> must be provided in the Close message
+      after the status code<!--CLOSE CODE-->. <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></p>
 
       <p class="note">The <i>start the WebSocket closing handshake</i>
       algorithm eventually invokes the <i>close the WebSocket
