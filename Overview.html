@@ -411,7 +411,7 @@
   being retrieved (e.g. by author script), and is said to be
   <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString protocols),
  <a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString[] protocols)]
-interface <dfn id="websocket">WebSocket</dfn> {
+interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-url">url</a>;
 
   // ready state
@@ -436,8 +436,7 @@ interface <dfn id="websocket">WebSocket</dfn> {
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>ArrayBuffer</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>Blob</span> data);
-};
-<a href="#websocket">WebSocket</a> implements <span>EventTarget</span>;</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
+};</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
   constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
   connect. The second, <var title="">protocols</var>, if present, is
   either a string or an array of strings. If it is a string, it is
