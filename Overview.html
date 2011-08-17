@@ -214,7 +214,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-15-august-2011">Editor's Draft 15 August 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-17-august-2011">Editor's Draft 17 August 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -318,7 +318,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 15 August 2011 Editor's Draft.
+  This specification is the 17 August 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -410,8 +410,8 @@
   <code>Node</code> objects as defined in the DOM Core
   specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>An IDL attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString protocols),
- <a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(in DOMString url, in optional DOMString[] protocols)]
+  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(DOMString url, optional DOMString protocols),
+ <a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(DOMString url, optional DOMString[] protocols)]
 interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-url">url</a>;
 
@@ -429,14 +429,14 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
            attribute <span>Function</span>? <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   readonly attribute DOMString <a href="#dom-websocket-extensions" title="dom-WebSocket-extensions">extensions</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
-  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>([Clamp] in optional unsigned short code, in optional DOMString reason);
+  void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>([Clamp] optional unsigned short code, optional DOMString reason);
 
   // messaging
            attribute <span>Function</span>? <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in DOMString data);
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>ArrayBuffer</span> data);
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(in <span>Blob</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>Blob</span> data);
 };</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
   constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
   connect. The second, <var title="">protocols</var>, if present, is
@@ -891,7 +891,7 @@ socket.onopen = function () {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
   readonly attribute unsigned short <a href="#dom-closeevent-code" title="dom-CloseEvent-code">code</a>;
   readonly attribute DOMString <span title="dom-WebSocket-reason">reason</span>;
-  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(in DOMString typeArg, in boolean canBubbleArg, in boolean cancelableArg, in boolean wasCleanArg, in unsigned short codeArg, in DOMString reasonArg);
+  void <a href="#dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent">initCloseEvent</a>(DOMString typeArg, boolean canBubbleArg, boolean cancelableArg, boolean wasCleanArg, unsigned short codeArg, DOMString reasonArg);
 };</pre><p>The <dfn id="dom-closeevent-initcloseevent" title="dom-CloseEvent-initCloseEvent"><code>initCloseEvent()</code></dfn>
   method must initialize the event in a manner analogous to the
   similarly-named method in the DOM Events interfaces. <a href="#refsDOMEVENTS">[DOMEVENTS]</a><p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
