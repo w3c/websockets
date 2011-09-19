@@ -214,7 +214,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-10-september-2011">Editor's Draft 10 September 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-19-september-2011">Editor's Draft 19 September 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -318,7 +318,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 10 September 2011 Editor's Draft.
+  This specification is the 19 September 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -445,9 +445,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   omitted, it is equivalent to the empty array. Each string in the
   array is a subprotocol name. The connection will only be established
   if the server reports that it has selected one of these
-  subprotocols. The subprotocol names must all be non-empty ASCII
-  strings with no control characters and no spaces in them (i.e. only
-  characters in the range U+0021 to U+007E).<p>When the <code>WebSocket()</code> constructor is invoked, the UA
+  subprotocols. The subprotocol names must all be strings that match
+  the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code>
+  header fields as defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a><p>When the <code>WebSocket()</code> constructor is invoked, the UA
   must run these steps:<ol><li><p><i>Parse a WebSocket URL's components</i> from the <var title="">url</var> argument, to obtain <var title="">host</var>,
    <var title="">port</var>, <var title="">resource name</var>, and
    <var title="">secure</var>. If this fails, throw a
@@ -485,10 +485,11 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    </li>
 
    <li><p>If any of the values in <var title="">protocols</var> occur
-   more than once or contain characters with Unicode code points less
-   than U+0021 or greater than U+007E (i.e. the space character or any
-   characters that are not printable ASCII characters), then throw a
-   <code>SYNTAX_ERR</code> exception and abort these steps.</li>
+   more than once or otherwise fail to match the requirements for
+   elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code>
+   header fields as defined by the WebSocket protocol specification,
+   then throw a <code>SYNTAX_ERR</code> exception and abort these
+   steps. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
    serialization of an origin">ASCII serialization</span> of the
