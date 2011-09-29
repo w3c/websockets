@@ -214,7 +214,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-19-september-2011">Editor's Draft 19 September 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-29-september-2011">Editor's Draft 29 September 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -318,7 +318,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 19 September 2011 Editor's Draft.
+  This specification is the 29 September 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -424,15 +424,15 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   readonly attribute unsigned long <a href="#dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount">bufferedAmount</a>;
 
   // networking
-           attribute <span>Function</span>? <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
-           attribute <span>Function</span>? <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
-           attribute <span>Function</span>? <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
+  [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-websocket-onopen" title="handler-WebSocket-onopen">onopen</a>;
+  [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-websocket-onerror" title="handler-WebSocket-onerror">onerror</a>;
+  [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-websocket-onclose" title="handler-WebSocket-onclose">onclose</a>;
   readonly attribute DOMString <a href="#dom-websocket-extensions" title="dom-WebSocket-extensions">extensions</a>;
   readonly attribute DOMString <a href="#dom-websocket-protocol" title="dom-WebSocket-protocol">protocol</a>;
   void <a href="#dom-websocket-close" title="dom-WebSocket-close">close</a>([Clamp] optional unsigned short code, optional DOMString reason);
 
   // messaging
-           attribute <span>Function</span>? <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
+  [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
