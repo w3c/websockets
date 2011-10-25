@@ -345,11 +345,11 @@
    <li><a href="#dependencies"><span class="secno">2.1 </span>Dependencies</a></ol></li>
  <li><a href="#terminology"><span class="secno">3 </span>Terminology</a></li>
  <li><a href="#the-websocket-interface"><span class="secno">4 </span>The <code>WebSocket</code> interface</a></li>
- <li><a href="#feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</a>
-  <ol>
-   <li><a href="#parsing-websocket-urls"><span class="secno">5.1 </span>Parsing WebSocket URLs</a></li>
-   <li><a href="#event-definitions"><span class="secno">5.2 </span>Event definitions</a></li>
-   <li><a href="#garbage-collection"><span class="secno">5.3 </span>Garbage collection</a></ol></li>
+ <li><a href="#feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</a></li>
+ <li><a href="#ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</a></li>
+ <li><a href="#parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</a></li>
+ <li><a href="#event-definitions"><span class="secno">8 </span>Event definitions</a></li>
+ <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></ol>
 <hr><h2 id="network-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable Web applications to maintain bidirectional
@@ -895,7 +895,15 @@ socket.onopen = function () {
 
   </ol><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
-  source</dfn>.<h3 id="parsing-websocket-urls"><span class="secno">5.1 </span>Parsing WebSocket URLs</h3><p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from
+  source</dfn>.<h2 id="ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</h2><p>The WebSocket protocol specification defines Ping and Pong frames
+  that can be used for keep-alive, heart-beats, network status
+  probing, latency instrumentation, and so forth. These are not
+  currently exposed in the API.<p>User agents may send ping and unsolicited pong frames as desired,
+  for example in an attempt to maintain local network NAT mappings, to
+  detect failed connections, or to display latency metrics to the
+  user. User agents must not use pings or unsolicited pongs to aid the
+  server; it is assumed that servers will send solicit pongs whenever
+  appropriate for the server's needs.<h2 id="parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</h2><p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from
   a string <var title="">url</var> are as follows. These steps return
   either a <var title="">host</var>, a <var title="">port</var>, a
   <var title="">resource name</var>, and a <var title="">secure</var>
@@ -945,7 +953,7 @@ socket.onopen = function () {
    <li><p>Return <var title="">host</var>, <var title="">port</var>,
    <var title="">resource name</var>, and <var title="">secure</var>.</li>
 
-  </ol><h3 id="event-definitions"><span class="secno">5.2 </span>Event definitions</h3><pre class="idl">[Constructor(DOMString type, optional <a href="#closeeventinit">CloseEventInit</a> eventInitDict)]
+  </ol><h2 id="event-definitions"><span class="secno">8 </span>Event definitions</h2><pre class="idl">[Constructor(DOMString type, optional <a href="#closeeventinit">CloseEventInit</a> eventInitDict)]
 interface <dfn id="closeevent">CloseEvent</dfn> : <span>Event</span> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
   readonly attribute unsigned short <a href="#dom-closeevent-code" title="dom-CloseEvent-code">code</a>;
@@ -967,7 +975,7 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
   attribute must return the value it was initialized to. When the
   object is created, this attribute must be initialized to empty
   string. It represents the WebSocket connection close reason provided
-  by the server.<h3 id="garbage-collection"><span class="secno">5.3 </span>Garbage collection</h3><p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  by the server.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>
   (0) as of the last time the <span>event loop</span> started
   executing a <span title="concept-task">task</span> must not be
