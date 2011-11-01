@@ -215,7 +215,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-31-october-2011">Editor's Draft 31 October 2011</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-1-november-2011">Editor's Draft 1 November 2011</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -319,7 +319,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 31 October 2011 Editor's Draft.
+  This specification is the 1 November 2011 Editor's Draft.
   <p>This specification is being developed in conjunction with an
   Internet Draft for a wire protocol, the WebSocket Protocol,
   available from the following location:<ul><li>WebSocket Protocol Internet-Draft: <a href="http://www.whatwg.org/specs/web-socket-protocol/">http://www.whatwg.org/specs/web-socket-protocol/</a></li>
@@ -981,9 +981,13 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
   executing a <span title="concept-task">task</span> must not be
   garbage collected if there are any event listeners registered for
   <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) or <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as of the last time
-  the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
-  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
+  was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of
+  the last time the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
+  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as
+  of the last time the <span>event loop</span> started executing a
+  <span title="concept-task">task</span> must not be garbage collected
+  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
   connection is established">an established connection</i> that has
   data queued to be transmitted to the network must not be garbage
   collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
