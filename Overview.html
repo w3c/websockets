@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"><html lang="en-US-x-Hixie"><title>The WebSocket API</title><style type="text/css">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="en-US-x-Hixie"><title>The WebSocket API</title><style type="text/css">
    pre { margin-left: 2em; white-space: pre-wrap; }
    h2 { margin: 3em 0 1em 0; }
    h3 { margin: 2.5em 0 1em 0; }
@@ -210,12 +210,13 @@
      }
      return null;
    }
-  </script><div class="head" id="head">
+  </script><body>
+  <div class="head" id="head">
    <p><a href="http://www.w3.org/"><img alt="W3C" height="48" src="http://www.w3.org/Icons/w3c_home" width="72"></a></p>
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-21-february-2012">Editor's Draft 21 February 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-13-march-2012">Editor's Draft 13 March 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -246,19 +247,37 @@
    <!-- UNDER NO CIRCUMSTANCES IS THE PRECEDING PARAGRAPH TO BE REMOVED OR EDITED WITHOUT TALKING TO IAN FIRST -->
 
 
-  </div><hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2><p>This specification defines an API that enables Web pages to use
+  </div>
+
+  <hr class="top"><h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+  <p>This specification defines an API that enables Web pages to use
   the WebSocket protocol for two-way communication with a remote
-  host.<h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2><p><em>This section describes the status of this document at the
+  host.</p>
+
+  <h2 class="no-num no-toc" id="status-of-this-document">Status of This document</h2>
+
+  
+  
+
+  <p><em>This section describes the status of this document at the
   time of its publication. Other documents may supersede this
   document. A list of current W3C publications and the
 
   most recently formally published <!-- DO NOT CHANGE THIS BACK TO THE STANDARD BOILERPLATE, AS IT IS INACCURATE -->
 
   revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
-  http://www.w3.org/TR/.</em></p><p>If you wish to make comments regarding this document in a manner
+  http://www.w3.org/TR/.</em></p>
+
+
+  
+
+  <p>If you wish to make comments regarding this document in a manner
   that is tracked by the W3C, please submit them via using <a href="http://www.w3.org/Bugs/Public/enter_bug.cgi?product=HTML%20WG">our
   public bug database</a>. If you do not have an account then you can
-  enter feedback using this form:<form action="http://www.whatwg.org/specs/web-apps/current-work/file-spam.cgi" method="post">
+  enter feedback using this form:</p>
+
+  <form action="http://www.whatwg.org/specs/web-apps/current-work/file-spam.cgi" method="post">
    <fieldset><legend>Feedback Comments</legend>
     <input name="id" type="hidden" value="top"><input name="component" type="hidden" value="WebSocket API (editor: Ian Hickson)"><input name="response" type="hidden" value="html"><p><label for="feedbackBox">Please enter your feedback, carefully
     indicating the title of the section for which you are submitting
@@ -290,18 +309,28 @@
     </script><p>
      <input onclick="return checkFeedbackForm(form)" type="submit" value="Submit feedback"><small>(Note: Your IP address and user agent will be publicly recorded for spam prevention purposes.)</small>
     </p>
-   </fieldset></form><p>You can also e-mail feedback to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
+   </fieldset></form>
+
+  
+  <p>You can also e-mail feedback to <a href="mailto:public-webapps@w3.org">public-webapps@w3.org</a> (<a href="mailto:public-webapps-request@w3.org?subject=subscribe">subscribe</a>,
   <a href="http://lists.w3.org/Archives/Public/public-webapps/">archives</a>),
   or <a href="mailto:whatwg@whatwg.org">whatwg@whatwg.org</a> (<a href="http://lists.whatwg.org/listinfo.cgi/whatwg-whatwg.org">subscribe</a>,
   <a href="http://lists.whatwg.org/pipermail/whatwg-whatwg.org/">archives</a>).
-  All feedback is welcome.</p><p>Implementors should be aware that this specification is not
+  All feedback is welcome.</p>
+
+  
+  <p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
   under them in incompatible ways.</strong> Vendors interested in
   implementing this specification before it eventually reaches the
   Candidate Recommendation stage should join the aforementioned
-  mailing lists and take part in the discussions.<div id="multipage-common">
-  </div><p>The latest
+  mailing lists and take part in the discussions.</p>
+
+  <div id="multipage-common">
+  </div>
+
+   <p>The latest
   stable version of the editor's draft of this specification is always
   available on <a href="http://dev.w3.org/html5/websockets/">the W3C CVS server</a>
   and in the <a href="http://svn.whatwg.org/webapps/">WHATWG
@@ -309,9 +338,12 @@
   editor's working copy</a> (which may contain unfinished text in the
   process of being prepared) contains the latest draft text of this
   specification (amongst others). For more details, please see the <a href="http://wiki.whatwg.org/wiki/FAQ#What_are_the_various_versions_of_the_spec.3F">WHATWG
-  FAQ</a>.<p>Notifications of changes to this specification are sent along
+  FAQ</a>.</p>
+
+  <p>Notifications of changes to this specification are sent along
   with notifications of changes to related specifications using the
-  following mechanisms:<dl><dt>E-mail notifications of changes</dt>
+  following mechanisms:</p>
+  <dl><dt>E-mail notifications of changes</dt>
    <dd>Commit-Watchers mailing list (complete source diffs): <a href="http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org">http://lists.whatwg.org/listinfo.cgi/commit-watchers-whatwg.org</a></dd>
    <dt>Browsable version-control record of all changes:</dt>
    <dd>CVSWeb interface with side-by-side diffs: <a href="http://dev.w3.org/cvsweb/html5/">http://dev.w3.org/cvsweb/html5/</a></dd>
@@ -320,10 +352,15 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 21 February 2012 Editor's Draft.
+  This specification is the 13 March 2012 Editor's Draft.
+  </p>
+
+
   <p>This specification is being developed in conjunction with an
   RFC for a wire protocol, the WebSocket Protocol,
-  available from the following location:<ul><li>RFC 6455: The WebSocket Protocol: <a href="http://tools.ietf.org/html/rfc6455">http://tools.ietf.org/html/rfc6455</a></li>
+  available from the following location:</p>
+
+  <ul><li>RFC 6455: The WebSocket Protocol: <a href="http://tools.ietf.org/html/rfc6455">http://tools.ietf.org/html/rfc6455</a></li>
   </ul><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
@@ -331,14 +368,22 @@
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  6 of the W3C Patent Policy</a>.</p>
+
+  
+  
+  <p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
   February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42538/status" rel="disclosure">public list of
   any patent disclosures</a> made in connection with the deliverables
   of the group; that page also includes instructions for disclosing a
   patent. An individual who has actual knowledge of a patent which the
   individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
   Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.<h2 class="no-num no-toc" id="contents">Table of Contents</h2>
+  6 of the W3C Patent Policy</a>.</p>
+
+
+  <h2 class="no-num no-toc" id="contents">Table of Contents</h2>
+  
 
 <ol class="toc">
  <li><a href="#network-intro"><span class="secno">1 </span>Introduction</a></li>
@@ -354,31 +399,59 @@
  <li><a href="#garbage-collection"><span class="secno">9 </span>Garbage collection</a></li>
  <li><a class="no-num" href="#references">References</a></li>
  <li><a class="no-num" href="#acknowledgements">Acknowledgements</a></ol>
-<hr><h2 id="network-intro"><span class="secno">1 </span>Introduction</h2><p><i>This section is non-normative.</i><p>To enable Web applications to maintain bidirectional
+
+  <hr><h2 id="network-intro"><span class="secno">1 </span>Introduction</h2>
+
+  <p><i>This section is non-normative.</i></p>
+
+  <p>To enable Web applications to maintain bidirectional
   communications with server-side processes, this specification
-  introduces the <code><a href="#websocket">WebSocket</a></code> interface.<p class="note">This interface does not allow for raw access to the
+  introduces the <code><a href="#websocket">WebSocket</a></code> interface.</p>
+
+  <p class="note">This interface does not allow for raw access to the
   underlying network. For example, this interface could not be used to
   implement an IRC client without proxying messages through a custom
-  server.<h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2><p>All diagrams, examples, and notes in this specification are
+  server.</p>
+
+
+  
+
+  <h2 id="conformance-requirements"><span class="secno">2 </span>Conformance requirements</h2>
+
+  <p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.<p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+  Everything else in this specification is normative.</p>
+
+  <p>The key words "MUST", "MUST NOT", "REQUIRED",  "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
   "OPTIONAL" in the normative parts of this document are to be
   interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a><p>Requirements phrased in the imperative as part of algorithms
+  not appear in all uppercase letters in this specification. <a href="#refsRFC2119">[RFC2119]</a></p>
+
+  <p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
   key word ("must", "should", "may", etc) used in introducing the
-  algorithm.<p>Some conformance requirements are phrased as requirements on
+  algorithm.</p>
+
+  <p>Some conformance requirements are phrased as requirements on
   attributes, methods or objects. Such requirements are to be
-  interpreted as requirements on user agents.<p>Conformance requirements phrased as algorithms or specific steps
+  interpreted as requirements on user agents.</p>
+
+  <p>Conformance requirements phrased as algorithms or specific steps
   may be implemented in any manner, so long as the end result is
   equivalent. (In particular, the algorithms defined in this
   specification are intended to be easy to follow, and not intended to
-  be performant.)<p>The only conformance class defined by this specification is user
-  agents.<p>User agents may impose implementation-specific limits on
+  be performant.)</p>
+
+  <p>The only conformance class defined by this specification is user
+  agents.</p>
+
+  <p>User agents may impose implementation-specific limits on
   otherwise unconstrained inputs, e.g. to prevent denial of service
   attacks, to guard against running out of memory, or to work around
-  platform-specific limitations.<p>When support for a feature is disabled (e.g. as an emergency
+  platform-specific limitations.</p>
+
+  <p>When support for a feature is disabled (e.g. as an emergency
   measure to mitigate a security problem, or to aid in development, or
   for performance reasons), user agents must act as if they had no
   support for the feature whatsoever, and as if the feature was not
@@ -386,8 +459,15 @@
   feature is accessed via an attribute in a Web IDL interface, the
   attribute itself would be omitted from the objects that implement
   that interface &mdash; leaving the attribute on the object but
-  making it return null or throw an exception is insufficient.<h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3><p>This specification relies on several other underlying
-  specifications.<dl><dt>HTML</dt>
+  making it return null or throw an exception is insufficient.</p>
+
+
+  <h3 id="dependencies"><span class="secno">2.1 </span>Dependencies</h3>
+
+  <p>This specification relies on several other underlying
+  specifications.</p>
+
+  <dl><dt>HTML</dt>
 
    <dd>
 
@@ -405,16 +485,28 @@
 
    </dd>
 
-  </dl><h2 id="terminology"><span class="secno">3 </span>Terminology</h2><p>The construction "a <code title="">Foo</code> object", where
+  </dl><h2 id="terminology"><span class="secno">3 </span>Terminology</h2>
+
+  <p>The construction "a <code title="">Foo</code> object", where
   <code title="">Foo</code> is actually an interface, is sometimes
   used instead of the more accurate "an object implementing the
-  interface <code title="">Foo</code>".<p>The term DOM is used to refer to the API set made available to
+  interface <code title="">Foo</code>".</p>
+
+  <p>The term DOM is used to refer to the API set made available to
   scripts in Web applications, and does not necessarily imply the
   existence of an actual <code>Document</code> object or of any other
   <code>Node</code> objects as defined in the DOM Core
-  specifications. <a href="#refsDOMCORE">[DOMCORE]</a><p>An IDL attribute is said to be <em>getting</em> when its value is
+  specifications. <a href="#refsDOMCORE">[DOMCORE]</a></p>
+
+  <p>An IDL attribute is said to be <em>getting</em> when its value is
   being retrieved (e.g. by author script), and is said to be
-  <em>setting</em> when a new value is assigned to it.<h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2><pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(DOMString url, optional (DOMString or DOMString[]) protocols)]
+  <em>setting</em> when a new value is assigned to it.</p>
+
+
+
+  <h2 id="the-websocket-interface"><span class="secno">4 </span>The <code><a href="#websocket">WebSocket</a></code> interface</h2>
+
+  <pre class="idl">[<a href="#dom-websocket" title="dom-WebSocket">Constructor</a>(DOMString url, optional (DOMString or DOMString[]) protocols)]
 interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   readonly attribute DOMString <a href="#dom-websocket-url" title="dom-WebSocket-url">url</a>;
 
@@ -440,7 +532,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>Blob</span> data);
-};</pre><p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
+};</pre>
+
+  <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
   constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
   connect. The second, <var title="">protocols</var>, if present, is
   either a string or an array of strings. If it is a string, it is
@@ -450,8 +544,12 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   if the server reports that it has selected one of these
   subprotocols. The subprotocol names must all be strings that match
   the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code>
-  header fields as defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a><p>When the <code>WebSocket()</code> constructor is invoked, the UA
-  must run these steps:<ol><li><p><i><a href="#parse-a-websocket-url-s-components">Parse a WebSocket URL's components</a></i> from the <var title="">url</var> argument, to obtain <var title="">host</var>,
+  header fields as defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a></p>
+
+  <p>When the <code>WebSocket()</code> constructor is invoked, the UA
+  must run these steps:</p>
+
+  <ol><li><p><i><a href="#parse-a-websocket-url-s-components">Parse a WebSocket URL's components</a></i> from the <var title="">url</var> argument, to obtain <var title="">host</var>,
    <var title="">port</var>, <var title="">resource name</var>, and
    <var title="">secure</var>. If this fails, throw a
    <code>SyntaxError</code> exception and abort these steps. <a href="#refsWSP">[WSP]</a></li>
@@ -537,13 +635,19 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
   </ol><p>This constructor must be visible when the <span>script's global
   object</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerUtils</code> interface.<hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn>
+  implementing the <code>WorkerUtils</code> interface.</p>
+
+  <hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn>
   attribute must return the result of <span title="resolve a
   url">resolving</span> the <span>URL</span> that was passed to the
   constructor. (It doesn't matter what it is resolved relative to,
-  since we already know it is an <span>absolute URL</span>.)<p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
+  since we already know it is an <span>absolute URL</span>.)</p>
+
+  <p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
   attribute represents the state of the connection. It can have the
-  following values:<dl><dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
+  following values:</p>
+
+  <dl><dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
    <dd>The connection has not yet been established.</dd>
 
@@ -560,19 +664,31 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    <dd>The connection has been closed or could not be opened.</dd>
 
   </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).<p>The <dfn id="dom-websocket-extensions" title="dom-WebSocket-extensions"><code>extensions</code></dfn>
+  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).</p>
+
+  <p>The <dfn id="dom-websocket-extensions" title="dom-WebSocket-extensions"><code>extensions</code></dfn>
   attribute must initially return the empty string. After <i>the
   WebSocket connection is established</i>, its value might change, as
-  defined below.<p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns
+  defined below.</p>
+
+  <p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns
   the extensions selected by the server, if any. (Currently this will
-  only ever be the empty string.)<p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
+  only ever be the empty string.)</p>
+
+  <p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
   must initially return the empty string. After <i>the WebSocket
   connection is established</i>, its value might change, as defined
-  below.<p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
+  below.</p>
+
+  <p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
   subprotocol selected by the server, if any. It can be used in
   conjunction with the array form of the constructor's second argument
-  to perform subprotocol negotiation.<p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
-  method must run the following steps:<ol><li><p>If the method's first argument is present but is not an
+  to perform subprotocol negotiation.</p>
+
+  <p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
+  method must run the following steps:</p>
+
+  <ol><li><p>If the method's first argument is present but is not an
    integer equal to 1000 or in the range 3000 to 4999, throw an
    <code>InvalidAccessError</code> exception and abort these
    steps.</li>
@@ -671,7 +787,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   by the operating system or network hardware. If the connection is
   closed, this attribute's value will only increase with each call to
   the <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> method (the
-  number does not reset to zero once the connection closes).<div class="example">
+  number does not reset to zero once the connection closes).</p>
+
+  <div class="example">
 
    <p>In this simple example, the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
    attribute is used to ensure that updates are sent either at the
@@ -693,13 +811,17 @@ socket.onopen = function () {
    requires more careful monitoring of the value of the attribute over
    time.</p>
 
-  </div><hr><p>When a <code><a href="#websocket">WebSocket</a></code> object is created, its <dfn id="dom-websocket-binarytype" title="dom-WebSocket-binaryType"><code>binaryType</code></dfn> IDL
+  </div>
+
+  <hr><p>When a <code><a href="#websocket">WebSocket</a></code> object is created, its <dfn id="dom-websocket-binarytype" title="dom-WebSocket-binaryType"><code>binaryType</code></dfn> IDL
   attribute must be set to the string "<code title="">blob</code>". On
   getting, it must return the last value it was set to. On setting, if
   the new value is either the string "<code title="">blob</code>" or
   the string "<code title="">arraybuffer</code>", then set the IDL
   attribute to this new value. Otherwise, throw a
-  <code>SyntaxError</code> exception.<p class="note">This attribute allows authors to control how binary
+  <code>SyntaxError</code> exception.</p>
+
+  <p class="note">This attribute allows authors to control how binary
   data is exposed to scripts. By setting the attribute to "<code title="">blob</code>", binary data is returned in <code>Blob</code>
   form; by setting it to "<code title="">arraybuffer</code>", it is
   returned in <code>ArrayBuffer</code> form. User agents can use this
@@ -713,12 +835,16 @@ socket.onopen = function () {
   attribute at the last minute. This latter aspect is important in
   particular because it is quite possible for the attribute to be
   changed after the user agent has received the data but before the
-  user agent as fired the event for it.<p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
+  user agent as fired the event for it.</p>
+
+  <p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
   connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is
   <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
   throw an <code>InvalidStateError</code> exception. Otherwise, the
   user agent must run the appropriate set of steps from the following
-  list:<dl><dt>If the argument is a string</dt>
+  list:</p>
+
+  <dl><dt>If the argument is a string</dt>
 
    <dd>
 
@@ -782,13 +908,19 @@ socket.onopen = function () {
   </dl><hr><p>The following are the <span>event handlers</span> (and their
   corresponding <span title="event handler event type">event handler
   event types</span>) that must be supported, as IDL attributes, by
-  all objects implementing the <code><a href="#websocket">WebSocket</a></code> interface:<table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
+  all objects implementing the <code><a href="#websocket">WebSocket</a></code> interface:</p>
+
+  <table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-websocket-onerror" title="handler-WebSocket-onerror"><code>onerror</code></dfn> <td> <code title="event-error">error</code>
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
-  </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2><p>When <i>the WebSocket connection is established</i>, the user
-  agent must <span>queue a task</span> to run these steps:<ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+  </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2>
+
+  <p>When <i>the WebSocket connection is established</i>, the user
+  agent must <span>queue a task</span> to run these steps:</p>
+
+  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
    value to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</li>
 
    <li><p>Change the <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute's
@@ -806,7 +938,9 @@ socket.onopen = function () {
    object.</p>
 
   </ol><hr><p>When <i>a WebSocket message has been received</i> with type <var title="">type</var> and data <var title="">data</var>, the user
-  agent must <span>queue a task</span> to follow these steps: <a href="#refsWSP">[WSP]</a><ol><li>
+  agent must <span>queue a task</span> to follow these steps: <a href="#refsWSP">[WSP]</a></p>
+
+  <ol><li>
 
     <p>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
     attribute's value is not <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), then abort these
@@ -866,15 +1000,21 @@ socket.onopen = function () {
   above <span title="concept-task">task</span> for this particular
   message the script switched <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> to "<code title="">arraybuffer</code>", the user agent would want to page the
   data back to RAM before running this <span title="concept-task">task</span> so as to avoid stalling the main
-  thread while it created the <code>ArrayBuffer</code> object.<hr><p>When <i>the WebSocket closing handshake is started</i>, the user
+  thread while it created the <code>ArrayBuffer</code> object.</p>
+
+  <hr><p>When <i>the WebSocket closing handshake is started</i>, the user
   agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
   <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method was called,
   the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value will already be set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) when this task
-  runs.) <a href="#refsWSP">[WSP]</a><hr><p id="closeWebSocket">When <i>the WebSocket connection is
+  runs.) <a href="#refsWSP">[WSP]</a></p>
+
+  <hr><p id="closeWebSocket">When <i>the WebSocket connection is
   closed</i>, possibly <i title="">cleanly</i>, the user agent must
-  <span>queue a task</span> to run the following substeps:<ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+  <span>queue a task</span> to run the following substeps:</p>
+
+  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
    value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code>
    (3).</li>
 
@@ -896,19 +1036,33 @@ socket.onopen = function () {
 
   </ol><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
-  source</dfn>.<h2 id="ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</h2><p>The WebSocket protocol specification defines Ping and Pong frames
+  source</dfn>.</p>
+
+
+  <h2 id="ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</h2>
+
+  <p>The WebSocket protocol specification defines Ping and Pong frames
   that can be used for keep-alive, heart-beats, network status
   probing, latency instrumentation, and so forth. These are not
-  currently exposed in the API.<p>User agents may send ping and unsolicited pong frames as desired,
+  currently exposed in the API.</p>
+
+  <p>User agents may send ping and unsolicited pong frames as desired,
   for example in an attempt to maintain local network NAT mappings, to
   detect failed connections, or to display latency metrics to the
   user. User agents must not use pings or unsolicited pongs to aid the
   server; it is assumed that servers will send solicit pongs whenever
-  appropriate for the server's needs.<h2 id="parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</h2><p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from
+  appropriate for the server's needs.</p>
+
+
+  <h2 id="parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</h2>
+
+  <p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from
   a string <var title="">url</var> are as follows. These steps return
   either a <var title="">host</var>, a <var title="">port</var>, a
   <var title="">resource name</var>, and a <var title="">secure</var>
-  flag, or they fail.<ol><li><p>If the <var title="">url</var> string is not an
+  flag, or they fail.</p>
+
+  <ol><li><p>If the <var title="">url</var> string is not an
    <span>absolute URL</span>, then fail this algorithm.</li>
 
    <li>
@@ -958,7 +1112,9 @@ socket.onopen = function () {
    <li><p>Return <var title="">host</var>, <var title="">port</var>,
    <var title="">resource name</var>, and <var title="">secure</var>.</li>
 
-  </ol><h2 id="event-definitions"><span class="secno">8 </span>Event definitions</h2><pre class="idl">[Constructor(DOMString type, optional <a href="#closeeventinit">CloseEventInit</a> eventInitDict)]
+  </ol><h2 id="event-definitions"><span class="secno">8 </span>Event definitions</h2>
+
+  <pre class="idl">[Constructor(DOMString type, optional <a href="#closeeventinit">CloseEventInit</a> eventInitDict)]
 interface <dfn id="closeevent">CloseEvent</dfn> : <span>Event</span> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
   readonly attribute unsigned short <a href="#dom-closeevent-code" title="dom-CloseEvent-code">code</a>;
@@ -969,38 +1125,62 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
   boolean wasClean;
   unsigned short code;
   DOMString reason;
-};</pre><p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
+};</pre>
+
+  <p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
   attribute must return the value it was initialized to. When the
   object is created, this attribute must be initialized to false. It
-  represents whether the connection closed cleanly or not.<p>The <dfn id="dom-closeevent-code" title="dom-CloseEvent-code"><code>code</code></dfn>
+  represents whether the connection closed cleanly or not.</p>
+
+  <p>The <dfn id="dom-closeevent-code" title="dom-CloseEvent-code"><code>code</code></dfn>
   attribute must return the value it was initialized to. When the
   object is created, this attribute must be initialized to zero. It
   represents the WebSocket connection close code provided by the
-  server.<p>The <dfn id="dom-closeevent-reason" title="dom-CloseEvent-reason"><code>reason</code></dfn>
+  server.</p>
+
+  <p>The <dfn id="dom-closeevent-reason" title="dom-CloseEvent-reason"><code>reason</code></dfn>
   attribute must return the value it was initialized to. When the
   object is created, this attribute must be initialized to empty
   string. It represents the WebSocket connection close reason provided
-  by the server.<h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2><p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  by the server.</p>
+
+
+
+  <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
+
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>
   (0) as of the last time the <span>event loop</span> started
   executing a <span title="concept-task">task</span> must not be
   garbage collected if there are any event listeners registered for
-  <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.</p>
+
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of
   the last time the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
-  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
+  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-close">close</code> events.</p>
+
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as
   of the last time the <span>event loop</span> started executing a
   <span title="concept-task">task</span> must not be garbage collected
-  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-close">close</code> events.<p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
+  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-close">close</code> events.</p>
+
+  <p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
   connection is established">an established connection</i> that has
   data queued to be transmitted to the network must not be garbage
-  collected. <a href="#refsWSP">[WSP]</a><p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
+  collected. <a href="#refsWSP">[WSP]</a></p>
+
+  <p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
   connection is still open, the user agent must <i>start the
-  WebSocket closing handshake</i>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a><hr><p>If a user agent is to <dfn id="make-disappear">make disappear</dfn> a
+  WebSocket closing handshake</i>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a></p>
+
+  <hr><p>If a user agent is to <dfn id="make-disappear">make disappear</dfn> a
   <code><a href="#websocket">WebSocket</a></code> object (this happens when a
   <code>Document</code> object goes away), the user agent must follow
-  the first appropriate set of steps from the following list:<dl class="switch"><dt>If the WebSocket connection is not yet <i title="the WebSocket
+  the first appropriate set of steps from the following list:</p>
+
+  <dl class="switch"><dt>If the WebSocket connection is not yet <i title="the WebSocket
    connection is established">established</i> <a href="#refsWSP">[WSP]</a></dt>
 
    <dd>
@@ -1030,7 +1210,13 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
 
    </dd>
 
-  </dl><h2 class="no-num" id="references">References</h2><p>All references are normative unless marked "Non-normative".</p><dl><dt id="refsCOOKIES">[COOKIES]</dt>
+  </dl><h2 class="no-num" id="references">References</h2>
+
+  <p>All references are normative unless marked "Non-normative".</p>
+
+  
+
+  <dl><dt id="refsCOOKIES">[COOKIES]</dt>
    
    <dd><cite><a href="http://tools.ietf.org/html/rfc6265">HTTP State Management Mechanism</a></cite>, A. Barth. IETF.</dd>
 
@@ -1065,5 +1251,9 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
    <dt id="refsWSP">[WSP]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/rfc6455">The WebSocket protocol</a></cite>, I. Fette. IETF.</dd>
 
-  </dl><h2 class="no-num" id="acknowledgements">Acknowledgements</h2><p>For a full list of acknowledgements, please see the HTML
-  specification. <a href="#refsHTML">[HTML]</a>
+  </dl><h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
+
+  <p>For a full list of acknowledgements, please see the HTML
+  specification. <a href="#refsHTML">[HTML]</a></p>
+
+ 
