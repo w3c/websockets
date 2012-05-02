@@ -530,7 +530,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   [TreatNonCallableAsNull] attribute <span>Function</span>? <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>Blob</span> data);
 };</pre>
 
@@ -899,7 +899,7 @@ socket.onopen = function () {
    </dd>
 
 
-   <dt>If the argument is an <code>ArrayBuffer</code> object</dt>
+   <dt>If the argument is an <code>ArrayBufferView</code> object</dt>
 
    <dd>
 
@@ -910,11 +910,13 @@ socket.onopen = function () {
     buffer is full, the user agent must <i>close the WebSocket
     connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
     prejudice</a>. The data to be sent is the data stored in the
-    buffer described by the <code>ArrayBuffer</code> object.  Any invocation of this method with an
-    <code>ArrayBuffer</code> argument that does not throw an exception
-    must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the length of the <code>ArrayBuffer</code> in bytes.
-     <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    section of the buffer described by the <code>ArrayBuffer</code>
+    object that the <code>ArrayBufferView</code> object references.
+     Any invocation
+    of this method with an <code>ArrayBufferView</code> argument that
+    does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+    attribute by the length of the <code>ArrayBufferView</code> in
+    bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </dd>
 
