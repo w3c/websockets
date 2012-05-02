@@ -1002,6 +1002,24 @@ socket.onopen = function () {
   data back to RAM before running this <span title="concept-task">task</span> so as to avoid stalling the main
   thread while it created the <code>ArrayBuffer</code> object.</p>
 
+  <div class="example">
+
+   <p>Here is an example of how to define a handler for the <code title="event-message">message</code> event in the case of text
+   frames:</p>
+
+   <pre>mysocket.onmessage = function (event) {
+  if (event.data == 'on') {
+    turnLampOn();
+  } else if (event.data == 'off') {
+    turnLampOff();
+  }
+};</pre>
+
+   <p>The protocol here is a trivial one, with the server just sending
+   "on" or "off" messages.</p>
+
+  </div>
+
   <hr><p>When <i>the WebSocket closing handshake is started</i>, the user
   agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
