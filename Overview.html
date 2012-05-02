@@ -693,14 +693,27 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    <code>InvalidAccessError</code> exception and abort these
    steps.</li>
 
-   <li><p>If the method's second argument has any isolated surrogates,
-   then throw a <code>SyntaxError</code> exception and abort these
-   steps. <a href="#refsUNICODE">[UNICODE]</a></li>
+   <li>
 
-   <li><p>If the method's second argument is present, then let <var title="">reason</var> be the result of encoding that argument as
-   UTF-8. If <var title="">reason</var> is longer than 123 bytes, then
-   throw a <code>SyntaxError</code> exception and abort these steps.
-   <a href="#refsRFC3629">[RFC3629]</a></li>
+    <p>If the method's second argument is present, then run these
+    substeps:</p>
+
+    <ol><li><p>Let <var title="">raw reason</var> be the method's second
+     argument.</li>
+
+     <li><p>Let <var title="">Unicode reason</var> be the result of
+     <span title="convert a DOMString to a sequence of Unicode
+     characters">converting <var title="">raw reason</var> to a
+     sequence of Unicode characters</span>.</li>
+
+     <li><p>Let <var title="">reason</var> be the result of encoding
+     <var title="">Unicode reason</var> as UTF-8.</li>
+
+     <li><p>If <var title="">reason</var> is longer than 123 bytes,
+     then throw a <code>SyntaxError</code> exception and abort these
+     steps. <a href="#refsRFC3629">[RFC3629]</a></li>
+
+    </ol></li>
 
    <li><p>Run the first matching steps from the following list:</p>
 
@@ -848,10 +861,10 @@ socket.onopen = function () {
 
    <dd>
 
-    <p>If the <var title="">data</var> argument has any isolated
-    surrogates, then throw a <code>SyntaxError</code> exception. If
-    <i>the WebSocket connection is established</i>, and the string has
-    no isolated surrogates, and <i title="the WebSocket closing
+    <p>Let <var title="">data</var> be the result of <span title="convert a DOMString to a sequence of Unicode
+    characters">converting the <var title="">data</var> argument to a
+    sequence of Unicode characters</span>. If <i>the WebSocket
+    connection is established</i> and <i title="the WebSocket closing
     handshake is started">the WebSocket closing handshake has not yet
     started</i>, then the user agent must <i>send a WebSocket
     Message</i> comprised of <var title="">data</var> using a text
