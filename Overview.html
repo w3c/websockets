@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-2-may-2012">Editor's Draft 2 May 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-8-may-2012">Editor's Draft 8 May 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -352,7 +352,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 2 May 2012 Editor's Draft.
+  This specification is the 8 May 2012 Editor's Draft.
   </p>
 
 
@@ -966,7 +966,7 @@ socket.onopen = function () {
    <li>
 
     <p>Let <var title="">event</var> be an event that uses the
-    <code>MessageEvent</code> interface, with the event name <code title="event-message">message</code>, which does not bubble, is
+    <code>MessageEvent</code> interface, with the event type <code title="event-message">message</code>, which does not bubble, is
     not cancelable, and has no default action.
     
     <a href="#refsHTML">[HTML]</a>
@@ -1057,7 +1057,7 @@ socket.onopen = function () {
    at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Create an event that uses the <code><a href="#closeevent">CloseEvent</a></code>
-   interface, with the event name <code title="event-close">close</code>, which does not bubble, is not
+   interface, with the event type <code title="event-close">close</code>, which does not bubble, is not
    cancelable, has no default action, whose <code title="dom-CloseEvent-wasClean"><a href="#dom-closeevent-wasclean">wasClean</a></code> attribute is initialized to
    true if the connection closed <i title="">cleanly</i> and false
    otherwise, whose <code title="dom-CloseEvent-code"><a href="#dom-closeevent-code">code</a></code>
