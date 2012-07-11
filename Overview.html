@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-10-july-2012">Editor's Draft 10 July 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-11-july-2012">Editor's Draft 11 July 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -352,7 +352,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 10 July 2012 Editor's Draft.
+  This specification is the 11 July 2012 Editor's Draft.
   </p>
 
 
@@ -1067,7 +1067,47 @@ socket.onopen = function () {
    <span>decoded as UTF-8, with error handling</span>, and dispatch
    the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
-  </ol><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
+  </ol><div class="warning">
+
+   <p>User agents must not convey any failure information to scripts
+   in a way that would allow a script to distinguish the following
+   situations:</p>
+
+   <ul><li>A server whose host name could not be resolved.
+
+    <li>A server to which packets could not successfully be routed.
+
+    <li>A server that refused the connection on the specified port.
+
+    <li>A server that failed to correctly perform a TLS handshake
+    (e.g., the server certificate can't be verified).
+
+    <li>A server that did not complete the opening handshake (e.g.
+    because it was not a WebSocket server).
+
+    <li>A WebSocket server that sent a correct opening handshake, but
+    that specified options that caused the client to drop the
+    connection (e.g. the server specified a subprotocol that the
+    client did not offer).
+
+    <li>A WebSocket server that abruptly closed the connection after
+    successfully completing the opening handshake.
+
+   </ul><p>In all of these cases, the <i>the WebSocket connection close
+   code</i> would be 1006, as required by the WebSocket Protocol
+   specification. <a href="#refsWSP">[WSP]</a></p>
+
+   <p>Allowing a script to distinguish these cases would allow a
+   script to probe the user's local network in preparation for an
+   attack.</p>
+
+   <p class="note">In particular, this means the code 1015 is not used
+   by the user agent (unless the server erroneously uses it in its
+   close frame, of course).</p>
+
+  </div>
+
+  <hr><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.</p>
 
