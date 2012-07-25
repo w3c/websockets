@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-11-july-2012">Editor's Draft 11 July 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-25-july-2012">Editor's Draft 25 July 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -352,7 +352,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 11 July 2012 Editor's Draft.
+  This specification is the 25 July 2012 Editor's Draft.
   </p>
 
 
@@ -530,8 +530,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
            attribute <span>EventHandler</span> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>Blob</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
 };</pre>
 
   <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
@@ -895,6 +896,26 @@ socket.onopen = function () {
     does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
     attribute by the size of the <code>Blob</code> object's raw data,
     in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsFILEAPI">[FILEAPI]</a></p>
+
+   </dd>
+
+
+   <dt>If the argument is an <code>ArrayBuffer</code> object</dt>
+
+   <dd>
+
+    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing handshake is started">the WebSocket
+    closing handshake has not yet started</i>, then the user agent
+    must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary frame opcode; if the data
+    cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket
+    connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
+    prejudice</a>. The data to be sent is the data stored in the
+    buffer described by the <code>ArrayBuffer</code> object.  Any invocation of
+    this method with an <code>ArrayBuffer</code> argument that does
+    not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+    attribute by the length of the <code>ArrayBuffer</code> in bytes.
+     <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </dd>
 
