@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-26-august-2012">Editor's Draft 26 August 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-29-august-2012">Editor's Draft 29 August 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -352,7 +352,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 26 August 2012 Editor's Draft.
+  This specification is the 29 August 2012 Editor's Draft.
   </p>
 
 
@@ -616,7 +616,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
     response">validates the server's response</i> during the
     "<i>establish a WebSocket connection</i>" algorithm, if the status
     code received from the server is not 101 (e.g. it is a redirect),
-    the user agent must <i>fail the websocket connection</i>.</p>
+    the user agent must <i>fail the WebSocket connection</i>.</p>
 
     <p class="warning">Following HTTP procedures here could introduce
     serious security problems in a Web browser context. For example,
@@ -659,7 +659,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
    <dt><dfn id="dom-websocket-closing" title="dom-WebSocket-CLOSING"><code>CLOSING</code></dfn> (numeric value 2)</dt>
 
-   <dd>The connection is going through the closing handshake.</dd>
+   <dd>The connection is going through the closing handshake, or the <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method has been invoked.</dd>
 
    <dt><dfn id="dom-websocket-closed" title="dom-WebSocket-CLOSED"><code>CLOSED</code></dfn> (numeric value 3)</dt>
 
@@ -1070,7 +1070,7 @@ socket.onopen = function () {
    value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code>
    (3).</li>
 
-   <li><p>If the user agent was required to <i>fail the websocket
+   <li><p>If the user agent was required to <i>fail the WebSocket
    connection</i> or <i>the WebSocket connection is closed</i> <dfn id="concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</dfn>,
    <span>fire a simple event</span> named <code title="">error</code>
    at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
