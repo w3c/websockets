@@ -216,10 +216,10 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="cr-09-aug-2012">W3C Candidate Recommendation 09 August July 2012</h2>
+   <h2 class="no-num no-toc" id="cr-20-sep-2012">W3C Candidate Recommendation 20 September 2012</h2>
    <dl>
     <dt>This Version:</dt>
-    <dd><a href="http://www.w3.org/TR/2012/CR-websockets-20120809/">http://www.w3.org/TR/2012/CR-websockets-20120809/</a>
+    <dd><a href="http://www.w3.org/TR/2012/CR-websockets-20120809/">http://www.w3.org/TR/2012/CR-websockets-20120920/</a>
     <dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -227,6 +227,7 @@
 
 
     <dt>Previous Versions:</dt>
+    <dd><a href="http://www.w3.org/TR/2012/WD-websockets-20120809/">http://www.w3.org/TR/2012/WD-websockets-20120809/</a>
     <dd><a href="http://www.w3.org/TR/2012/WD-websockets-20120524/">http://www.w3.org/TR/2012/WD-websockets-20120524/</a>
     <dd><a href="http://www.w3.org/TR/2011/CR-websockets-20111208/">http://www.w3.org/TR/2011/CR-websockets-20111208/</a>
     <dd><a href="http://www.w3.org/TR/2011/WD-websockets-20110929/">http://www.w3.org/TR/2011/WD-websockets-20110929/</a>
@@ -342,11 +343,11 @@
   <p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 09 August 2012 Candidate Recommendation.
+  This specification is the 20 September 2012 Candidate Recommendation.
   Comments and bugs submitted against the 
-  <a href="http://www.w3.org/TR/2012/WD-websockets-20120524/">24 May 2012 Last Call Working Draft</a> 
+  <a href="http://www.w3.org/TR/2012/WD-websockets-20120809/">09 August 2012 Last Call Working Draft</a> 
   are tracked in a 
-  <a href="http://www.w3.org/2008/webapps/wiki/Websockets-Comments-LC-24May2012">comment tracking document</a>.
+  <a href="http://www.w3.org/2008/webapps/wiki/Websockets-Comments-LC-09Aug2012">comment tracking document</a>.
   </p>
 
 
@@ -382,12 +383,14 @@ must have been met:
  implementation report (hosted together with the test suite).
 
  <li>A minimum of one month of the CR stage will have elapsed (i.e. not
- until after 08 September 2012). This is to ensure that enough time is given
+ until after 18 October 2012). This is to ensure that enough time is given
  for any remaining major errors to be caught. The CR period will be extended
  if implementations are slow to appear.
 </ol>
 
+
   <h2 class="no-num no-toc" id="contents">Table of Contents</h2>
+ 
 
 <ol class="toc">
  <li><a href="#network-intro"><span class="secno">1 </span>Introduction</a></li>
@@ -534,8 +537,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
            attribute <a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">EventHandler</a> <a href="#handler-websocket-onmessage" title="handler-WebSocket-onmessage">onmessage</a>;
            attribute DOMString <a href="#dom-websocket-binarytype" title="dom-WebSocket-binaryType">binaryType</a>;
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(DOMString data);
-  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<a href="http://dev.w3.org/html5/spec/infrastructure.html#blob">Blob</a> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBuffer</span> data);
+  void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
 };</pre>
 
   <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
@@ -618,7 +622,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
     response">validates the server's response</i> during the
     "<i>establish a WebSocket connection</i>" algorithm, if the status
     code received from the server is not 101 (e.g. it is a redirect),
-    the user agent must <i>fail the websocket connection</i>.</p>
+    the user agent must <i>fail the WebSocket connection</i>.</p>
 
     <p class="warning">Following HTTP procedures here could introduce
     serious security problems in a Web browser context. For example,
@@ -633,7 +637,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
     algorithm fails, it triggers the <i>fail the WebSocket
     connection</i> algorithm, which then invokes the <i>close the
     WebSocket connection</i> algorithm, which then establishes that
-    <i>the WebSocket connection is closed</i>, which fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+    <i>the WebSocket connection is closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
 
    </li>
 
@@ -661,7 +665,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
 
    <dt><dfn id="dom-websocket-closing" title="dom-WebSocket-CLOSING"><code>CLOSING</code></dfn> (numeric value 2)</dt>
 
-   <dd>The connection is going through the closing handshake.</dd>
+   <dd>The connection is going through the closing handshake, or the <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method has been invoked.</dd>
 
    <dt><dfn id="dom-websocket-closed" title="dom-WebSocket-CLOSED"><code>CLOSED</code></dfn> (numeric value 3)</dt>
 
@@ -729,7 +733,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
       <p>Do nothing.</p>
 
       <p class="note">The connection is already closing or is already
-      closed. If it has not already, a <code title="event-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
+      closed. If it has not already, a <code title="event-socket-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
@@ -747,7 +751,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
       algorithm invokes the <i>close the WebSocket
       connection</i> algorithm, which then establishes that 
       <i>the WebSocket connection is closed</i>, which fires the
-      <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+      <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
@@ -771,7 +775,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
       <p class="note">The <i>start the WebSocket closing handshake</i>
       algorithm eventually invokes the <i>close the WebSocket
       connection</i> algorithm, which then establishes that <i>the
-      WebSocket connection is closed</i>, which fires the <code title="event-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+      WebSocket connection is closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
@@ -787,7 +791,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
       <p class="note"><i>The WebSocket closing handshake is
       started</i>, and will eventually invoke the <i>close the
       WebSocket connection</i> algorithm, which will establish that
-      <i>the WebSocket connection is closed</i>, and thus the <code title="event-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
+      <i>the WebSocket connection is closed</i>, and thus the <code title="event-socket-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
@@ -903,6 +907,26 @@ socket.onopen = function () {
    </dd>
 
 
+   <dt>If the argument is an <code>ArrayBuffer</code> object</dt>
+
+   <dd>
+
+    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing handshake is started">the WebSocket
+    closing handshake has not yet started</i>, then the user agent
+    must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary frame opcode; if the data
+    cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket
+    connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
+    prejudice</a>. The data to be sent is the data stored in the
+    buffer described by the <code>ArrayBuffer</code> object.  Any invocation of
+    this method with an <code>ArrayBuffer</code> argument that does
+    not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+    attribute by the length of the <code>ArrayBuffer</code> in bytes.
+     <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+
+   </dd>
+
+
    <dt>If the argument is an <code>ArrayBufferView</code> object</dt>
 
    <dd>
@@ -933,7 +957,7 @@ socket.onopen = function () {
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
     <tr><td><dfn id="handler-websocket-onmessage" title="handler-WebSocket-onmessage"><code>onmessage</code></dfn> <td> <code title="event-message">message</code>
     <tr><td><dfn id="handler-websocket-onerror" title="handler-WebSocket-onerror"><code>onerror</code></dfn> <td> <code title="event-error">error</code>
-    <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-close">close</code>
+    <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-socket-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2>
 
   <p>When <i>the WebSocket connection is established</i>, the user
@@ -1055,13 +1079,13 @@ socket.onopen = function () {
    value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code>
    (3).</li>
 
-   <li><p>If the user agent was required to <i>fail the websocket
+   <li><p>If the user agent was required to <i>fail the WebSocket
    connection</i> or <i>the WebSocket connection is closed</i> <dfn id="concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</dfn>,
    <a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">fire a simple event</a> named <code title="">error</code>
    at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Create an event that uses the <code><a href="#closeevent">CloseEvent</a></code>
-   interface, with the event type <code title="event-close">close</code>, which does not bubble, is not
+   interface, with the event type <code title="event-socket-close">close</code>, which does not bubble, is not
    cancelable, has no default action, whose <code title="dom-CloseEvent-wasClean"><a href="#dom-closeevent-wasclean">wasClean</a></code> attribute is initialized to
    true if the connection closed <i title="">cleanly</i> and false
    otherwise, whose <code title="dom-CloseEvent-code"><a href="#dom-closeevent-code">code</a></code>
@@ -1071,7 +1095,47 @@ socket.onopen = function () {
    <a href="http://dev.w3.org/html5/spec/single-page.html#decoded-as-utf-8-with-error-handling">decoded as UTF-8, with error handling</a>, and dispatch
    the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
-  </ol><p>The <a href="http://dev.w3.org/html5/spec/webappapis.html#task-source">task source</a> for all <span title="concept-task">tasks</span> <span title="queue a
+  </ol><div class="warning">
+
+   <p>User agents must not convey any failure information to scripts
+   in a way that would allow a script to distinguish the following
+   situations:</p>
+
+   <ul><li>A server whose host name could not be resolved.
+
+    <li>A server to which packets could not successfully be routed.
+
+    <li>A server that refused the connection on the specified port.
+
+    <li>A server that failed to correctly perform a TLS handshake
+    (e.g., the server certificate can't be verified).
+
+    <li>A server that did not complete the opening handshake (e.g.
+    because it was not a WebSocket server).
+
+    <li>A WebSocket server that sent a correct opening handshake, but
+    that specified options that caused the client to drop the
+    connection (e.g. the server specified a subprotocol that the
+    client did not offer).
+
+    <li>A WebSocket server that abruptly closed the connection after
+    successfully completing the opening handshake.
+
+   </ul><p>In all of these cases, the <i>the WebSocket connection close
+   code</i> would be 1006, as required by the WebSocket Protocol
+   specification. <a href="#refsWSP">[WSP]</a></p>
+
+   <p>Allowing a script to distinguish these cases would allow a
+   script to probe the user's local network in preparation for an
+   attack.</p>
+
+   <p class="note">In particular, this means the code 1015 is not used
+   by the user agent (unless the server erroneously uses it in its
+   close frame, of course).</p>
+
+  </div>
+
+  <hr><p>The <a href="http://dev.w3.org/html5/spec/webappapis.html#task-source">task source</a> for all <span title="concept-task">tasks</span> <span title="queue a
   task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
   source</dfn>.</p>
 
@@ -1157,7 +1221,7 @@ socket.onopen = function () {
 interface <dfn id="closeevent">CloseEvent</dfn> : <a href="http://dev.w3.org/html5/spec/infrastructure.html#event">Event</a> {
   readonly attribute boolean <a href="#dom-closeevent-wasclean" title="dom-CloseEvent-wasClean">wasClean</a>;
   readonly attribute unsigned short <a href="#dom-closeevent-code" title="dom-CloseEvent-code">code</a>;
-  readonly attribute DOMString <span title="dom-WebSocket-reason">reason</span>;
+  readonly attribute DOMString <a href="#dom-closeevent-reason" title="dom-CloseEvent-reason">reason</a>;
 };
 
 dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <a href="http://dev.w3.org/html5/spec/infrastructure.html#eventinit">EventInit</a> {
@@ -1192,18 +1256,18 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <a href="http://dev.w
   (0) as of the last time the <a href="http://dev.w3.org/html5/spec/webappapis.html#event-loop">event loop</a> started
   executing a <span title="concept-task">task</span> must not be
   garbage collected if there are any event listeners registered for
-  <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-close">close</code> events.</p>
+  <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-socket-close">close</code> events.</p>
 
   <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of
   the last time the <a href="http://dev.w3.org/html5/spec/webappapis.html#event-loop">event loop</a> started executing a <span title="concept-task">task</span> must not be garbage collected if
-  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-close">close</code> events.</p>
+  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-socket-close">close</code> events.</p>
 
   <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
   was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as
   of the last time the <a href="http://dev.w3.org/html5/spec/webappapis.html#event-loop">event loop</a> started executing a
   <span title="concept-task">task</span> must not be garbage collected
-  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-close">close</code> events.</p>
+  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-socket-close">close</code> events.</p>
 
   <p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
   connection is established">an established connection</i> that has
@@ -1270,6 +1334,7 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <a href="http://dev.w
    <dd><cite><a href="http://dev.w3.org/html5/spec/">HTML5</a></cite>,
    I. Hickson. W3C.</dd>
 
+
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in
    RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
@@ -1295,8 +1360,6 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <a href="http://dev.w
   </dl><h2 class="no-num" id="acknowledgements">Acknowledgements</h2>
 
   <p>For a full list of acknowledgements, please see the HTML
-  specification <a href="#refsHTML">[HTML]</a>. Additionally, 
-  the Working Group Chairs would like to thank Julian Reschke for
-  a patch for bug 12510.</p>
+  specification. <a href="#refsHTML">[HTML]</a></p>
 
  
