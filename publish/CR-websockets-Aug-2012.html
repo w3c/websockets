@@ -563,7 +563,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
    <code>SyntaxError</code> exception and abort these steps. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>If <var title="">secure</var> is false but the
-   <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> of the <a href="http://dev.w3.org/html5/spec/browsers.html#entry-script">entry script</a> has a scheme
+   <a href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a> of the <a href="http://dev.w3.org/html5/spec/browsers.html#entry-script">entry script</a> has a scheme
    component that is itself a secure protocol, e.g. HTTPS, then throw
    a <code>SecurityError</code> exception.</li>
 
@@ -602,7 +602,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
 
    <li><p>Let <var title="">origin</var> be the <span title="ASCII
    serialization of an origin">ASCII serialization</span> of the
-   <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> of the <a href="http://dev.w3.org/html5/spec/browsers.html#entry-script">entry script</a>,
+   <a href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a> of the <a href="http://dev.w3.org/html5/spec/browsers.html#entry-script">entry script</a>,
    <a href="http://dev.w3.org/html5/spec/infrastructure.html#converted-to-ascii-lowercase">converted to ASCII lowercase</a>.</li>
 
    <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue
@@ -641,7 +641,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <a href="http://dev.w3.org/html5
 
    </li>
 
-  </ol><p>This constructor must be visible when the <a href="http://dev.w3.org/html5/spec/webappapis.html#script-s-global-object">script's global
+  </ol><p>This constructor must be visible when the <a href="http://dev.w3.org/html5/spec/webappapis.html#script's-global-object">script's global
   object</a> is either a <code>Window</code> object or an object
   implementing the <code>WorkerUtils</code> interface.</p>
 
@@ -1005,7 +1005,7 @@ socket.onopen = function () {
 
    <li><p>Initialize <var title="">event</var>'s <code title="dom-MessageEvent-origin">origin</code> attribute to the
    <span title="Unicode serialization of an origin">Unicode
-   serialization</span> of the <a href="http://dev.w3.org/html5/spec/origin-0.html#origin">origin</a> of the
+   serialization</span> of the <a href="http://dev.w3.org/html5/spec/browsers.html#origin">origin</a> of the
    <a href="http://dev.w3.org/html5/spec/urls.html#url">URL</a> that was passed to the <code><a href="#websocket">WebSocket</a></code>
    object's constructor.</li>
 
@@ -1092,7 +1092,7 @@ socket.onopen = function () {
    attribute is initialized to <i>the WebSocket connection close code</i>, and
    whose <code title="dom-CloseEvent-reason"><a href="#dom-closeevent-reason">reason</a></code> attribute
    is initialized to <i>the WebSocket connection close reason</i>
-   <a href="http://dev.w3.org/html5/spec/single-page.html#decoded-as-utf-8-with-error-handling">decoded as UTF-8, with error handling</a>, and dispatch
+   <a href="http://dev.w3.org/html5/spec/single-page.html#decoded-as-utf-8,-with-error-handling">decoded as UTF-8, with error handling</a>, and dispatch
    the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
   </ol><div class="warning">
