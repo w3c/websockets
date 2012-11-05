@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-25-october-2012">Editor's Draft 25 October 2012</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-5-november-2012">Editor's Draft 5 November 2012</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 25 October 2012 Editor's Draft.
+  This specification is the 5 November 2012 Editor's Draft.
   </p>
 
 
@@ -1018,7 +1018,7 @@ socket.onopen = function () {
 
    <li>
 
-    <p>Dispatch <var title="">event</var> at the
+    <p><span title="concept-event-dispatch">Dispatch</span> <var title="">event</var> at the
     <code><a href="#websocket">WebSocket</a></code> object.</p>
 
    </li>
@@ -1079,7 +1079,8 @@ socket.onopen = function () {
    true if the connection closed <i title="">cleanly</i> and false otherwise, whose <code title="dom-CloseEvent-code"><a href="#dom-closeevent-code">code</a></code> attribute is initialized to <i>the WebSocket connection
    close code</i>, and whose <code title="dom-CloseEvent-reason"><a href="#dom-closeevent-reason">reason</a></code> attribute is
    initialized to <i>the WebSocket connection close reason</i> <span>decoded as UTF-8, with error
-   handling</span>, and dispatch the event at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
+   handling</span>, and <span title="concept-event-dispatch">dispatch</span> the event at the
+   <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
 
   </ol><div class="warning">
 
