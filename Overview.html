@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-30-january-2013">Editor's Draft 30 January 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-5-february-2013">Editor's Draft 5 February 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 30 January 2013 Editor's Draft.
+  This specification is the 5 February 2013 Editor's Draft.
   </p>
 
 
@@ -788,26 +788,23 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
     </dl></li>
 
-  </ol><hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn>
-  attribute must return the number of bytes of application data (UTF-8
-  text and binary data) that have been queued using <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> but that, as of the last
-  time the <span>event loop</span> started executing a <span title="concept-task">task</span>, had not yet been transmitted to
-  the network. (This thus includes any text sent during the execution
-  of the current task, regardless of whether the user agent is able to
-  transmit text asynchronously with script execution.) This does not
-  include framing overhead incurred by the protocol, or buffering done
-  by the operating system or network hardware. If the connection is
-  closed, this attribute's value will only increase with each call to
-  the <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> method (the
+  </ol><hr><p>The <dfn id="dom-websocket-bufferedamount" title="dom-WebSocket-bufferedAmount"><code>bufferedAmount</code></dfn> attribute must
+  return the number of bytes of application data (UTF-8 text and binary data) that have been queued
+  using <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> but that, as of the last time the <span>event
+  loop</span> started executing a <span title="concept-task">task</span>, had not yet been
+  transmitted to the network. (This thus includes any text sent during the execution of the current
+  task, regardless of whether the user agent is able to transmit text asynchronously with script
+  execution.) This does not include framing overhead incurred by the protocol, or buffering done by
+  the operating system or network hardware. If the connection is closed, this attribute's value will
+  only increase with each call to the <code title="dom-WebSocket-send"><a href="#dom-websocket-send">send()</a></code> method (the
   number does not reset to zero once the connection closes).</p>
 
   <div class="example">
 
    <p>In this simple example, the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-   attribute is used to ensure that updates are sent either at the
-   rate of one update every 50ms, if the network can handle that rate,
-   or at whatever rate the network <em>can</em> handle, if that is too
-   fast.</p>
+   attribute is used to ensure that updates are sent either at the rate of one update every 50ms, if
+   the network can handle that rate, or at whatever rate the network <em>can</em> handle, if that is
+   too fast.</p>
 
    <pre>var socket = new WebSocket('ws://game.example.com:12010/updates');
 socket.onopen = function () {
@@ -817,60 +814,46 @@ socket.onopen = function () {
   }, 50);
 };</pre>
 
-   <p>The <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-   attribute can also be used to saturate the network without sending
-   the data at a higher rate than the network can handle, though this
-   requires more careful monitoring of the value of the attribute over
-   time.</p>
+   <p>The <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute can also be
+   used to saturate the network without sending the data at a higher rate than the network can
+   handle, though this requires more careful monitoring of the value of the attribute over time.</p>
 
   </div>
 
-  <hr><p>When a <code><a href="#websocket">WebSocket</a></code> object is created, its <dfn id="dom-websocket-binarytype" title="dom-WebSocket-binaryType"><code>binaryType</code></dfn> IDL
-  attribute must be set to the string "<code title="">blob</code>". On
-  getting, it must return the last value it was set to. On setting,
-  the user agent must set the IDL attribute to the new value.</p>
+  <hr><p>When a <code><a href="#websocket">WebSocket</a></code> object is created, its <dfn id="dom-websocket-binarytype" title="dom-WebSocket-binaryType"><code>binaryType</code></dfn> IDL attribute must be set to the
+  string "<code title="">blob</code>". On getting, it must return the last value it was set to. On
+  setting, the user agent must set the IDL attribute to the new value.</p>
 
-  <p class="note">This attribute allows authors to control how binary
-  data is exposed to scripts. By setting the attribute to "<code title="">blob</code>", binary data is returned in <code>Blob</code>
-  form; by setting it to "<code title="">arraybuffer</code>", it is
-  returned in <code>ArrayBuffer</code> form. User agents can use this
-  as a hint for how to handle incoming binary data: if the attribute
-  is set to "<code title="">blob</code>", it is safe to spool it to
-  disk, and if it is set to "<code title="">arraybuffer</code>", it is
-  likely more efficient to keep the data in memory. Naturally, user
-  agents are encouraged to use more subtle heuristics to decide
-  whether to keep incoming data in memory or not, e.g. based on how
-  big the data is or how common it is for a script to change the
-  attribute at the last minute. This latter aspect is important in
-  particular because it is quite possible for the attribute to be
-  changed after the user agent has received the data but before the
-  user agent has fired the event for it.</p>
+  <p class="note">This attribute allows authors to control how binary data is exposed to scripts. By
+  setting the attribute to "<code title="">blob</code>", binary data is returned in
+  <code>Blob</code> form; by setting it to "<code title="">arraybuffer</code>", it is returned in
+  <code>ArrayBuffer</code> form. User agents can use this as a hint for how to handle incoming
+  binary data: if the attribute is set to "<code title="">blob</code>", it is safe to spool it to
+  disk, and if it is set to "<code title="">arraybuffer</code>", it is likely more efficient to keep
+  the data in memory. Naturally, user agents are encouraged to use more subtle heuristics to decide
+  whether to keep incoming data in memory or not, e.g. based on how big the data is or how common it
+  is for a script to change the attribute at the last minute. This latter aspect is important in
+  particular because it is quite possible for the attribute to be changed after the user agent has
+  received the data but before the user agent has fired the event for it.</p>
 
-  <p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method transmits data using the
-  connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must
-  throw an <code>InvalidStateError</code> exception. Otherwise, the
-  user agent must run the appropriate set of steps from the following
-  list:</p>
+  <p>The <dfn id="dom-websocket-send" title="dom-WebSocket-send"><code>send(<var title="">data</var>)</code></dfn> method
+  transmits data using the connection. If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>, it must throw an
+  <code>InvalidStateError</code> exception. Otherwise, the user agent must run the appropriate set
+  of steps from the following list:</p>
 
   <dl><dt>If the argument is a string</dt>
 
    <dd>
 
-    <p>Let <var title="">data</var> be the result of <span title="convert a DOMString to a sequence of Unicode
-    characters">converting the <var title="">data</var> argument to a
-    sequence of Unicode characters</span>. If <i>the WebSocket
-    connection is established</i> and <i title="the WebSocket closing
-    handshake is started">the WebSocket closing handshake has not yet
-    started</i>, then the user agent must <i>send a WebSocket
-    Message</i> comprised of <var title="">data</var> using a text
-    frame opcode; if the data cannot be sent, e.g. because it would
-    need to be buffered but the buffer is full, the user agent must
-    <i>close the WebSocket connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</a>. Any
-    invocation of this method with a string argument that does not
-    throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the number of bytes needed to express the argument as
-    UTF-8. <a href="#refsUNICODE">[UNICODE]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></p>
+    <p>Let <var title="">data</var> be the result of <span title="convert a DOMString to a sequence
+    of Unicode characters">converting the <var title="">data</var> argument to a sequence of Unicode
+    characters</span>. If <i>the WebSocket connection is established</i> and <i title="the WebSocket
+    closing handshake is started">the WebSocket closing handshake has not yet started</i>, then the
+    user agent must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a
+    text frame opcode; if the data cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</a>. Any invocation of this method with a
+    string argument that does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute by the number of bytes
+    needed to express the argument as UTF-8. <a href="#refsUNICODE">[UNICODE]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></p>
 
    </dd>
 
@@ -879,18 +862,14 @@ socket.onopen = function () {
 
    <dd>
 
-    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing handshake is started">the WebSocket
-    closing handshake has not yet started</i>, then the user agent
-    must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary frame opcode; if the data
-    cannot be sent, e.g. because it would need to be buffered but the
-    buffer is full, the user agent must <i>close the WebSocket
-    connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
-    prejudice</a>. The data to be sent is the raw data represented
-    by the <code>Blob</code> object.  Any
-    invocation of this method with a <code>Blob</code> argument that
-    does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the size of the <code>Blob</code> object's raw data,
-    in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsFILEAPI">[FILEAPI]</a></p>
+    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing
+    handshake is started">the WebSocket closing handshake has not yet started</i>, then the user
+    agent must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary
+    frame opcode; if the data cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</a>. The data to be sent is the raw data
+    represented by the <code>Blob</code> object.  Any invocation of this method with a
+    <code>Blob</code> argument that does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute by the size of the
+    <code>Blob</code> object's raw data, in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
    </dd>
 
@@ -899,18 +878,15 @@ socket.onopen = function () {
 
    <dd>
 
-    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing handshake is started">the WebSocket
-    closing handshake has not yet started</i>, then the user agent
-    must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary frame opcode; if the data
-    cannot be sent, e.g. because it would need to be buffered but the
-    buffer is full, the user agent must <i>close the WebSocket
-    connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
-    prejudice</a>. The data to be sent is the data stored in the
-    buffer described by the <code>ArrayBuffer</code> object.  Any invocation of
-    this method with an <code>ArrayBuffer</code> argument that does
-    not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the length of the <code>ArrayBuffer</code> in bytes.
-     <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing
+    handshake is started">the WebSocket closing handshake has not yet started</i>, then the user
+    agent must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary
+    frame opcode; if the data cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</a>. The data to be sent is the data
+    stored in the buffer described by the <code>ArrayBuffer</code> object. 
+    Any invocation of this method with an <code>ArrayBuffer</code> argument that does not throw an
+    exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
+    attribute by the length of the <code>ArrayBuffer</code> in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </dd>
 
@@ -919,27 +895,22 @@ socket.onopen = function () {
 
    <dd>
 
-    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing handshake is started">the WebSocket
-    closing handshake has not yet started</i>, then the user agent
-    must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary frame opcode; if the data
-    cannot be sent, e.g. because it would need to be buffered but the
-    buffer is full, the user agent must <i>close the WebSocket
-    connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with
-    prejudice</a>. The data to be sent is the data stored in the
-    section of the buffer described by the <code>ArrayBuffer</code>
-    object that the <code>ArrayBufferView</code> object references.
-     Any invocation
-    of this method with an <code>ArrayBufferView</code> argument that
-    does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the length of the <code>ArrayBufferView</code> in
-    bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing
+    handshake is started">the WebSocket closing handshake has not yet started</i>, then the user
+    agent must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary
+    frame opcode; if the data cannot be sent, e.g. because it would need to be buffered but the
+    buffer is full, the user agent must <i>close the WebSocket connection</i> <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</a>. The data to be sent is the data
+    stored in the section of the buffer described by the <code>ArrayBuffer</code> object that the
+    <code>ArrayBufferView</code> object references.  Any invocation of
+    this method with an <code>ArrayBufferView</code> argument that does not throw an exception must
+    increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute by the
+    length of the <code>ArrayBufferView</code> in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </dd>
 
-  </dl><hr><p>The following are the <span>event handlers</span> (and their
-  corresponding <span title="event handler event type">event handler
-  event types</span>) that must be supported, as IDL attributes, by
-  all objects implementing the <code><a href="#websocket">WebSocket</a></code> interface:</p>
+  </dl><hr><p>The following are the <span>event handlers</span> (and their corresponding <span title="event
+  handler event type">event handler event types</span>) that must be supported, as IDL attributes,
+  by all objects implementing the <code><a href="#websocket">WebSocket</a></code> interface:</p>
 
   <table><thead><tr><th><span title="event handlers">Event handler</span> <th><span>Event handler event type</span>
    <tbody><tr><td><dfn id="handler-websocket-onopen" title="handler-WebSocket-onopen"><code>onopen</code></dfn> <td> <code title="event-open">open</code>
@@ -948,34 +919,32 @@ socket.onopen = function () {
     <tr><td><dfn id="handler-websocket-onclose" title="handler-WebSocket-onclose"><code>onclose</code></dfn> <td> <code title="event-socket-close">close</code>
   </table><h2 id="feedback-from-the-protocol"><span class="secno">5 </span>Feedback from the protocol</h2>
 
-  <p>When <i>the WebSocket connection is established</i>, the user
-  agent must <span>queue a task</span> to run these steps:</p>
+  <p>When <i>the WebSocket connection is established</i>, the user agent must <span>queue a
+  task</span> to run these steps:</p>
 
-  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-   value to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</li>
+  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to
+   <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</li>
 
-   <li><p>Change the <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute's
-   value to the <i>extensions in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
+   <li><p>Change the <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute's value to
+   the <i>extensions in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p>Change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to
-   the <i>subprotocol in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
+   <li><p>Change the <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute's value to the
+   <i>subprotocol in use</i>, if is not the null value. <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p>Act as if the user agent had <span title="receives a
-   set-cookie-string">received a set-cookie-string</span> consisting
-   of the <i>cookies set during the server's opening handshake</i>,
-   for the URL <var title="">url</var> given to the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket()</a></code> constructor. <a href="#refsCOOKIES">[COOKIES]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></li>
+   <li><p>Act as if the user agent had <span title="receives a set-cookie-string">received a
+   set-cookie-string</span> consisting of the <i>cookies set during the server's opening
+   handshake</i>, for the URL <var title="">url</var> given to the <code title="dom-WebSocket"><a href="#dom-websocket">WebSocket()</a></code> constructor. <a href="#refsCOOKIES">[COOKIES]</a> <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p><span>Fire a simple event</span> named <code title="event-open">open</code> at the <code><a href="#websocket">WebSocket</a></code>
-   object.</p>
+   <li><p><span>Fire a simple event</span> named <code title="event-open">open</code> at the
+   <code><a href="#websocket">WebSocket</a></code> object.</p>
 
-  </ol><hr><p>When <i>a WebSocket message has been received</i> with type <var title="">type</var> and data <var title="">data</var>, the user
-  agent must <span>queue a task</span> to follow these steps: <a href="#refsWSP">[WSP]</a></p>
+  </ol><hr><p>When <i>a WebSocket message has been received</i> with type <var title="">type</var> and data
+  <var title="">data</var>, the user agent must <span>queue a task</span> to follow these steps: <a href="#refsWSP">[WSP]</a></p>
 
   <ol><li>
 
-    <p>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-    attribute's value is not <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), then abort these
-    steps.</p>
+    <p>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value is not
+    <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1), then abort these steps.</p>
 
    </li>
 
@@ -991,27 +960,21 @@ socket.onopen = function () {
 
    </li>
 
-   <li><p>Initialize <var title="">event</var>'s <code title="dom-MessageEvent-origin">origin</code> attribute to the
-   <span title="Unicode serialization of an origin">Unicode
-   serialization</span> of the <span>origin</span> of the
-   <span>URL</span> that was passed to the <code><a href="#websocket">WebSocket</a></code>
+   <li><p>Initialize <var title="">event</var>'s <code title="dom-MessageEvent-origin">origin</code>
+   attribute to the <span title="Unicode serialization of an origin">Unicode serialization</span> of
+   the <span>origin</span> of the <span>URL</span> that was passed to the <code><a href="#websocket">WebSocket</a></code>
    object's constructor.</li>
 
    <li>
 
-    <p>If <var title="">type</var> indicates that the data is Text,
-    then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to <var title="">data</var>.
+    <p>If <var title="">type</var> indicates that the data is Text, then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to <var title="">data</var>.
 
-    <p>If <var title="">type</var> indicates that the data is Binary,
-    and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is
-    set to "<code title="">blob</code>", then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new
-    <code>Blob</code> object that represents <var title="">data</var>
-    as its raw data. <a href="#refsFILEAPI">[FILEAPI]</a></p>
+    <p>If <var title="">type</var> indicates that the data is Binary, and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is set to "<code title="">blob</code>", then
+    initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute
+    to a new <code>Blob</code> object that represents <var title="">data</var> as its raw data. <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
-    <p>If <var title="">type</var> indicates that the data is Binary,
-    and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is
-    set to "<code title="">arraybuffer</code>", then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new
-    read-only <code>ArrayBuffer</code> object whose contents are <var title="">data</var>. <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    <p>If <var title="">type</var> indicates that the data is Binary, and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is set to "<code title="">arraybuffer</code>", then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new read-only <code>ArrayBuffer</code>
+    object whose contents are <var title="">data</var>. <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
 
    </li>
 
@@ -1022,21 +985,17 @@ socket.onopen = function () {
 
    </li>
 
-  </ol><p class="note">User agents are encouraged to check if they can
-  perform the above steps efficiently before they run the task,
-  picking tasks from other <span title="task queue">task queues</span>
-  while they prepare the buffers if not. For example, if the <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> attribute was set
-  to "<code title="">blob</code>" when the data arrived, and the user
-  agent spooled all the data to disk, but just before running the
-  above <span title="concept-task">task</span> for this particular
-  message the script switched <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> to "<code title="">arraybuffer</code>", the user agent would want to page the
-  data back to RAM before running this <span title="concept-task">task</span> so as to avoid stalling the main
-  thread while it created the <code>ArrayBuffer</code> object.</p>
+  </ol><p class="note">User agents are encouraged to check if they can perform the above steps
+  efficiently before they run the task, picking tasks from other <span title="task queue">task
+  queues</span> while they prepare the buffers if not. For example, if the <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> attribute was set to "<code title="">blob</code>" when the data arrived, and the user agent spooled all the data to disk, but
+  just before running the above <span title="concept-task">task</span> for this particular message
+  the script switched <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> to "<code title="">arraybuffer</code>", the user agent would want to page the data back to RAM before
+  running this <span title="concept-task">task</span> so as to avoid stalling the main thread while
+  it created the <code>ArrayBuffer</code> object.</p>
 
   <div class="example">
 
-   <p>Here is an example of how to define a handler for the <code title="event-message">message</code> event in the case of text
-   frames:</p>
+   <p>Here is an example of how to define a handler for the <code title="event-message">message</code> event in the case of text frames:</p>
 
    <pre>mysocket.onmessage = function (event) {
   if (event.data == 'on') {
@@ -1046,31 +1005,24 @@ socket.onopen = function () {
   }
 };</pre>
 
-   <p>The protocol here is a trivial one, with the server just sending
-   "on" or "off" messages.</p>
+   <p>The protocol here is a trivial one, with the server just sending "on" or "off" messages.</p>
 
   </div>
 
-  <hr><p>When <i>the WebSocket closing handshake is started</i>, the user
-  agent must <span>queue a task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the
-  <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method was called,
-  the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-  attribute's value will already be set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) when this task
-  runs.) <a href="#refsWSP">[WSP]</a></p>
+  <hr><p>When <i>the WebSocket closing handshake is started</i>, the user agent must <span>queue a
+  task</span> to change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+  value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). (If the <code title="dom-WebSocket-close"><a href="#dom-websocket-close">close()</a></code> method was called, the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value will already be set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) when this task runs.) <a href="#refsWSP">[WSP]</a></p>
 
-  <hr><p id="closeWebSocket">When <i>the WebSocket connection is
-  closed</i>, possibly <i title="">cleanly</i>, the user agent must
-  <span>queue a task</span> to run the following substeps:</p>
+  <hr><p id="closeWebSocket">When <i>the WebSocket connection is closed</i>, possibly <i title="">cleanly</i>, the user agent must <span>queue a task</span> to run the following
+  substeps:</p>
 
-  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-   value to <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code>
-   (3).</li>
+  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to
+   <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3).</li>
 
-   <li><p>If the user agent was required to <i>fail the WebSocket
-   connection</i> or <i>the WebSocket connection is closed</i> <dfn id="concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</dfn>,
-   <span>fire a simple event</span> named <code title="">error</code>
-   at the <code><a href="#websocket">WebSocket</a></code> object. <a href="#refsWSP">[WSP]</a></li>
+   <li><p>If the user agent was required to <i>fail the WebSocket connection</i> or <i>the WebSocket
+   connection is closed</i> <dfn id="concept-websocket-close-fail" title="concept-websocket-close-fail">with prejudice</dfn>,
+   <span>fire a simple event</span> named <code title="">error</code> at the <code><a href="#websocket">WebSocket</a></code>
+   object. <a href="#refsWSP">[WSP]</a></li>
 
    <li><p>Create a <span title="concept-events-trusted">trusted</span> event that uses the
    <code><a href="#closeevent">CloseEvent</a></code> interface, with the event type <code title="event-socket-close">close</code>, which does not bubble, is not cancelable, has no default
@@ -1083,9 +1035,8 @@ socket.onopen = function () {
 
   </ol><div class="warning">
 
-   <p>User agents must not convey any failure information to scripts
-   in a way that would allow a script to distinguish the following
-   situations:</p>
+   <p>User agents must not convey any failure information to scripts in a way that would allow a
+   script to distinguish the following situations:</p>
 
    <ul><li>A server whose host name could not be resolved.
 
@@ -1093,37 +1044,32 @@ socket.onopen = function () {
 
     <li>A server that refused the connection on the specified port.
 
-    <li>A server that failed to correctly perform a TLS handshake
-    (e.g., the server certificate can't be verified).
+    <li>A server that failed to correctly perform a TLS handshake (e.g., the server certificate
+    can't be verified).
 
-    <li>A server that did not complete the opening handshake (e.g.
-    because it was not a WebSocket server).
+    <li>A server that did not complete the opening handshake (e.g. because it was not a WebSocket
+    server).
 
-    <li>A WebSocket server that sent a correct opening handshake, but
-    that specified options that caused the client to drop the
-    connection (e.g. the server specified a subprotocol that the
+    <li>A WebSocket server that sent a correct opening handshake, but that specified options that
+    caused the client to drop the connection (e.g. the server specified a subprotocol that the
     client did not offer).
 
-    <li>A WebSocket server that abruptly closed the connection after
-    successfully completing the opening handshake.
+    <li>A WebSocket server that abruptly closed the connection after successfully completing the
+    opening handshake.
 
-   </ul><p>In all of these cases, the <i>the WebSocket connection close
-   code</i> would be 1006, as required by the WebSocket Protocol
-   specification. <a href="#refsWSP">[WSP]</a></p>
+   </ul><p>In all of these cases, the <i>the WebSocket connection close code</i> would be 1006, as
+   required by the WebSocket Protocol specification. <a href="#refsWSP">[WSP]</a></p>
 
-   <p>Allowing a script to distinguish these cases would allow a
-   script to probe the user's local network in preparation for an
-   attack.</p>
+   <p>Allowing a script to distinguish these cases would allow a script to probe the user's local
+   network in preparation for an attack.</p>
 
-   <p class="note">In particular, this means the code 1015 is not used
-   by the user agent (unless the server erroneously uses it in its
-   close frame, of course).</p>
+   <p class="note">In particular, this means the code 1015 is not used by the user agent (unless the
+   server erroneously uses it in its close frame, of course).</p>
 
   </div>
 
-  <hr><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue a
-  task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task
-  source</dfn>.</p>
+  <hr><p>The <span>task source</span> for all <span title="concept-task">tasks</span> <span title="queue
+  a task">queued</span> in this section is the <dfn id="websocket-task-source">WebSocket task source</dfn>.</p>
 
 
   <h2 id="ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</h2>
@@ -1237,37 +1183,33 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
 
   <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
 
-  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code>
-  (0) as of the last time the <span>event loop</span> started
-  executing a <span title="concept-task">task</span> must not be
-  garbage collected if there are any event listeners registered for
-  <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or <code title="event-socket-close">close</code> events.</p>
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+  attribute's value was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0) as of
+  the last time the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if there are any event listeners
+  registered for <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or
+  <code title="event-socket-close">close</code> events.</p>
 
-  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of
-  the last time the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be garbage collected if
-  there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-socket-close">close</code> events.</p>
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+  attribute's value was set to <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1) as of the last time
+  the <span>event loop</span> started executing a <span title="concept-task">task</span> must not be
+  garbage collected if there are any event listeners registered for <code title="event-message">message</code> events, <code title="event-error">error</code>, or <code title="event-socket-close">close</code> events.</p>
 
-  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value
-  was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as
-  of the last time the <span>event loop</span> started executing a
-  <span title="concept-task">task</span> must not be garbage collected
-  if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-socket-close">close</code> events.</p>
+  <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
+  attribute's value was set to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) as of the last
+  time the <span>event loop</span> started executing a <span title="concept-task">task</span> must
+  not be garbage collected if there are any event listeners registered for <code title="event-error">error</code> or <code title="event-socket-close">close</code> events.</p>
 
-  <p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket
-  connection is established">an established connection</i> that has
-  data queued to be transmitted to the network must not be garbage
-  collected. <a href="#refsWSP">[WSP]</a></p>
+  <p>A <code><a href="#websocket">WebSocket</a></code> object with <i title="the WebSocket connection is established">an
+  established connection</i> that has data queued to be transmitted to the network must not be
+  garbage collected. <a href="#refsWSP">[WSP]</a></p>
 
-  <p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its
-  connection is still open, the user agent must <i>start the
-  WebSocket closing handshake</i>, with no status code for the Close message. <a href="#refsWSP">[WSP]</a></p>
+  <p>If a <code><a href="#websocket">WebSocket</a></code> object is garbage collected while its connection is still open, the
+  user agent must <i>start the WebSocket closing handshake</i>, with no status code<!--CLOSE CODE-->
+  for the Close message. <a href="#refsWSP">[WSP]</a></p>
 
-  <hr><p>If a user agent is to <dfn id="make-disappear">make disappear</dfn> a
-  <code><a href="#websocket">WebSocket</a></code> object (this happens when a
-  <code>Document</code> object goes away), the user agent must follow
-  the first appropriate set of steps from the following list:</p>
+  <hr><p>If a user agent is to <dfn id="make-disappear">make disappear</dfn> a <code><a href="#websocket">WebSocket</a></code> object (this happens
+  when a <code>Document</code> object goes away), the user agent must follow the first appropriate
+  set of steps from the following list:</p>
 
   <dl class="switch"><dt>If the WebSocket connection is not yet <i title="the WebSocket
    connection is established">established</i> <a href="#refsWSP">[WSP]</a></dt>
