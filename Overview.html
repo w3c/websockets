@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-6-february-2013">Editor's Draft 6 February 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-7-february-2013">Editor's Draft 7 February 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 6 February 2013 Editor's Draft.
+  This specification is the 7 February 2013 Editor's Draft.
   </p>
 
 
@@ -533,118 +533,98 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   void <a href="#dom-websocket-send" title="dom-WebSocket-send">send</a>(<span>ArrayBufferView</span> data);
 };</pre>
 
-  <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn>
-  constructor takes one or two arguments. The first argument, <var title="">url</var>, specifies the <span>URL</span> to which to
-  connect. The second, <var title="">protocols</var>, if present, is
-  either a string or an array of strings. If it is a string, it is
-  equivalent to an array consisting of just that string; if it is
-  omitted, it is equivalent to the empty array. Each string in the
-  array is a subprotocol name. The connection will only be established
-  if the server reports that it has selected one of these
-  subprotocols. The subprotocol names must all be strings that match
-  the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code>
-  header fields as defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a></p>
+  <p>The <dfn id="dom-websocket" title="dom-WebSocket"><code>WebSocket(<var title="">url</var>, <var title="">protocols</var>)</code></dfn> constructor takes one or two arguments. The first argument,
+  <var title="">url</var>, specifies the <span>URL</span> to which to connect. The second, <var title="">protocols</var>, if present, is either a string or an array of strings. If it is a
+  string, it is equivalent to an array consisting of just that string; if it is omitted, it is
+  equivalent to the empty array. Each string in the array is a subprotocol name. The connection will
+  only be established if the server reports that it has selected one of these subprotocols. The
+  subprotocol names must all be strings that match the requirements for elements that comprise the
+  value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> header fields as
+  defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a></p>
 
-  <p>When the <code>WebSocket()</code> constructor is invoked, the UA
-  must run these steps:</p>
+  <p>When the <code>WebSocket()</code> constructor is invoked, the UA must run these steps:</p>
 
-  <ol><li><p><i><a href="#parse-a-websocket-url-s-components">Parse a WebSocket URL's components</a></i> from the <var title="">url</var> argument, to obtain <var title="">host</var>,
-   <var title="">port</var>, <var title="">resource name</var>, and
-   <var title="">secure</var>. If this fails, throw a
-   <code>SyntaxError</code> exception and abort these steps. <a href="#refsWSP">[WSP]</a></li>
+  <ol><li><p><i><a href="#parse-a-websocket-url-s-components">Parse a WebSocket URL's components</a></i> from the <var title="">url</var> argument, to
+   obtain <var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, and
+   <var title="">secure</var>. If this fails, throw a <code>SyntaxError</code> exception and abort
+   these steps. <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p>If <var title="">secure</var> is false but the
-   <span>origin</span> of the <span>entry script</span> has a scheme
-   component that is itself a secure protocol, e.g. HTTPS, then throw
-   a <code>SecurityError</code> exception.</li>
+   <li><p>If <var title="">secure</var> is false but the <span>origin</span> of the <span>entry
+   script</span> has a scheme component that is itself a secure protocol, e.g. HTTPS, then throw a
+   <code>SecurityError</code> exception.</li>
 
    <li>
 
-    <p>If <var title="">port</var> is a port to which the user agent
-    is configured to block access, then throw a
-    <code>SecurityError</code> exception. (User agents typically block
-    access to well-known ports like SMTP.)</p>
-
+    <p>If <var title="">port</var> is a port to which the user agent is configured to block access,
+    then throw a <code>SecurityError</code> exception. (User agents typically block access to
+    well-known ports like SMTP.)</p>
     
 
-    <p>Access to ports 80 and 443 should not be blocked, including the
-    unlikely cases when <var title="">secure</var> is false but <var title="">port</var> is 443 or <var title="">secure</var> is true
-    but <var title="">port</var> is 80.</p>
+    <p>Access to ports 80 and 443 should not be blocked, including the unlikely cases when <var title="">secure</var> is false but <var title="">port</var> is 443 or <var title="">secure</var>
+    is true but <var title="">port</var> is 80.</p>
     
 
    </li>
 
    <li>
 
-    <p>If <var title="">protocols</var> is absent, let <var title="">protocols</var> be an empty array.</p>
+    <p>If <var title="">protocols</var> is absent, let <var title="">protocols</var> be an empty
+    array.</p>
 
-    <p>Otherwise, if <var title="">protocols</var> is present and a
-    string, let <var title="">protocols</var> instead be an array
-    consisting of just that string.</p>
+    <p>Otherwise, if <var title="">protocols</var> is present and a string, let <var title="">protocols</var> instead be an array consisting of just that string.</p>
 
    </li>
 
-   <li><p>If any of the values in <var title="">protocols</var> occur
-   more than once or otherwise fail to match the requirements for
-   elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code>
-   header fields as defined by the WebSocket protocol specification,
-   then throw a <code>SyntaxError</code> exception and abort these
+   <li><p>If any of the values in <var title="">protocols</var> occur more than once or otherwise
+   fail to match the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> header fields as defined by the
+   WebSocket protocol specification, then throw a <code>SyntaxError</code> exception and abort these
    steps. <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p>Let <var title="">origin</var> be the <span title="ASCII
-   serialization of an origin">ASCII serialization</span> of the
-   <span>origin</span> of the <span>entry script</span>,
-   <span>converted to ASCII lowercase</span>.</li>
+   <li><p>Let <var title="">origin</var> be the <span title="ASCII serialization of an origin">ASCII
+   serialization</span> of the <span>origin</span> of the <span>entry script</span>, <span>converted
+   to ASCII lowercase</span>.</li>
 
-   <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue
-   these steps in the background (without blocking scripts).</li>
+   <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, and continue these steps in the background
+   (without blocking scripts).</li>
 
    <li>
 
-    <p><i>Establish a WebSocket connection</i> given the set (<var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, <var title="">secure</var>), along
-    with the <var title="">protocols</var> list, an empty list for the
-    extensions, and <var title="">origin</var>. The <i>headers to send
-    appropriate cookies</i> must be a <code title="http-Cookie">Cookie</code> header whose value is the
-    <i>cookie-string</i> computed from the user's cookie store and the
-    URL <var title="">url</var>; for these purposes this is
+    <p><i>Establish a WebSocket connection</i> given the set (<var title="">host</var>, <var title="">port</var>, <var title="">resource name</var>, <var title="">secure</var>), along with
+    the <var title="">protocols</var> list, an empty list for the extensions, and <var title="">origin</var>. The <i>headers to send appropriate cookies</i> must be a <code title="http-Cookie">Cookie</code> header whose value is the <i>cookie-string</i> computed from
+    the user's cookie store and the URL <var title="">url</var>; for these purposes this is
     <em>not</em> a "non-HTTP" API. <a href="#refsWSP">[WSP]</a> <a href="#refsCOOKIES">[COOKIES]</a></p>
 
-    <p>When the user agent <i title="validate the server's
-    response">validates the server's response</i> during the
-    "<i>establish a WebSocket connection</i>" algorithm, if the status
-    code received from the server is not 101 (e.g. it is a redirect),
-    the user agent must <i>fail the WebSocket connection</i>.</p>
+    <p>When the user agent <i title="validate the server's response">validates the server's
+    response</i> during the "<i>establish a WebSocket connection</i>" algorithm, if the status code
+    received from the server is not 101 (e.g. it is a redirect), the user agent must <i>fail the
+    WebSocket connection</i>.</p>
 
-    <p class="warning">Following HTTP procedures here could introduce
-    serious security problems in a Web browser context. For example,
-    consider a host with a WebSocket server at one path and an open
-    HTTP redirector at another. Suddenly, any script that can be given
-    a particular WebSocket URL can be tricked into communicating to
-    (and potentially sharing secrets with) any host on the Internet,
-    even if the script checks that the URL has the right hostname.</p>
+    <p class="warning">Following HTTP procedures here could introduce serious security problems in a
+    Web browser context. For example, consider a host with a WebSocket server at one path and an
+    open HTTP redirector at another. Suddenly, any script that can be given a particular WebSocket
+    URL can be tricked into communicating to (and potentially sharing secrets with) any host on the
+    Internet, even if the script checks that the URL has the right hostname.</p>
     
 
-    <p class="note">If the <i>establish a WebSocket connection</i>
-    algorithm fails, it triggers the <i>fail the WebSocket
-    connection</i> algorithm, which then invokes the <i>close the
-    WebSocket connection</i> algorithm, which then establishes that
-    <i>the WebSocket connection is closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+    <p class="note">If the <i>establish a WebSocket connection</i> algorithm fails, it triggers the
+    <i>fail the WebSocket connection</i> algorithm, which then invokes the <i>close the WebSocket
+    connection</i> algorithm, which then establishes that <i>the WebSocket connection is closed</i>,
+    which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as
+    described below</a>.</p>
 
    </li>
 
-  </ol><p>This constructor must be visible when the <span>script's global
-  object</span> is either a <code>Window</code> object or an object
-  implementing the <code>WorkerGlobalScope</code> interface.</p>
+  </ol><p>This constructor must be visible when the <span>script's global object</span> is either a
+  <code>Window</code> object or an object implementing the <code>WorkerGlobalScope</code>
+  interface.</p>
 
-  <hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn>
-  attribute must return the result of <span title="resolve a
-  url">resolving</span> the <span>URL</span> that was passed to the
-  constructor. (It doesn't matter what it is resolved relative to,
-  since we already know it is an <span>absolute URL</span>.)</p>
+  <hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn> attribute must return the result of
+  <span title="resolve a url">resolving</span> the <span>URL</span> that was passed to the
+  constructor. (It doesn't matter what it is resolved relative to, since we already know it is an
+  <span>absolute URL</span>.)</p>
 
-  <p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn>
-  attribute represents the state of the connection. It can have the
-  following values:</p>
+  <p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn> attribute represents
+  the state of the connection. It can have the following values:</p>
 
   <dl><dt><dfn id="dom-websocket-connecting" title="dom-WebSocket-CONNECTING"><code>CONNECTING</code></dfn> (numeric value 0)</dt>
 
@@ -662,112 +642,96 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
    <dd>The connection has been closed or could not be opened.</dd>
 
-  </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be set to
-  <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).</p>
+  </dl><p>When the object is created its <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> must be
+  set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0).</p>
 
-  <p>The <dfn id="dom-websocket-extensions" title="dom-WebSocket-extensions"><code>extensions</code></dfn>
-  attribute must initially return the empty string. After <i>the
-  WebSocket connection is established</i>, its value might change, as
-  defined below.</p>
+  <p>The <dfn id="dom-websocket-extensions" title="dom-WebSocket-extensions"><code>extensions</code></dfn> attribute must
+  initially return the empty string. After <i>the WebSocket connection is established</i>, its value
+  might change, as defined below.</p>
 
-  <p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns
-  the extensions selected by the server, if any. (Currently this will
-  only ever be the empty string.)</p>
+  <p class="note">The <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute returns the
+  extensions selected by the server, if any. (Currently this will only ever be the empty
+  string.)</p>
 
-  <p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute
-  must initially return the empty string. After <i>the WebSocket
-  connection is established</i>, its value might change, as defined
-  below.</p>
+  <p>The <dfn id="dom-websocket-protocol" title="dom-WebSocket-protocol"><code>protocol</code></dfn> attribute must initially
+  return the empty string. After <i>the WebSocket connection is established</i>, its value might
+  change, as defined below.</p>
 
   <p class="note">The <code title="dom-WebSocket-protocol"><a href="#dom-websocket-protocol">protocol</a></code> attribute returns the
-  subprotocol selected by the server, if any. It can be used in
-  conjunction with the array form of the constructor's second argument
-  to perform subprotocol negotiation.</p>
+  subprotocol selected by the server, if any. It can be used in conjunction with the array form of
+  the constructor's second argument to perform subprotocol negotiation.</p>
 
-  <p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn>
-  method must run the following steps:</p>
+  <p>The <dfn id="dom-websocket-close" title="dom-WebSocket-close"><code>close()</code></dfn> method must run the following
+  steps:</p>
 
-
-  <ol><li><p>If the method's first argument is present but is neither an
-   integer equal to 1000 nor an integer in the range 3000 to 4999, throw an
-   <code>InvalidAccessError</code> exception and abort these
-   steps.</li>
+  <ol><li><p>If the method's first argument is present but is neither an integer equal to 1000 nor an
+   integer in the range 3000 to 4999, throw an <code>InvalidAccessError</code> exception and abort
+   these steps.</li>
 
    <li>
 
-    <p>If the method's second argument is present, then run these
-    substeps:</p>
+    <p>If the method's second argument is present, then run these substeps:</p>
 
-    <ol><li><p>Let <var title="">raw reason</var> be the method's second
-     argument.</li>
+    <ol><li><p>Let <var title="">raw reason</var> be the method's second argument.</li>
 
-     <li><p>Let <var title="">Unicode reason</var> be the result of
-     <span title="convert a DOMString to a sequence of Unicode
-     characters">converting <var title="">raw reason</var> to a
-     sequence of Unicode characters</span>.</li>
+     <li><p>Let <var title="">Unicode reason</var> be the result of <span title="convert a DOMString
+     to a sequence of Unicode characters">converting <var title="">raw reason</var> to a sequence of
+     Unicode characters</span>.</li>
 
-     <li><p>Let <var title="">reason</var> be the result of encoding
-     <var title="">Unicode reason</var> as UTF-8.</li>
+     <li><p>Let <var title="">reason</var> be the result of encoding <var title="">Unicode
+     reason</var> as UTF-8.</li>
 
-     <li><p>If <var title="">reason</var> is longer than 123 bytes,
-     then throw a <code>SyntaxError</code> exception and abort these
-     steps. <a href="#refsRFC3629">[RFC3629]</a></li>
+     <li><p>If <var title="">reason</var> is longer than 123 bytes, then throw a
+     <code>SyntaxError</code> exception and abort these steps. <a href="#refsRFC3629">[RFC3629]</a></li>
 
     </ol></li>
 
    <li><p>Run the first matching steps from the following list:</p>
 
-    <dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-     attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
+    <dl class="switch"><dt>If the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute is in the <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2) or <code title="dom-WebSocket-CLOSED"><a href="#dom-websocket-closed">CLOSED</a></code> (3) state</dt>
 
      <dd>
 
       <p>Do nothing.</p>
 
-      <p class="note">The connection is already closing or is already
-      closed. If it has not already, a <code title="event-socket-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
+      <p class="note">The connection is already closing or is already closed. If it has not already,
+      a <code title="event-socket-close">close</code> event will eventually fire <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
 
-     <dt>If the WebSocket connection is not yet <i title="the
-     WebSocket connection is established">established</i> <a href="#refsWSP">[WSP]</a></dt>
+     <dt>If the WebSocket connection is not yet <i title="the WebSocket connection is
+     established">established</i> <a href="#refsWSP">[WSP]</a></dt>
 
      <dd>
 
-      <p><i>Fail the WebSocket connection</i> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-      value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).
+      <p><i>Fail the WebSocket connection</i> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
+
+      <p class="note">The <i>fail the WebSocket connection</i> algorithm invokes the <i>close the
+      WebSocket connection</i> algorithm, which then establishes that <i>the WebSocket connection is
+      closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+
+     </dd>
+
+
+     <dt>If the WebSocket closing handshake has not yet been <i title="the WebSocket closing
+     handshake is started">started</i> <a href="#refsWSP">[WSP]</a></dt>
+
+     <dd>
+
+      <p><i>Start the WebSocket closing handshake</i> and set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
+
+      <p>If the first argument is present, then the status code<!--CLOSE CODE--> to use in the
+      WebSocket Close message must be the integer given by the first argument. <a href="#refsWSP">[WSP]</a></p>
+
+      <p>If the second argument is also present, then <var title="">reason</var> must be provided in
+      the Close message after the status code<!--CLOSE CODE-->. <a href="#refsRFC3629">[RFC3629]</a>
       <a href="#refsWSP">[WSP]</a></p>
 
-      <p class="note">The <i>fail the WebSocket connection</i>
-      algorithm invokes the <i>close the WebSocket
-      connection</i> algorithm, which then establishes that 
-      <i>the WebSocket connection is closed</i>, which fires the
-      <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
-
-     </dd>
-
-
-     <dt>If the WebSocket closing handshake has not yet been <i title="the WebSocket closing handshake is
-     started">started</i> <a href="#refsWSP">[WSP]</a></dt>
-
-     <dd>
-
-      <p><i>Start the WebSocket closing handshake</i> and set the
-      <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
-      attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2). <a href="#refsWSP">[WSP]</a></p>
-
-      <p>If the first argument is present, then the status
-      code<!--CLOSE CODE--> to use in the WebSocket Close message must
-      be the integer given by the first argument. <a href="#refsWSP">[WSP]</a></p>
-
-      <p>If the second argument is also present, then <var title="">reason</var> must be provided in the Close message
-      after the status code<!--CLOSE CODE-->. <a href="#refsRFC3629">[RFC3629]</a> <a href="#refsWSP">[WSP]</a></p>
-
-      <p class="note">The <i>start the WebSocket closing handshake</i>
-      algorithm eventually invokes the <i>close the WebSocket
-      connection</i> algorithm, which then establishes that <i>the
-      WebSocket connection is closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described below</a>.</p>
+      <p class="note">The <i>start the WebSocket closing handshake</i> algorithm eventually invokes
+      the <i>close the WebSocket connection</i> algorithm, which then establishes that <i>the
+      WebSocket connection is closed</i>, which fires the <code title="event-socket-close">close</code> event <a href="#closeWebSocket">as described
+      below</a>.</p>
 
      </dd>
 
@@ -776,14 +740,12 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
      <dd>
 
-      <p>Set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
-      value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code>
-      (2).</p>
+      <p>Set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2).</p>
 
-      <p class="note"><i>The WebSocket closing handshake is
-      started</i>, and will eventually invoke the <i>close the
-      WebSocket connection</i> algorithm, which will establish that
-      <i>the WebSocket connection is closed</i>, and thus the <code title="event-socket-close">close</code> event will fire, <a href="#closeWebSocket">as described below</a>.</p>
+      <p class="note"><i>The WebSocket closing handshake is started</i>, and will eventually invoke
+      the <i>close the WebSocket connection</i> algorithm, which will establish that <i>the
+      WebSocket connection is closed</i>, and thus the <code title="event-socket-close">close</code>
+      event will fire, <a href="#closeWebSocket">as described below</a>.</p>
 
      </dd>
 
@@ -1075,78 +1037,67 @@ socket.onopen = function () {
 
   <h2 id="ping-and-pong-frames"><span class="secno">6 </span>Ping and Pong frames</h2>
 
-  <p>The WebSocket protocol specification defines Ping and Pong frames
-  that can be used for keep-alive, heart-beats, network status
-  probing, latency instrumentation, and so forth. These are not
-  currently exposed in the API.</p>
+  <p>The WebSocket protocol specification defines Ping and Pong frames that can be used for
+  keep-alive, heart-beats, network status probing, latency instrumentation, and so forth. These are
+  not currently exposed in the API.</p>
 
-  <p>User agents may send ping and unsolicited pong frames as desired,
-  for example in an attempt to maintain local network NAT mappings, to
-  detect failed connections, or to display latency metrics to the
-  user. User agents must not use pings or unsolicited pongs to aid the
-  server; it is assumed that servers will solicit pongs whenever
-  appropriate for the server's needs.</p>
+  <p>User agents may send ping and unsolicited pong frames as desired, for example in an attempt to
+  maintain local network NAT mappings, to detect failed connections, or to display latency metrics
+  to the user. User agents must not use pings or unsolicited pongs to aid the server; it is assumed
+  that servers will solicit pongs whenever appropriate for the server's needs.</p>
 
   
 
 
   <h2 id="parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</h2>
 
-  <p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from
-  a string <var title="">url</var> are as follows. These steps return
-  either a <var title="">host</var>, a <var title="">port</var>, a
-  <var title="">resource name</var>, and a <var title="">secure</var>
-  flag, or they fail.</p>
+  <p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from a string <var title="">url</var> are as follows. These steps return either a <var title="">host</var>, a <var title="">port</var>, a <var title="">resource name</var>, and a <var title="">secure</var> flag,
+  or they fail.</p>
 
-  <ol><li><p>If the <var title="">url</var> string is not an
-   <span>absolute URL</span>, then fail this algorithm.</li>
+  <ol><li><p>If the <var title="">url</var> string is not an <span>absolute URL</span>, then fail this
+   algorithm.</li>
 
    <li>
 
-    <p><span title="resolve a url">Resolve</span> the <var title="">url</var> string, with the URL character encoding set to
-    UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p> 
+    <p><span title="resolve a url">Resolve</span> the <var title="">url</var> string, with the URL
+    character encoding set to UTF-8. <a href="#refsRFC3629">[RFC3629]</a></p> 
 
-    <p class="note">It doesn't matter what it is resolved relative to,
-    since we already know it is an <span>absolute URL</span> at this
-    point.</p>
+    <p class="note">It doesn't matter what it is resolved relative to, since we already know it is
+    an <span>absolute URL</span> at this point.</p>
 
    </li>
 
-   <li><p>If <var title="">url</var> does not have a <span title="url-scheme">&lt;scheme&gt;</span> component whose value,
-   when <span>converted to ASCII lowercase</span>, is either "<code title="">ws</code>" or "<code title="">wss</code>", then fail this
-   algorithm.</li>
+   <li><p>If <var title="">url</var> does not have a <span title="url-scheme">&lt;scheme&gt;</span>
+   component whose value, when <span>converted to ASCII lowercase</span>, is either "<code title="">ws</code>" or "<code title="">wss</code>", then fail this algorithm.</li>
 
-   <li><p>If <var title="">url</var> has a <span title="url-fragment">&lt;fragment&gt;</span> component, then fail
-   this algorithm.</li>
+   <li><p>If <var title="">url</var> has a <span title="url-fragment">&lt;fragment&gt;</span>
+   component, then fail this algorithm.</li>
 
-   <li><p>If the <span title="url-scheme">&lt;scheme&gt;</span>
-   component of <var title="">url</var> is "<code title="">ws</code>",
-   set <var title="">secure</var> to false; otherwise, the <span title="url-scheme">&lt;scheme&gt;</span> component is "<code title="">wss</code>", set <var title="">secure</var> to
-   true.</li>
+   <li><p>If the <span title="url-scheme">&lt;scheme&gt;</span> component of <var title="">url</var>
+   is "<code title="">ws</code>", set <var title="">secure</var> to false; otherwise, the <span title="url-scheme">&lt;scheme&gt;</span> component is "<code title="">wss</code>", set <var title="">secure</var> to true.</li>
 
-   <li><p>Let <var title="">host</var> be the value of the <span title="url-host">&lt;host&gt;</span> component of <var title="">url</var>, <span>converted to ASCII
-   lowercase</span>.</li> 
+   <li><p>Let <var title="">host</var> be the value of the <span title="url-host">&lt;host&gt;</span> component of <var title="">url</var>, <span>converted to
+   ASCII lowercase</span>.</li> 
 
-   <li><p>If <var title="">url</var> has a <span title="url-port">&lt;port&gt;</span> component, then let <var title="">port</var> be that component's value; otherwise, there is
-   no explicit <var title="">port</var>.</li>
+   <li><p>If <var title="">url</var> has a <span title="url-port">&lt;port&gt;</span> component,
+   then let <var title="">port</var> be that component's value; otherwise, there is no explicit <var title="">port</var>.</li>
 
-   <li><p>If there is no explicit <var title="">port</var>, then: if
-   <var title="">secure</var> is false, let <var title="">port</var>
-   be 80, otherwise let <var title="">port</var> be 443.</li>
+   <li><p>If there is no explicit <var title="">port</var>, then: if <var title="">secure</var> is
+   false, let <var title="">port</var> be 80, otherwise let <var title="">port</var> be
+   443.</li>
 
-   <li><p>Let <var title="">resource name</var> be the value of the
-   <span title="url-path">&lt;path&gt;</span> component (which might
-   be empty) of <var title="">url</var>.</li> 
+   <li><p>Let <var title="">resource name</var> be the value of the <span title="url-path">&lt;path&gt;</span> component (which might be empty) of <var title="">url</var>.</li> 
 
-   <li><p>If <var title="">resource name</var> is the empty string,
-   set it to a single character U+002F SOLIDUS (/).</li>
+   <li><p>If <var title="">resource name</var> is the empty string, set it to a single character
+   U+002F SOLIDUS (/).</li>
 
-   <li><p>If <var title="">url</var> has a <span title="url-query">&lt;query&gt;</span> component, then append a
-   single U+003F QUESTION MARK character (?) to <var title="">resource
-   name</var>, followed by the value of the <span title="url-query">&lt;query&gt;</span> component.</li> 
+   <li><p>If <var title="">url</var> has a <span title="url-query">&lt;query&gt;</span> component,
+   then append a single U+003F QUESTION MARK character (?) to <var title="">resource name</var>,
+   followed by the value of the <span title="url-query">&lt;query&gt;</span> component.</li>
+   
 
-   <li><p>Return <var title="">host</var>, <var title="">port</var>,
-   <var title="">resource name</var>, and <var title="">secure</var>.</li>
+   <li><p>Return <var title="">host</var>, <var title="">port</var>, <var title="">resource
+   name</var>, and <var title="">secure</var>.</li>
 
   </ol><h2 id="event-definitions"><span class="secno">8 </span>Event definitions</h2>
 
@@ -1163,22 +1114,17 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
   DOMString reason;
 };</pre>
 
-  <p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn>
-  attribute must return the value it was initialized to. When the
-  object is created, this attribute must be initialized to false. It
-  represents whether the connection closed cleanly or not.</p>
+  <p>The <dfn id="dom-closeevent-wasclean" title="dom-CloseEvent-wasClean"><code>wasClean</code></dfn> attribute must return the
+  value it was initialized to. When the object is created, this attribute must be initialized to
+  false. It represents whether the connection closed cleanly or not.</p>
 
-  <p>The <dfn id="dom-closeevent-code" title="dom-CloseEvent-code"><code>code</code></dfn>
-  attribute must return the value it was initialized to. When the
-  object is created, this attribute must be initialized to zero. It
-  represents the WebSocket connection close code provided by the
-  server.</p>
+  <p>The <dfn id="dom-closeevent-code" title="dom-CloseEvent-code"><code>code</code></dfn> attribute must return the value it
+  was initialized to. When the object is created, this attribute must be initialized to zero. It
+  represents the WebSocket connection close code provided by the server.</p>
 
-  <p>The <dfn id="dom-closeevent-reason" title="dom-CloseEvent-reason"><code>reason</code></dfn>
-  attribute must return the value it was initialized to. When the
-  object is created, this attribute must be initialized to empty
-  string. It represents the WebSocket connection close reason provided
-  by the server.</p>
+  <p>The <dfn id="dom-closeevent-reason" title="dom-CloseEvent-reason"><code>reason</code></dfn> attribute must return the
+  value it was initialized to. When the object is created, this attribute must be initialized to
+  empty string. It represents the WebSocket connection close reason provided by the server.</p>
 
 
 
