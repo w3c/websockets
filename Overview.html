@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-7-february-2013">Editor's Draft 7 February 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-9-february-2013">Editor's Draft 9 February 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 7 February 2013 Editor's Draft.
+  This specification is the 9 February 2013 Editor's Draft.
   </p>
 
 
@@ -1049,6 +1049,7 @@ socket.onopen = function () {
   
 
 
+
   <h2 id="parsing-websocket-urls"><span class="secno">7 </span>Parsing WebSocket URLs</h2>
 
   <p>The steps to <dfn id="parse-a-websocket-url-s-components">parse a WebSocket URL's components</dfn> from a string <var title="">url</var> are as follows. These steps return either a <var title="">host</var>, a <var title="">port</var>, a <var title="">resource name</var>, and a <var title="">secure</var> flag,
@@ -1067,33 +1068,33 @@ socket.onopen = function () {
 
    </li>
 
-   <li><p>If <var title="">url</var> does not have a <span title="url-scheme">&lt;scheme&gt;</span>
+   <li><p>If the resulting <span>parsed URL</span> does not have a <span title="concept-url-scheme">scheme</span>
    component whose value, when <span>converted to ASCII lowercase</span>, is either "<code title="">ws</code>" or "<code title="">wss</code>", then fail this algorithm.</li>
 
-   <li><p>If <var title="">url</var> has a <span title="url-fragment">&lt;fragment&gt;</span>
+   <li><p>If the resulting <span>parsed URL</span> has a non-null <span title="concept-url-fragment">fragment</span>
    component, then fail this algorithm.</li>
 
-   <li><p>If the <span title="url-scheme">&lt;scheme&gt;</span> component of <var title="">url</var>
-   is "<code title="">ws</code>", set <var title="">secure</var> to false; otherwise, the <span title="url-scheme">&lt;scheme&gt;</span> component is "<code title="">wss</code>", set <var title="">secure</var> to true.</li>
+   <li><p>If the <span title="concept-url-scheme">scheme</span> component of the resulting <span>parsed URL</span>
+   is "<code title="">ws</code>", set <var title="">secure</var> to false; otherwise, the <span title="concept-url-scheme">scheme</span> component is "<code title="">wss</code>", set <var title="">secure</var> to true.</li>
 
-   <li><p>Let <var title="">host</var> be the value of the <span title="url-host">&lt;host&gt;</span> component of <var title="">url</var>, <span>converted to
+   <li><p>Let <var title="">host</var> be the value of the resulting <span>parsed URL</span>'s <span title="concept-url-host">host</span> component, <span>converted to
    ASCII lowercase</span>.</li> 
 
-   <li><p>If <var title="">url</var> has a <span title="url-port">&lt;port&gt;</span> component,
+   <li><p>If the resulting <span>parsed URL</span> has a <span title="concept-url-port">port</span> component that is not the empty string,
    then let <var title="">port</var> be that component's value; otherwise, there is no explicit <var title="">port</var>.</li>
 
    <li><p>If there is no explicit <var title="">port</var>, then: if <var title="">secure</var> is
    false, let <var title="">port</var> be 80, otherwise let <var title="">port</var> be
    443.</li>
 
-   <li><p>Let <var title="">resource name</var> be the value of the <span title="url-path">&lt;path&gt;</span> component (which might be empty) of <var title="">url</var>.</li> 
+   <li><p>Let <var title="">resource name</var> be the value of the resulting <span>parsed URL</span>'s <span title="concept-url-path">path</span> component (which might be empty).</li> 
 
    <li><p>If <var title="">resource name</var> is the empty string, set it to a single character
    U+002F SOLIDUS (/).</li>
 
-   <li><p>If <var title="">url</var> has a <span title="url-query">&lt;query&gt;</span> component,
+   <li><p>If the resulting <span>parsed URL</span> has a non-null <span title="concept-url-query">query</span> component,
    then append a single U+003F QUESTION MARK character (?) to <var title="">resource name</var>,
-   followed by the value of the <span title="url-query">&lt;query&gt;</span> component.</li>
+   followed by the value of the <span title="concept-url-query">query</span> component.</li>
    
 
    <li><p>Return <var title="">host</var>, <var title="">port</var>, <var title="">resource
