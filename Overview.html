@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-26-july-2013">Editor's Draft 26 July 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-18-october-2013">Editor's Draft 18 October 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 26 July 2013 Editor's Draft.
+  This specification is the 18 October 2013 Editor's Draft.
   </p>
 
 
@@ -402,14 +402,12 @@
 
   <p><i>This section is non-normative.</i></p>
 
-  <p>To enable Web applications to maintain bidirectional
-  communications with server-side processes, this specification
-  introduces the <code><a href="#websocket">WebSocket</a></code> interface.</p>
+  <p>To enable Web applications to maintain bidirectional communications with server-side processes,
+  this specification introduces the <code><a href="#websocket">WebSocket</a></code> interface.</p>
 
-  <p class="note">This interface does not allow for raw access to the
-  underlying network. For example, this interface could not be used to
-  implement an IRC client without proxying messages through a custom
-  server.</p>
+  <p class="note">This interface does not allow for raw access to the underlying network. For
+  example, this interface could not be used to implement an IRC client without proxying messages
+  through a custom server.</p>
 
 
   
@@ -539,7 +537,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
   equivalent to the empty array. Each string in the array is a subprotocol name. The connection will
   only be established if the server reports that it has selected one of these subprotocols. The
   subprotocol names must all be strings that match the requirements for elements that comprise the
-  value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> header fields as
+  value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> fields as
   defined by the WebSocket protocol specification. <a href="#refsWSP">[WSP]</a></p>
 
   <p>When the <code>WebSocket()</code> constructor is invoked, the UA must run these steps:</p>
@@ -576,7 +574,7 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    </li>
 
    <li><p>If any of the values in <var title="">protocols</var> occur more than once or otherwise
-   fail to match the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> header fields as defined by the
+   fail to match the requirements for elements that comprise the value of <code title="http-sec-websocket-protocol">Sec-WebSocket-Protocol</code> fields as defined by the
    WebSocket protocol specification, then throw a <code>SyntaxError</code> exception and abort these
    steps. <a href="#refsWSP">[WSP]</a></li>
 
@@ -1153,8 +1151,8 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
   when a <code>Document</code> object goes away), the user agent must follow the first appropriate
   set of steps from the following list:</p>
 
-  <dl class="switch"><dt>If the WebSocket connection is not yet <i title="the WebSocket
-   connection is established">established</i> <a href="#refsWSP">[WSP]</a></dt>
+  <dl class="switch"><dt>If the WebSocket connection is not yet <i title="the WebSocket connection is
+   established">established</i> <a href="#refsWSP">[WSP]</a></dt>
 
    <dd>
 
@@ -1163,14 +1161,13 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
    </dd>
 
 
-   <dt>If the WebSocket closing handshake has not yet been <i title="the WebSocket closing handshake is started">started</i>
-   <a href="#refsWSP">[WSP]</a></dt>
+   <dt>If the WebSocket closing handshake has not yet been <i title="the WebSocket closing handshake
+   is started">started</i> <a href="#refsWSP">[WSP]</a></dt>
 
    <dd>
 
-    <p><i>Start the WebSocket closing handshake</i>, with the
-    status code<!--CLOSE CODE--> to use in the WebSocket Close message
-    being 1001. <a href="#refsWSP">[WSP]</a></p>
+    <p><i>Start the WebSocket closing handshake</i>, with the status code<!--CLOSE CODE--> to use in
+    the WebSocket Close message being 1001. <a href="#refsWSP">[WSP]</a></p>
 
    </dd>
 
