@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-18-october-2013">Editor's Draft 18 October 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-21-october-2013">Editor's Draft 21 October 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 18 October 2013 Editor's Draft.
+  This specification is the 21 October 2013 Editor's Draft.
   </p>
 
 
@@ -584,6 +584,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
    <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, but continue these steps
    asynchronously.</li>
+
+   <li><p>Let the new object's <dfn id="client-specified-protocols">client-specified protocols</dfn> be the values (if any) given in
+   <var title="">protocols</var>.</li>
 
    <li>
 
@@ -879,7 +882,12 @@ socket.onopen = function () {
   <p>When <i>the WebSocket connection is established</i>, the user agent must <span>queue a
   task</span> to run these steps:</p>
 
-  <ol><li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to
+  <ol><li><p>If the <code><a href="#websocket">WebSocket</a></code> object's <a href="#client-specified-protocols">client-specified protocols</a> was not an
+   empty list, but the <i>subprotocol in use</i> is the null value, then <i>fail the WebSocket
+   connection</i>, set the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's
+   value to <code title="dom-WebSocket-CLOSING"><a href="#dom-websocket-closing">CLOSING</a></code> (2), and abort these steps. <a href="#refsWSP">[WSP]</a></li>
+
+   <li><p>Change the <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code> attribute's value to
    <code title="dom-WebSocket-OPEN"><a href="#dom-websocket-open">OPEN</a></code> (1).</li>
 
    <li><p>Change the <code title="dom-WebSocket-extensions"><a href="#dom-websocket-extensions">extensions</a></code> attribute's value to
