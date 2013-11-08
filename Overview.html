@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-21-october-2013">Editor's Draft 21 October 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-8-november-2013">Editor's Draft 8 November 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 21 October 2013 Editor's Draft.
+  This specification is the 8 November 2013 Editor's Draft.
   </p>
 
 
@@ -547,8 +547,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    <var title="">secure</var>. If this fails, throw a <code>SyntaxError</code> exception and abort
    these steps. <a href="#refsWSP">[WSP]</a></li>
 
-   <li><p>If <var title="">secure</var> is false but the <span>origin</span> of the <span>entry
-   script</span> has a scheme component that is itself a secure protocol, e.g. HTTPS, then throw a
+
+   <li><p>If <var title="">secure</var> is false but the <span>origin</span> specified by the <span>entry
+   settings object</span> has a scheme component that is itself a secure protocol, e.g. HTTPS, then throw a
    <code>SecurityError</code> exception and abort these steps.</li>
 
    <li>
@@ -578,8 +579,9 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
    WebSocket protocol specification, then throw a <code>SyntaxError</code> exception and abort these
    steps. <a href="#refsWSP">[WSP]</a></li>
 
+
    <li><p>Let <var title="">origin</var> be the <span title="ASCII serialization of an origin">ASCII
-   serialization</span> of the <span>origin</span> of the <span>entry script</span>, <span>converted
+   serialization</span> of the <span>origin</span> specified by the <span>entry settings object</span>, <span>converted
    to ASCII lowercase</span>.</li>
 
    <li><p>Return a new <code><a href="#websocket">WebSocket</a></code> object, but continue these steps
