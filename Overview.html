@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-19-november-2013">Editor's Draft 19 November 2013</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-21-november-2013">Editor's Draft 21 November 2013</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 19 November 2013 Editor's Draft.
+  This specification is the 21 November 2013 Editor's Draft.
   </p>
 
 
@@ -619,8 +619,8 @@ interface <dfn id="websocket">WebSocket</dfn> : <span>EventTarget</span> {
 
   </ol><hr><p>The <dfn id="dom-websocket-url" title="dom-WebSocket-url"><code>url</code></dfn> attribute must return the result of
   <span title="resolve a url">resolving</span> the <span>URL</span> that was passed to the
-  constructor. (It doesn't matter what it is resolved relative to, since we already know it is an
-  <span>absolute URL</span>.)</p>
+  constructor, with the URL character encoding set to UTF-8. (It doesn't matter what it is resolved
+  relative to, since we already know it is an <span>absolute URL</span>.)</p>
 
   <p>The <dfn id="dom-websocket-readystate" title="dom-WebSocket-readyState"><code>readyState</code></dfn> attribute represents
   the state of the connection. It can have the following values:</p>
