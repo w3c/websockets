@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-27-january-2014">Editor's Draft 27 January 2014</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-3-february-2014">Editor's Draft 3 February 2014</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 27 January 2014 Editor's Draft.
+  This specification is the 3 February 2014 Editor's Draft.
   </p>
 
 
@@ -837,22 +837,24 @@ socket.onopen = function () {
 
    <dd>
 
+
     <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing
     handshake is started">the WebSocket closing handshake has not yet started</i>, then the user
     agent must <i>send a WebSocket Message</i> comprised of <var title="">data</var> using a binary
     frame opcode; if the data cannot be sent, e.g. because it would need to be buffered but the
     buffer is full, the user agent must <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">flag the
     WebSocket as full</a> and then <i>close the WebSocket connection</i>. The data to be sent is
-    the data stored in the buffer described by the <code>ArrayBuffer</code> object.  Any invocation of this method with an <code>ArrayBuffer</code> argument that
+    the data stored in the buffer described by the <code>ArrayBuffer</code> object. Any invocation of this method with an <code>ArrayBuffer</code> argument that
     does not throw an exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code> attribute by the length of the
-    <code>ArrayBuffer</code> in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    <code>ArrayBuffer</code> in bytes. <a href="#refsWSP">[WSP]</a> <a href="#refsECMA262">[ECMA262]</a></p>
 
    </dd>
 
 
-   <dt>If the argument is an <code>ArrayBufferView</code> object</dt>
+   <dt>If the argument is an object that matches the <code>ArrayBufferView</code> type definition</dt>
 
    <dd>
+
 
     <p>If <i>the WebSocket connection is established</i>, and <i title="the WebSocket closing
     handshake is started">the WebSocket closing handshake has not yet started</i>, then the user
@@ -861,10 +863,10 @@ socket.onopen = function () {
     buffer is full, the user agent must <a href="#concept-websocket-close-fail" title="concept-websocket-close-fail">flag the
     WebSocket as full</a> and then <i>close the WebSocket connection</i>. The data to be sent is
     the data stored in the section of the buffer described by the <code>ArrayBuffer</code> object
-    that the <code>ArrayBufferView</code> object references.  Any
-    invocation of this method with an <code>ArrayBufferView</code> argument that does not throw an
+    that <var title="">data</var> references. Any
+    invocation of this method with this kind of argument that does not throw an
     exception must increase the <code title="dom-WebSocket-bufferedAmount"><a href="#dom-websocket-bufferedamount">bufferedAmount</a></code>
-    attribute by the length of the <code>ArrayBufferView</code> in bytes.  <a href="#refsWSP">[WSP]</a> <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    attribute by the length of <var title="">data</var>'s buffer in bytes. <a href="#refsWSP">[WSP]</a> <a href="#refsECMA262">[ECMA262]</a></p>
 
    </dd>
 
@@ -939,8 +941,8 @@ socket.onopen = function () {
     initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute
     to a new <code>Blob</code> object that represents <var title="">data</var> as its raw data. <a href="#refsFILEAPI">[FILEAPI]</a></p>
 
-    <p>If <var title="">type</var> indicates that the data is Binary, and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is set to "<code title="">arraybuffer</code>", then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new read-only <code>ArrayBuffer</code>
-    object whose contents are <var title="">data</var>. <a href="#refsTYPEDARRAY">[TYPEDARRAY]</a></p>
+    <p>If <var title="">type</var> indicates that the data is Binary, and <code title="dom-WebSocket-binaryType"><a href="#dom-websocket-binarytype">binaryType</a></code> is set to "<code title="">arraybuffer</code>", then initialize <var title="">event</var>'s <code title="dom-MessageEvent-data">data</code> attribute to a new read-only <code>ArrayBuffer</code> <!-- XXXX -->
+    object whose contents are <var title="">data</var>. <a href="#refsECMA262">[ECMA262]</a></p>
 
    </li>
 
@@ -1200,6 +1202,9 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
    <dt id="refsDOM">[DOM]</dt>
    <dd><cite><a href="http://dom.spec.whatwg.org/">DOM</a></cite>, A. van Kesteren, A. Gregor, Ms2ger. WHATWG.</dd>
 
+   <dt id="refsECMA262">[ECMA262]</dt>
+   <dd><cite><a href="http://people.mozilla.org/~jorendorff/es6-draft.html">ECMAScript Language Specification</a></cite>. ECMA.</dd>
+
    <dt id="refsENCODING">[ENCODING]</dt>
    <dd><cite><a href="http://encoding.spec.whatwg.org/">Encoding</a></cite>, A. van Kesteren, J. Bell. WHATWG.</dd>
 
@@ -1211,9 +1216,6 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
 
    <dt id="refsRFC2119">[RFC2119]</dt>
    <dd><cite><a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a></cite>, S. Bradner. IETF.</dd>
-
-   <dt id="refsTYPEDARRAY">[TYPEDARRAY]</dt>
-   <dd><cite><a href="http://www.khronos.org/registry/typedarray/specs/latest/">Typed Array Specification</a></cite>, D. Herman, K. Russell. Khronos.</dd>
 
    <dt id="refsUNICODE">[UNICODE]</dt>
    <dd><cite><a href="http://www.unicode.org/versions/">The Unicode Standard</a></cite>. Unicode Consortium.</dd>
