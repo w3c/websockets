@@ -216,7 +216,7 @@
 
    <h1>The WebSocket API</h1>
    
-   <h2 class="no-num no-toc" id="editor-s-draft-14-may-2014">Editor's Draft 14 May 2014</h2>
+   <h2 class="no-num no-toc" id="editor-s-draft-4-june-2014">Editor's Draft 4 June 2014</h2>
    <dl><dt>Latest Published Version:</dt>
     <dd><a href="http://www.w3.org/TR/websockets/">http://www.w3.org/TR/websockets/</a></dd>
     <dt>Latest Editor's Draft:</dt>
@@ -350,7 +350,7 @@
   </dl><p>The W3C <a href="http://www.w3.org/2008/webapps/">Web Applications
   Working Group</a> is the W3C working group responsible for this
   specification's progress along the W3C Recommendation track.
-  This specification is the 14 May 2014 Editor's Draft.
+  This specification is the 4 June 2014 Editor's Draft.
   </p>
 
 
@@ -1135,9 +1135,10 @@ dictionary <dfn id="closeeventinit">CloseEventInit</dfn> : <span>EventInit</span
 
   <h2 id="garbage-collection"><span class="secno">9 </span>Garbage collection</h2>
 
+
   <p>A <code><a href="#websocket">WebSocket</a></code> object whose <code title="dom-WebSocket-readyState"><a href="#dom-websocket-readystate">readyState</a></code>
   attribute's value was set to <code title="dom-WebSocket-CONNECTING"><a href="#dom-websocket-connecting">CONNECTING</a></code> (0) as of
-  the last time the <span>event loop</span> started reached step 1 must not be garbage collected if
+  the last time the <span>event loop</span> reached step 1 must not be garbage collected if
   there are any event listeners registered for <code title="event-open">open</code> events, <code title="event-message">message</code> events, <code title="event-error">error</code> events, or
   <code title="event-close">close</code> events.</p>
 
